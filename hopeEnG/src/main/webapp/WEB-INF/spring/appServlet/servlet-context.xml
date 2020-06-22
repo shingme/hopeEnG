@@ -22,7 +22,9 @@
 	</beans:bean>
 	
 	<context:component-scan base-package="org.hope.web" />
-	
+	<resources mapping="/css/**" location="/resources/css/" />
+	<resources mapping="/image/**" location="/resources/image/" />
+	<resources mapping="/js/**" location="/resources/js/" />
 	
 	
 </beans:beans>
