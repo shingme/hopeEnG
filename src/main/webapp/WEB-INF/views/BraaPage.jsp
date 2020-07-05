@@ -12,7 +12,7 @@
 <body>
 <Script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
 
-<form action="/brcc/Braa1000_mainRegister" method="POST">
+<form action="/braa/Braa1000_mainRegister" method="POST">
 <table>
   <tr>
    <td>

@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.RestController;
  * Handles requests for the application home page.
  */
 @Controller
+@RequestMapping("/braa")
 public class BraaController {
 
 	@Autowired
@@ -34,7 +35,7 @@ public class BraaController {
 	 * Simply selects the home view to render by returning its name.
 	 */
 	
-		  @RequestMapping(value = "/web/braa.do", method = RequestMethod.GET) public String
+		  @RequestMapping(value = "/braa.do", method = RequestMethod.GET) public String
 		  home(Locale locale, Model model) {
 		  logger.info("Welcome home! The client locale is {}.", locale);
 		  
@@ -51,7 +52,7 @@ public class BraaController {
 		  };
 		 
 
-	@RequestMapping("/brcc/Braa1000_mainRegister")
+	@RequestMapping("/Braa1000_mainRegister")
 	public void BraaRegister(@ModelAttribute BraaVO braaVO) {
 		System.out.println("qqq");
 		logger.info("zzz");
