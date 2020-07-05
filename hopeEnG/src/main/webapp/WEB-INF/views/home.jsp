@@ -19,7 +19,7 @@
         <link href="${pageContext.request.contextPath}/css/styles.css" rel="stylesheet" />
         <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/slick.css">
   		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/slick-theme.css">
-  		<%-- <%@ include file="/WEB-INF/views/header.jsp" %> --%>
+  		<%@ include file="/WEB-INF/views/header.jsp" %>
   		<style type="text/css">
     html, body {
       margin: 0;
@@ -82,7 +82,7 @@
     
      
         <!-- Navigation-->
-        <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
+        <!-- <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
             <div class="container">
                 <a class="navbar-brand js-scroll-trigger" href="#page-top"><img src="/image/img/navbar-logo.svg" alt="" /></a>
                 <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
@@ -99,7 +99,7 @@
                     </ul>
                 </div>
             </div>
-        </nav>
+        </nav> -->
         <!-- Masthead-->
         <header class="masthead">
         <section class="lazy slider" data-sizes="50vw">

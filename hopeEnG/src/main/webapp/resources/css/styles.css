@@ -10071,6 +10071,7 @@ img::-moz-selection {
   padding-top: 1rem;
   padding-bottom: 1rem;
   background-color: #212529;
+  position:relative;
 }
 #mainNav .navbar-toggler {
   padding: 0.75rem;
@@ -10105,8 +10106,8 @@ img::-moz-selection {
   #mainNav {
     padding-top: 1.5rem;
     padding-bottom: 1.5rem;
-    border: none;
-    background-color: transparent;
+    border: none;	
+    /* background-color: transparent; */
     transition: padding-top 0.3s ease-in-out, padding-bottom 0.3s ease-in-out;
   }
   #mainNav .navbar-brand {
