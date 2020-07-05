@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Repository;
 import org.apache.ibatis.session.SqlSession;
-import org.hope.web.BraaController;
+import org.hope.web.controller.BraaController;
 import org.hope.web.domain.BraaVO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
