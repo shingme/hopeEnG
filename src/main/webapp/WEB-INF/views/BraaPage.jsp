@@ -6,41 +6,44 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>온라인 문의</title>
+<title>작성하기</title>
 <%@ include file="/WEB-INF/views/header.jsp" %>
 </head>
 <body>
-<Script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
-
-<form action="/braa/Braa1000_mainRegister" method="POST">
+<script src="${pageContext.request.contextPath}/js/jquery-3.5.1.min.js" type="text/javascript"></script>
+<form action="/braa/Braa1000_insert.do" method="POST">
 <table>
   <tr>
    <td>
    <table width="500" cellpadding="7" cellspacing="0" border="1">
     <tr>
     	<td align="center" width="120">이름</td>
-    	<td><input type="text" name="name"></td>
+    	<td><input type="text" name="userNm"></td>
     	<td align="center" width="120">비밀번호</td>
-    	<td><input type="text" name="passwd"></td>
+    	<td><input type="text" name="userPw"></td>
     </tr>
      <tr>
     	<td align="center" width="120">이메일</td>
-    	<td><input type="text" name="email"></td>
+    	<td><input type="text" name="userEmail"></td>
     	<td align="center" width="120">휴대전화</td>
-    	<td><input type="text" name="tellNm"></td>
+    	<td><input type="text" name="userPhone"></td>
     </tr>
     <tr>
     	<td align="center">제목</td>
-    	<td colspan="3"><input type="text" name="title"></td>
+    	<td colspan="3"><input type="text" name="braaNm"></td>
     </tr>
     <tr>
-    	<td align="center">첨부파일</td>
-    	<td><input type="text" name="title"></td> <!-- 첨부파일 지정  -->
+    	<td align="center">상태</td>
+    	<td><input type="text" name="braaStus" value="S"></td>
     </tr>
+<!--     <tr>
+    	<td align="center">첨부파일</td>
+    	<td><input type="text" name="title"></td> 첨부파일 지정 
+    </tr> -->
     <tr>
       <td align="center" height="100" >내용</td>
       <td height="150" colspan="3">
-       <textarea name="content"></textarea>
+       <textarea name="braaCts"></textarea>
       </td>
      </tr>   
     </table>
