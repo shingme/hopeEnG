@@ -1,49 +1,82 @@
 package org.hope.web.domain;
 
 public class BraaVO {
-	private String name;
-	private String passwd;
-	private String email;
-	private String tellNm;
-	private String title;
-	private String content;
-	//첨부파일 우선 제거 
-	public String getName() {
-		return name;
+	private int braaNo;
+	private String braaNm;
+	private String braaCts;
+	private String braaStus;
+	private int braaCnt;
+	private String userNm;
+	private String userEmail;
+	private String userPhone;
+	private String userPw;
+	private String regiDate;
+	private String modyDate;
+	public int getBraaNo() {
+		return braaNo;
 	}
-	public void setName(String name) {
-		this.name = name;
+	public void setBraaNo(int braaNo) {
+		this.braaNo = braaNo;
 	}
-	public String getPasswd() {
-		return passwd;
+	public String getBraaNm() {
+		return braaNm;
 	}
-	public void setPasswd(String passwd) {
-		this.passwd = passwd;
+	public void setBraaNm(String braaNm) {
+		this.braaNm = braaNm;
 	}
-	public String getEmail() {
-		return email;
+	public String getBraaCts() {
+		return braaCts;
 	}
-	public void setEmail(String email) {
-		this.email = email;
+	public void setBraaCts(String braaCts) {
+		this.braaCts = braaCts;
 	}
-	public String getTellNm() {
-		return tellNm;
+	public String getBraaStus() {
+		return braaStus;
 	}
-	public void setTellNm(String tellNm) {
-		this.tellNm = tellNm;
+	public void setBraaStus(String braaStus) {
+		this.braaStus = braaStus;
 	}
-	public String getTitle() {
-		return title;
+	public int getBraaCnt() {
+		return braaCnt;
 	}
-	public void setTitle(String title) {
-		this.title = title;
+	public void setBraaCnt(int braaCnt) {
+		this.braaCnt = braaCnt;
 	}
-	public String getContent() {
-		return content;
+	public String getUserNm() {
+		return userNm;
 	}
-	public void setContent(String content) {
-		this.content = content;
+	public void setUserNm(String userNm) {
+		this.userNm = userNm;
+	}
+	public String getUserEmail() {
+		return userEmail;
+	}
+	public void setUserEmail(String userEmail) {
+		this.userEmail = userEmail;
+	}
+	public String getUserPhone() {
+		return userPhone;
+	}
+	public void setUserPhone(String userPhone) {
+		this.userPhone = userPhone;
+	}
+	public String getUserPw() {
+		return userPw;
+	}
+	public void setUserPw(String userPw) {
+		this.userPw = userPw;
+	}
+	public String getRegiDate() {
+		return regiDate;
+	}
+	public void setRegiDate(String regiDate) {
+		this.regiDate = regiDate;
+	}
+	public String getModyDate() {
+		return modyDate;
+	}
+	public void setModyDate(String modyDate) {
+		this.modyDate = modyDate;
 	}
 	
-
 }
