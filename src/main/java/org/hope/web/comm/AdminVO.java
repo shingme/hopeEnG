@@ -1,4 +1,4 @@
-package org.hope.web.domain;
+package org.hope.web.comm;
 
 public class AdminVO {
 	
