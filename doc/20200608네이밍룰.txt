@@ -9,7 +9,7 @@
 
 - Controller Name
 식 : 시스템ID4자리 + Controller.java
-예 : BrmaController.java
+예 : BraaController.java
       GlmaController.java
       MamaController.java
       
