@@ -5,6 +5,7 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.hope.web.controller.BraaController;
@@ -29,9 +30,9 @@ public class BraaDAO {
 		sqlSession.insert("BraaMapper.Braa1000_insert", braaVO);
 	}
 	
-	public List<BraaVO> select(BraaVO braaVO) throws DataAccessException{ 
+	public List<BraaVO> select(Map<String, String> map) throws DataAccessException{ 
 		// TODO Auto-generated method stub
-		return sqlSession.selectList("BraaMapper.Braa1000_select", braaVO);
+		return sqlSession.selectList("BraaMapper.Braa1000_select", map);
 	}
 	
 
