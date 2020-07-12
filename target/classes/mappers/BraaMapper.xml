@@ -8,9 +8,14 @@
 		VALUES(#{braaNm}, #{braaCts},#{braaStus},#{userNm},#{userEmail},#{userPhone},#{userPw}, SYSDATE(), SYSDATE())
     </insert>
 
+<<<<<<< HEAD
     <select id="Braa1000_select" resultType="org.hope.web.domain.BraaVO" parameterType="java.util.HashMap">
 		SELECT ROW_NUMBER() OVER () AS rowNm
 			  ,BORD_NO AS braaNo
+=======
+    <select id="Braa1000_select" resultType="org.hope.web.domain.BraaVO">
+		SELECT BORD_NO AS braaNo
+>>>>>>> upstream/master
 			  ,BORD_NM AS braaNm
               ,BORD_STUS AS braaStus
               ,BORD_CNT AS braaCnt
@@ -18,6 +23,7 @@
               ,DATE_FORMAT(MODY_DATE, '%Y-%m-%d') AS modyDate
 		 FROM BORDTB
 		WHERE 1=1 
+<<<<<<< HEAD
  			<if test="braaNm!=null and !braaNm.equals('')">
 			   AND BORD_NM LIKE CONCAT('%',#{braaNm},'%')
 			</if>
@@ -27,6 +33,17 @@
 		    <!-- <if test="braaStus!=null and !braaStus.equals('')">
 		    AND BORD_STUS = #{braaStus}
 		    </if> -->
+=======
+<!-- 			<if test="braaNm != ''">
+			   AND BORD_NM LIKE 
+			</if> -->
+		    <if test="braaStus!=null and !braaStus.equals('')">
+		    AND BORD_STUS = #{braaStus}
+		    </if>
+<!-- 			<if test="regiDate != ''">
+		    AND REGI_DATE LIKE ""
+		    </if>      --> 
+>>>>>>> upstream/master
 	</select>
 	
 	<select id="Braa1000_select_detail" resultType="org.hope.web.domain.BraaVO">
