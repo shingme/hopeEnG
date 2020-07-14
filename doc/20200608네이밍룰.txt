@@ -1,0 +1,33 @@
+=======================================================================
+1. 파일 네이밍 규칙
+=======================================================================
+- URL 규칙
+식 : Controller위치패스 + Controller그룹 + 파일명 + 구분자 + 동작방식 + .do
+예 : /hope/       + brcc/      + Braa1000      + _main  + Search  + .do
+예 : /hope/       + glcc/      + Glaa1000      + _detail  + Search  + .do
+예 : /hope/       + macc/    +Maaa1000      + _main  + Save  + .do
+
+- Controller Name
+식 : 시스템ID4자리 + Controller.java
+예 : BraaController.java
+      GlmaController.java
+      MamaController.java
+      
+
+- Service Implementation Name
+식 : 시스템ID4자리 + ServiceImpl.java
+예 : BraaServiceImpl.java
+예 : GlaaServiceImpl.java
+
+- SQL Name
+식 : SQL_ + 시스템ID 4자리 수.xml
+예 : SQL_BRAA.xml
+예 : SQL_GLAA.xml
+
+- SQL ID Name
+식 : 시스템ID_ + 4자리 수 + 구분자 + 동작방식.xml
+예 : BRCC0100_mainSelect
+예 : BRCC0100_mainInsert
+예 : BRCC0100_mainUpdate
+예 : BRCC0100_mainDelete
+예 : BRCC0100_mainMerge

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="BraaMapper">
+
+    <insert id="Braa1000_insert" parameterType="org.hope.web.domain.BraaVO">
+		INSERT INTO BORDTB(BORD_NM, BORD_CTS, BORD_STUS, USER_NM, USER_EMAIL, USER_PHONE, USER_PW, REGI_DATE, MODY_DATE)
+		VALUES(#{braaNm}, #{braaCts},#{braaStus},#{userNm},#{userEmail},#{userPhone},#{userPw}, SYSDATE(), SYSDATE())
+    </insert>
+
+    <select id="Braa1000_select" resultType="org.hope.web.domain.BraaVO">
+		SELECT BORD_NO AS braaNo
+			  ,BORD_NM AS braaNm
+              ,BORD_STUS AS braaStus
+              ,BORD_CNT AS braaCnt
+              ,USER_NM AS userNm
+              ,DATE_FORMAT(MODY_DATE, '%Y-%m-%d') AS modyDate
+		 FROM BORDTB
+		WHERE 1=1 
+<!-- 			<if test="braaNm != ''">
+			   AND BORD_NM LIKE 
+			</if> -->
+		    <if test="braaStus!=null and !braaStus.equals('')">
+		    AND BORD_STUS = #{braaStus}
+		    </if>
+<!-- 			<if test="regiDate != ''">
+		    AND REGI_DATE LIKE ""
+		    </if>      --> 
+	</select>
+	
+	<select id="Braa1000_select_detail" resultType="org.hope.web.domain.BraaVO">
+		SELECT BORD_NO AS braaNo
+			  ,BORD_NM AS braaNm
+              ,BORD_CTS AS braaCts
+              ,BORD_STUS AS braaStus
+              ,USER_NM AS userNm
+              ,USER_EMAIL AS userEmail
+              ,USER_PHONE AS userPhone
+              ,DATE_FORMAT(REGI_DATE, '%Y-%m-%d') AS regiDate
+              ,DATE_FORMAT(MODY_DATE, '%Y-%m-%d') AS modyDate
+		 FROM BORDTB
+	</select>
+</mapper>
