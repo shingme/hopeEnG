@@ -54,5 +54,7 @@
  <input type=submit value="등록">
  <input type=button value="목록">
 </form>
+
+<%@ include file="/WEB-INF/views/footer.jsp" %>
 </body>
 </html>
