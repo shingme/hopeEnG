@@ -1,9 +1,14 @@
 package org.hope.web.service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import org.hope.web.controller.BraaController;
 import org.hope.web.dao.BraaDAO;
 import org.hope.web.domain.BraaVO;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,6 +17,8 @@ public class BraaServiceImpl implements BraaService{
 	@Autowired
 	BraaDAO braaDAO;
 	
+	private static final Logger logger = LoggerFactory.getLogger(BraaController.class);
+	
 	@Override
 	public void insertBraa(BraaVO braaVO) {
 		// TODO Auto-generated method stub
@@ -19,9 +26,9 @@ public class BraaServiceImpl implements BraaService{
 	}
 
 	@Override
-	public List<BraaVO> selectBraa(BraaVO braaVO) {
+	public List<BraaVO> selectBraa(Map<String, String> map) {
 		// TODO Auto-generated method stub
-		return braaDAO.select(braaVO);
+		return braaDAO.select(map);
 	}
 
 }

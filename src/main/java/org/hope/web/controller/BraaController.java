@@ -15,6 +15,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
@@ -46,10 +47,11 @@ public class BraaController {
 
 		//온라인 문의글 목록 조회
 		@RequestMapping("/Braa1000_select.do")
-		@ResponseBody // ajax통신을 위해서는 애를 선언해줘야 돌아갈 수 있음 
-		public Map<String, List<BraaVO>> BraaSelect(@ModelAttribute BraaVO braaVO) {
+		@ResponseBody 
+		public Map<String, List<BraaVO>> BraaSelect(@RequestParam HashMap<String, String> paramMap) {
+			paramMap.forEach((key,value) -> logger.info(key+":"+value));
 			Map<String, List<BraaVO>> map = new HashMap<String, List<BraaVO>>();
-			List<BraaVO> braaList = braaService.selectBraa(braaVO);
+			List<BraaVO> braaList = braaService.selectBraa(paramMap);
 			map.put("braaList", braaList);
 
 			return map;
@@ -60,8 +62,8 @@ public class BraaController {
 		@ResponseBody
 		public String BraaInsert(@ModelAttribute BraaVO braaVO, Model model) {
 			braaService.insertBraa(braaVO);
-			List<BraaVO> braaList = braaService.selectBraa(braaVO);
-			model.addAttribute("BraaList", braaList);
+			//List<BraaVO> braaList = braaService.selectBraa(braaVO);
+			//model.addAttribute("BraaList", braaList);
 			return "BraaList";
 		}
 

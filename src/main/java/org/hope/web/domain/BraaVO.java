@@ -1,6 +1,7 @@
 package org.hope.web.domain;
 
 public class BraaVO {
+	private int rowNm;
 	private int braaNo;
 	private String braaNm;
 	private String braaCts;
@@ -12,6 +13,13 @@ public class BraaVO {
 	private String userPw;
 	private String regiDate;
 	private String modyDate;
+	
+	public int getRowNm() {
+		return rowNm;
+	}
+	public void setRowNm(int rowNm) {
+		this.rowNm = rowNm;
+	}
 	public int getBraaNo() {
 		return braaNo;
 	}

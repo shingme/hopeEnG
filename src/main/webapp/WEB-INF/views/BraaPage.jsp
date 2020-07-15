@@ -50,6 +50,7 @@
    </td>
   </tr>
  </table>
+ <input type=reset value="초기화">
  <input type=submit value="등록">
  <input type=button value="목록">
 </form>
