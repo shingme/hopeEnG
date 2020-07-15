@@ -53,6 +53,7 @@
 	}
 	
 </script>
+<div class="inner">
 	<div>
 		<select id="select">
 			<option value="braaNm">제목</option>
@@ -65,5 +66,7 @@
 		<table id="braaTable" width="500" cellpadding="7" cellspacing="0" border="1">
 		</table>
 	</div>
+</div>
 </body>
+<%@ include file="/WEB-INF/views/footer.jsp" %>
 </html>
