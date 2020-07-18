@@ -13,6 +13,8 @@ public class BraaVO {
 	private String userPw;
 	private String regiDate;
 	private String modyDate;
+	private String bordRelease;
+	
 	public int getRowNm() {
 		return rowNm;
 	}
@@ -84,6 +86,12 @@ public class BraaVO {
 	}
 	public void setModyDate(String modyDate) {
 		this.modyDate = modyDate;
+	}
+	public String getBordRelease() {
+		return bordRelease;
+	}
+	public void setBordRelease(String bordRelease) {
+		this.bordRelease = bordRelease;
 	}
 	
 }
