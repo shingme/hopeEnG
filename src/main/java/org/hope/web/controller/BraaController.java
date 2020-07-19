@@ -34,21 +34,23 @@ public class BraaController {
 	 * Simply selects the home view to render by returning its name.
 	 */
 	
-		//메인에서 들어오는 화면 
+		//문의 게시판 목록 이동 
 		@RequestMapping(value = "/braa.do", method = RequestMethod.GET)
 		public String home(Locale locale, Model model) {
 
-//			model.addAttribute("pageName", "BraaPage");	  
-//			return "home";
-//			return "BraaPage"; 
-//			return "redirect:/braa/Braa1000_select.do";
 			return "BraaList";
+		} 
+		
+		//문의 게시판 작성하기 이
+		@RequestMapping(value = "/Braa1000_write.do", method = RequestMethod.GET)
+		public String braaWrite() {
+			return "BraaPage";
 		} 
 
 		//온라인 문의글 목록 조회
 		@RequestMapping("/Braa1000_select.do")
 		@ResponseBody 
-		public Map<String, List<BraaVO>> BraaSelect(@RequestParam HashMap<String, String> paramMap) {
+		public Map<String, List<BraaVO>> braaSelect(@RequestParam HashMap<String, String> paramMap) {
 			paramMap.forEach((key,value) -> logger.info(key+":"+value));
 			Map<String, List<BraaVO>> map = new HashMap<String, List<BraaVO>>();
 			List<BraaVO> braaList = braaService.selectBraa(paramMap);
@@ -59,12 +61,13 @@ public class BraaController {
 		
 		//온라인 문의글 작성
 		@RequestMapping("/Braa1000_insert.do")
-		@ResponseBody
-		public String BraaInsert(@ModelAttribute BraaVO braaVO, Model model) {
+//		@ResponseBody
+		public String braaInsert(@ModelAttribute BraaVO braaVO, Model model) {
 			braaService.insertBraa(braaVO);
 			//List<BraaVO> braaList = braaService.selectBraa(braaVO);
 			//model.addAttribute("BraaList", braaList);
-			return "BraaList";
+			return "redirect:/braa/braa.do";
+			//return "BraaList";
 		}
 
 }
