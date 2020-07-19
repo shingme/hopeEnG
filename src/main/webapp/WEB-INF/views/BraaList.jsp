@@ -77,6 +77,7 @@
 	}
 	
 </script>
+<div class="inner">
 	<div>
 		<select id="select">
 			<option value="bordNm">제목</option>
@@ -92,5 +93,7 @@
 	<div>
 		<button id="write">작성하기</button>
 	</div>
+</div>
 </body>
+<%@ include file="/WEB-INF/views/footer.jsp" %>
 </html>

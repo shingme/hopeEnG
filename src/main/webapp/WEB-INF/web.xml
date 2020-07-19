@@ -30,10 +30,10 @@
 		<url-pattern>/</url-pattern>
 	</servlet-mapping>
 
-	<servlet-mapping>
+<!-- 	<servlet-mapping>
 		<servlet-name>appServlet</servlet-name>
 		<url-pattern>/web</url-pattern>
-	</servlet-mapping>
+	</servlet-mapping> -->
 
 
 	<filter>

@@ -121,5 +121,7 @@
 <button id="submit">등록</button>
 <button type="button" id="braaList">목록</button>
 </form>
+
+<%@ include file="/WEB-INF/views/footer.jsp" %>
 </body>
 </html>
