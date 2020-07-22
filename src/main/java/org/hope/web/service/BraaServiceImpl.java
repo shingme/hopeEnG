@@ -30,4 +30,10 @@ public class BraaServiceImpl implements BraaService{
 		return braaDAO.select(map);
 	}
 
+	@Override
+	public BraaVO selectDetailBraa(String bordNum) {
+		// TODO Auto-generated method stub
+		return braaDAO.selectDetail(bordNum);
+	}
+
 }

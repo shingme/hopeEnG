@@ -13,6 +13,7 @@
 <script src="${pageContext.request.contextPath}/js/jquery-3.5.1.min.js" type="text/javascript"></script>
 <script>
 	$(document).ready(function(){
+		//jstl말고 json으로 데이터 가져오기 (상세조회 !)
 		$("#braaList").click(function(){
 			// 화면으로 바로 이동 
 			window.location.href = "braa.do";
@@ -84,7 +85,7 @@
 	<p/>
 	<select id="bordRelease" name="bordRelease">
 		<option value="Y">공개</option>
-		<option value="N">비공개</option>
+		<option value="N" selected>비공개</option>
 	</select>
 </div>
 <div>
@@ -95,7 +96,7 @@
 <div>
 	<label for="pwd">비밀번호</label>
 	<p/>
-	<input type="text" id="userPw" name="userPw" disabled>
+	<input type="text" id="userPw" name="userPw">
 </div>
 <div>
 	<label for="email">이메일</label>

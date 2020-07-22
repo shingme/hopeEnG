@@ -9,5 +9,7 @@ public interface BraaService {
 	public void insertBraa(BraaVO braaVO);
 
 	public List<BraaVO> selectBraa(Map<String, String> map);
+	
+	public BraaVO selectDetailBraa(String bordNum);
 
 }

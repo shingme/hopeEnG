@@ -27,20 +27,6 @@
 			window.location.href = "Braa1000_write.do";
 		})
 	})
-	
-	function ajaxComm(url, data, callback){
-		$.ajax({
-			url:url,
-			type:"get",
-			data:data,
-			dataType:"json",
-			contentType:"application/json; charset=UTF-8",
-			success:callback,
-			error:function(xhr, status, error){
-				console.log(xhr+"\n"+status+"\n"+error);
-			}
-		});
-	}
 
 	function braaSelectCallback(result){
 		$("#braaTable").empty();
@@ -74,6 +60,25 @@
 	function bordWrite(bordNum){
 		console.log(bordNum)
 		//상세보기 추가해야함!
+	/* 	var url = "/braa/Braa1000_select.do";
+		var param = new Object();
+		param[bordNum] = bordNum; */
+		
+		window.location.href = "Braa1000_detailSelect.do?bordNum="+bordNum;
+	}
+	
+	function ajaxComm(url, data, callback){
+		$.ajax({
+			url:url,
+			type:"get",
+			data:data,
+			dataType:"json",
+			contentType:"application/json; charset=UTF-8",
+			success:callback,
+			error:function(xhr, status, error){
+				console.log(xhr+"\n"+status+"\n"+error);
+			}
+		});
 	}
 	
 </script>
