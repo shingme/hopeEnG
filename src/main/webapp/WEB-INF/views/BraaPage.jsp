@@ -12,63 +12,83 @@
 <body>
 <script src="${pageContext.request.contextPath}/js/jquery-3.5.1.min.js" type="text/javascript"></script>
 <script>
-	$(document).ready(function(){
-		$("#braaList").click(function(){
-			// 화면으로 바로 이동 
-			window.location.href = "braa.do";
-		})
-		
-		$("#bordRelease").change(function(){
-			if($("#bordRelease").val() == "Y"){
-				$("#userPw").attr("disabled",true);
-			}else{
-				$("#userPw").removeAttr("disabled"); 
-			}
-		})
-		
-		$("#bordWriteForm").submit(function(){
-		//$("#submit").click(function(){
-			var alertFlag = true;
-			var guideTxt = ""
-			var obj = "";
-			
-			if($("#checkInfo").is(":checked") == false){
-				guideTxt = "개인정보 수집 및 이용 동의에 체크해주세요.";
-				obj = $("#checkInfo");
-			}else if($("#userNm").val() == undefined || $("#userNm").val() == ""){
-				guideTxt = "이름을 입력해주세요.";
-				obj = $("#userNm");
-			}else if($("#userPw").attr("disabled") == undefined
-					&& ($("#userPw").val() == undefined || $("#userPw").val() == "")){
-					guideTxt = "비밀번호를 입력해주세요.";
-					obj = $("#userPw");
-			}else if($("#userEmail").val() == undefined || $("#userEmail").val() == ""){
-				guideTxt = "이메일을 입력해주세요.";
-				obj = $("#userEmail");
-			}else if($("#userPhone").val() == undefined || $("#userPhone").val() == ""){
-				guideTxt = "연락처를 입력해주세요.";
-				obj = $("#userPhone");
-			}else if($("#bordNm").val() == undefined || $("#bordNm").val() == ""){
-				guideTxt = "제목을 입력해주세요.";
-				obj = $("#bordNm");
-			}else if($("#bordCts").val() == undefined || $("#bordCts").val() == ""){
-				guideTxt = "내용을 입력해주세요.";
-				obj = $("#bordCts");
-			}else{
-				alertFlag = false;
-			}
-			
-			if(alertFlag){
-				alert(guideTxt);
-				obj.focus();
-				return;
-			}
-		})
+var flag = false;
+var num = "${braa.bordNo}";
+if("${braa}" != ""){ // 상세보기 일 때 
+	flag = true;
+}
+$(document).ready(function(){
+	if(flag){
+		$("#checkInfo").prop("checked",true);
+		$("#bordRelease").attr("disabled",true);
+		$("#pwdDiv").remove();
+		$("#write").remove();
+		$("#reset").remove();
+	}else{
+		$("#braaUpdate").remove();
+	}
 
+	$("#braaList").click(function(){
+		window.location.href = "braa.do";
 	})
-</script>
+	
+	$("#bordRelease").change(function(){
+		if($("#bordRelease").val() == "Y"){
+			$("#userPw").attr("disabled",true);
+		}else{
+			$("#userPw").removeAttr("disabled"); 
+		}
+	})
+})
 
-<form name="bordWriteForm" action="/braa/Braa1000_insert.do" method="POST">
+function submitVal(val){
+	var action = "";
+	if(val == "insert"){
+		var alertFlag = true;
+		var guideTxt = ""
+		var obj = "";
+		
+		if($("#checkInfo").is(":checked") == false){
+			guideTxt = "개인정보 수집 및 이용 동의에 체크해주세요.";
+			obj = $("#checkInfo");
+		}else if($("#userNm").val() == undefined || $("#userNm").val() == ""){
+			guideTxt = "이름을 입력해주세요.";
+			obj = $("#userNm");
+		}else if($("#userPw").attr("disabled") == undefined
+				&& ($("#userPw").val() == undefined || $("#userPw").val() == "")){
+				guideTxt = "비밀번호를 입력해주세요.";
+				obj = $("#userPw");
+		}else if($("#userEmail").val() == undefined || $("#userEmail").val() == ""){
+			guideTxt = "이메일을 입력해주세요.";
+			obj = $("#userEmail");
+		}else if($("#userPhone").val() == undefined || $("#userPhone").val() == ""){
+			guideTxt = "연락처를 입력해주세요.";
+			obj = $("#userPhone");
+		}else if($("#bordNm").val() == undefined || $("#bordNm").val() == ""){
+			guideTxt = "제목을 입력해주세요.";
+			obj = $("#bordNm");
+		}else if($("#bordCts").val() == undefined || $("#bordCts").val() == ""){
+			guideTxt = "내용을 입력해주세요.";
+			obj = $("#bordCts");
+		}else{
+			alertFlag = false;
+		}
+		
+		if(alertFlag){
+			alert(guideTxt);
+			obj.focus();
+			return;
+		}
+		action = "/braa/Braa1000_insert.do";
+	}else{ //update
+		$("#bordNo").val(num);
+		action = "/braa/Braa1000_update.do"
+	}
+	$("#bordWriteForm").attr("action", action).submit();
+}
+</script>
+<form name="bordWriteForm" id="bordWriteForm" method="POST">
+<input type="hidden" name="bordNo" id="bordNo" value=""/>
 <div>
 	<label for="agree">개인정보 수집 및 이용 동의</label>
 	<div>
@@ -84,42 +104,43 @@
 	<p/>
 	<select id="bordRelease" name="bordRelease">
 		<option value="Y">공개</option>
-		<option value="N">비공개</option>
+		<option value="N" selected>비공개</option>
 	</select>
 </div>
 <div>
 	<label for="name">이름</label>
 	<p/>
-	<input type="text" id="userNm" name="userNm">
+	<input type="text" id="userNm" name="userNm" value="${braa.userNm}">
 </div>
-<div>
+<div id="pwdDiv">
 	<label for="pwd">비밀번호</label>
 	<p/>
-	<input type="text" id="userPw" name="userPw" disabled>
+	<input type="password" id="userPw" name="userPw">
 </div>
 <div>
 	<label for="email">이메일</label>
 	<p/>
-	<input type="text" id="userEmail" name="userEmail">
+	<input type="text" id="userEmail" name="userEmail" value="${braa.userEmail}">
 </div>
 <div>
 	<label for="tel">연락처</label>
 	<p/>
-	<input type="text" id="userPhone" name="userPhone">
+	<input type="text" id="userPhone" name="userPhone" value="${braa.userPhone}">
 </div>
 <div>
 	<label for="title">제목</label>
 	<p/>
-	<input type="text" id="bordNm" name="bordNm">
+	<input type="text" id="bordNm" name="bordNm" value="${braa.bordNm}">
 </div>
 <div>
 	<label for="content">내용</label>
 	<p/>
-	<textarea id="bordCts" name="bordCts"></textarea>
+	<textarea id="bordCts" name="bordCts">${braa.bordCts}</textarea>
 </div>
 <button type="reset" id="reset">초기화</button>
-<button id="submit">등록</button>
+<button type="button" id="write" onclick="submitVal('insert')">등록</button>
 <button type="button" id="braaList">목록</button>
+<button type="button" id="braaUpdate" onclick="submitVal('braaUpdate')">수정</button>
 </form>
 
 <%@ include file="/WEB-INF/views/footer.jsp" %>
