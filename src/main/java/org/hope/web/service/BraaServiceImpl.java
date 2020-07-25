@@ -36,4 +36,12 @@ public class BraaServiceImpl implements BraaService{
 		return braaDAO.selectDetail(bordNum);
 	}
 
+	@Override
+	public void updateBraa(BraaVO braaVO) {
+		// TODO Auto-generated method stub
+		int num = braaDAO.update(braaVO);
+		logger.debug("num:"+num);
+		
+	}
+
 }

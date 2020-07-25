@@ -39,5 +39,9 @@ public class BraaDAO {
 		// TODO Auto-generated method stub
 		return sqlSession.selectOne("BraaMapper.Braa1000_selectDetail", bordNum);
 	}
+	
+	public int update(BraaVO braaVO) throws DataAccessException{
+		return sqlSession.update("BraaMapper.Braa1000_update", braaVO);
+	}
 
 }

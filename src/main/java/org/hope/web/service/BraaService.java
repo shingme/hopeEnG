@@ -11,5 +11,7 @@ public interface BraaService {
 	public List<BraaVO> selectBraa(Map<String, String> map);
 	
 	public BraaVO selectDetailBraa(String bordNum);
+	
+	public void updateBraa(BraaVO braaVO);
 
 }

@@ -48,7 +48,7 @@
 		    		break;
 	   		};
 	   		
-		    braaAppend += "<tr><td>"+item.bordNo+"</td><td><a href='javascript:bordWrite(\""+item.bordNo+"\");'>"+item.bordNm+"</a>"
+		    braaAppend += "<tr><td>"+item.bordNo+"</td><td><a href='javascript:bordWrite(\""+item.bordNo+"\",\""+item.bordRelease+"\");'>"+item.bordNm+"</a>"
 		    		   +"</td><td>"+item.userNm+"</td><td>"+item.modyDate+"</td><td>"+item.bordCnt+"</td><td>"+stus
 		    		   +"</td><td>"+item.bordRelease+"</td></tr>";
 
@@ -57,13 +57,11 @@
 		$("#braaTable").append(braaAppend);
 	}
 	
-	function bordWrite(bordNum){
-		console.log(bordNum)
-		//상세보기 추가해야함!
-	/* 	var url = "/braa/Braa1000_select.do";
-		var param = new Object();
-		param[bordNum] = bordNum; */
-		
+	function bordWrite(bordNum, bordRelease){		
+		//비밀번호 입력
+		/* if(bordRelease == "N"){ //비공개
+			window.open("${pageContext.request.contextPath}/confirm.jsp","","scrollbars=no,status=no,resizable=no,width=300,height=150");
+		} */
 		window.location.href = "Braa1000_detailSelect.do?bordNum="+bordNum;
 	}
 	

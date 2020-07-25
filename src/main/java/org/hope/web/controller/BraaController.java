@@ -66,13 +66,8 @@ public class BraaController {
 		@RequestMapping("/Braa1000_detailSelect.do")
 	//	@ResponseBody 
 		public String braaDetailSelect(@RequestParam String bordNum, Model model) {
-
 			BraaVO braa = braaService.selectDetailBraa(bordNum);
 			model.addAttribute("braa", braa);
-//			ModelAndView mav = new ModelAndView();
-//			mav.addObject("braa", braaVO);
-//			mav.setViewName("BraaPage");
-			
 			return "BraaPage";
 		}
 		
@@ -81,6 +76,13 @@ public class BraaController {
 //		@ResponseBody
 		public String braaInsert(@ModelAttribute BraaVO braaVO, Model model) {
 			braaService.insertBraa(braaVO);
+			return "redirect:/braa/braa.do";
+		}
+		
+		//온라인 문의글 작성
+		@RequestMapping("/Braa1000_update.do")
+		public String braaUpdate(@ModelAttribute BraaVO braaVO, Model model) {
+			braaService.updateBraa(braaVO);
 			return "redirect:/braa/braa.do";
 		}
 
