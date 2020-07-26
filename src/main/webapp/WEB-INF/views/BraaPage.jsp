@@ -88,7 +88,7 @@ function submitVal(val){
 }
 </script>
 <form name="bordWriteForm" id="bordWriteForm" method="POST">
-<input type="hidden" name="bordNo" id="bordNo" value=""/>
+<input type="hidden" name="bordNo" id="bordNo" value=0>
 <div>
 	<label for="agree">개인정보 수집 및 이용 동의</label>
 	<div>
