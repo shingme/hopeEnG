@@ -26,6 +26,7 @@ $(document).ready(function(){
 		$("#reset").remove();
 	}else{
 		$("#braaUpdate").remove();
+		$("#braaDelete").remove();
 	}
 
 	$("#braaList").click(function(){
@@ -80,10 +81,14 @@ function submitVal(val){
 			return;
 		}
 		action = "/braa/Braa1000_insert.do";
-	}else{ //update
+	}else if(val == "braaUpdate"){ //update
 		$("#bordNo").val(num);
 		action = "/braa/Braa1000_update.do"
+	}else{ //delete 
+		$("#bordNo").val(num);
+		action = "/braa/Braa1000_delete.do"
 	}
+	
 	$("#bordWriteForm").attr("action", action).submit();
 }
 </script>
@@ -141,6 +146,7 @@ function submitVal(val){
 <button type="button" id="write" onclick="submitVal('insert')">등록</button>
 <button type="button" id="braaList">목록</button>
 <button type="button" id="braaUpdate" onclick="submitVal('braaUpdate')">수정</button>
+<button type="button" id="braaDelete" onclick="submitVal('braaDelete')">삭제</button>
 </form>
 
 <%@ include file="/WEB-INF/views/footer.jsp" %>
