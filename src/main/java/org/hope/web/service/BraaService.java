@@ -13,5 +13,9 @@ public interface BraaService {
 	public BraaVO selectDetailBraa(String bordNum);
 	
 	public void updateBraa(BraaVO braaVO);
+	
+	public int deleteBraa(BraaVO braaVO);
+	
+	public Boolean confirmPasswd(Map<String, String> map);
 
 }

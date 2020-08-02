@@ -31,6 +31,10 @@
     	WHERE BORD_NO = #{bordNo}
     </update>
     
+    <update id="BraaMapper.Braa1000_delete" parameterType="org.hope.web.domain.BraaVO">
+    	UPDATE BORDTB SET BORD_STUS = 'D' WHERE BORD_NO = #{bordNo}
+    </update>
+    
     <select id="Braa1000_select" resultType="org.hope.web.domain.BraaVO" parameterType="java.util.HashMap">
 		SELECT ROW_NUMBER() OVER () AS rowNm
 			  ,BORD_NO AS bordNo
@@ -46,11 +50,12 @@
 			   AND BORD_NM LIKE CONCAT('%',#{bordNm},'%')
 			</if>
 			<if test="userNm!=null and !userNm.equals('')">
-		    AND USER_NM LIKE CONCAT('%',#{userNm},'%')
+		    	AND USER_NM LIKE CONCAT('%',#{userNm},'%')
 		    </if>
 		    <!-- <if test="braaStus!=null and !braaStus.equals('')">
 		    AND BORD_STUS = #{braaStus}
 		    </if> -->
+		    AND BORD_STUS != 'D'
 		 ORDER BY REGI_DATE DESC
 	</select>
 	
@@ -64,6 +69,12 @@
               ,USER_PHONE AS userPhone
               ,DATE_FORMAT(REGI_DATE, '%Y-%m-%d') AS regiDate
               ,DATE_FORMAT(MODY_DATE, '%Y-%m-%d') AS modyDate
+		 FROM BORDTB
+	    WHERE BORD_NO = #{bordNum}
+	</select>
+	
+	<select id="BraaMapper.Braa1000_selectPassWd" resultType="java.lang.String" parameterType="java.lang.String">
+	    SELECT USER_PW AS userNm
 		 FROM BORDTB
 	    WHERE BORD_NO = #{bordNum}
 	</select>

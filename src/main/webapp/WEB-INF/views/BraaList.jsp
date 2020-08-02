@@ -57,14 +57,21 @@
 		$("#braaTable").append(braaAppend);
 	}
 	
-	function bordWrite(bordNum, bordRelease){		
+	function bordWrite(bordNum, bordRelease){	
 		//비밀번호 입력
-		/* if(bordRelease == "N"){ //비공개
-			window.open("${pageContext.request.contextPath}/confirm.jsp","","scrollbars=no,status=no,resizable=no,width=300,height=150");
-		} */
-		window.location.href = "Braa1000_detailSelect.do?bordNum="+bordNum;
+		if(bordRelease == "N"){ //비공개
+			//window.open("${pageContext.request.contextPath}/confirm.jsp","","scrollbars=no,status=no,resizable=no,width=300,height=150");
+			window.open("Braa1000_confirmPasswdWindow.do?bordNum="+bordNum,"","scrollbars=no,status=no,resizable=no,width=300,height=150");		
+		}else{
+			pageMove(bordNum);
+		}
 	}
 	
+	function pageMove(num){
+		window.location.href = "Braa1000_detailSelect.do?bordNum="+num;
+	}
+	
+	//공통 js만들면 제거 
 	function ajaxComm(url, data, callback){
 		$.ajax({
 			url:url,
