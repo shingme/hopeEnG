@@ -1,4 +1,4 @@
-package org.hope.web.comm;
+package org.hope.web.comm.admin;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
