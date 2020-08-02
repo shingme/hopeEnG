@@ -38,33 +38,40 @@ public class BraaController {
 		//문의 게시판 목록 이동 
 		@RequestMapping(value = "/braa.do", method = RequestMethod.GET)
 		public String home(Locale locale, Model model) {
-
 			return "BraaList";
 		} 
 		
 		//문의 게시판 작성하기
 		@RequestMapping(value = "/Braa1000_write.do", method = RequestMethod.GET)
 		public String braaWrite() {
-			logger.info("들어옴");
 			return "BraaPage";
 		} 
+		
+		@RequestMapping(value = "Braa1000_confirmPasswdWindow.do", method = RequestMethod.GET)
+		public String braaConfirmPasswdWindow(@RequestParam String bordNum, Model model) {
+			model.addAttribute("bordNum", bordNum);
+			return "confirmPassWd";
+		}
+		
+		@RequestMapping(value = "Braa1000_confirmPasswd.do", method = RequestMethod.GET)
+		@ResponseBody
+		public Boolean braaConfirmPasswd(@RequestParam HashMap<String, String> data) {
+			return braaService.confirmPasswd(data);
+		}
 
 		//온라인 문의글 목록 조회
 		@RequestMapping("/Braa1000_select.do")
 		@ResponseBody 
 		public Map<String, List<BraaVO>> braaSelect(@RequestParam HashMap<String, String> paramMap) {
-			paramMap.forEach((key,value) -> logger.info(key+":"+value));
-			
+			//paramMap.forEach((key,value) -> logger.info(key+":"+value));
 			Map<String, List<BraaVO>> map = new HashMap<String, List<BraaVO>>();
 			List<BraaVO> braaList = braaService.selectBraa(paramMap);
 			map.put("braaList", braaList);
-			
 			return map;
 		}
 		
 		//온라인 문의글 상세 조회 
 		@RequestMapping("/Braa1000_detailSelect.do")
-	//	@ResponseBody 
 		public String braaDetailSelect(@RequestParam String bordNum, Model model) {
 			BraaVO braa = braaService.selectDetailBraa(bordNum);
 			model.addAttribute("braa", braa);
@@ -73,7 +80,6 @@ public class BraaController {
 		
 		//온라인 문의글 작성
 		@RequestMapping("/Braa1000_insert.do")
-//		@ResponseBody
 		public String braaInsert(@ModelAttribute BraaVO braaVO, Model model) {
 			braaService.insertBraa(braaVO);
 			return "redirect:/braa/braa.do";
@@ -83,6 +89,13 @@ public class BraaController {
 		@RequestMapping("/Braa1000_update.do")
 		public String braaUpdate(@ModelAttribute BraaVO braaVO, Model model) {
 			braaService.updateBraa(braaVO);
+			return "redirect:/braa/braa.do";
+		}
+		
+		//온라인 문의글 삭제
+		@RequestMapping("/Braa1000_delete.do")
+		public String braaDelete(@ModelAttribute BraaVO braaVO) {
+			braaService.deleteBraa(braaVO);
 			return "redirect:/braa/braa.do";
 		}
 

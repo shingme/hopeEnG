@@ -44,4 +44,24 @@ public class BraaServiceImpl implements BraaService{
 		
 	}
 
+	@Override
+	public Boolean confirmPasswd(Map<String, String> map) {
+		// TODO Auto-generated method stub
+		Boolean flag = false;
+		//비밀번호 암호화해서 비교하기 !SHA-4 ???
+		String savePw = braaDAO.selectPassWd(map.get("bordNum"));
+		logger.info("savePw:"+savePw);
+		if(savePw.equals(map.get("pw"))){
+			flag = true;
+		}
+		return flag;
+	}
+
+	@Override
+	public int deleteBraa(BraaVO braaVO) {
+		// TODO Auto-generated method stub
+		return braaDAO.delete(braaVO);
+		
+	}
+
 }
