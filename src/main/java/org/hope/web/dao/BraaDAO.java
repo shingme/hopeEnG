@@ -52,5 +52,9 @@ public class BraaDAO {
 		return sqlSession.update("BraaMapper.Braa1000_delete", braaVO);
 	}
 	
+	public int updateIncreViewsBraa(String bordNum) throws DataAccessException{
+		return sqlSession.update("BraaMapper.Braa1000_updateIncreViews", bordNum);
+	}
+	
 
 }
