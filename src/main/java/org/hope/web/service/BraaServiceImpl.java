@@ -33,9 +33,17 @@ public class BraaServiceImpl implements BraaService{
 	@Override
 	public BraaVO selectDetailBraa(String bordNum) {
 		// TODO Auto-generated method stub
+		int num = increViewsBraa(bordNum);
+		logger.debug("num:"+num);
 		return braaDAO.selectDetail(bordNum);
 	}
-
+	
+	@Override
+	public int increViewsBraa(String bordNum) {
+		// TODO Auto-generated method stub
+		return braaDAO.updateIncreViewsBraa(bordNum);
+	}
+	
 	@Override
 	public void updateBraa(BraaVO braaVO) {
 		// TODO Auto-generated method stub

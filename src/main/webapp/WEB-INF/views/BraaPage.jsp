@@ -17,14 +17,17 @@ var num = "${braa.bordNo}";
 if("${braa}" != ""){ // 상세보기 일 때 
 	flag = true;
 }
+
 $(document).ready(function(){
 	if(flag){
 		$("#checkInfo").prop("checked",true);
-		$("#bordRelease").attr("disabled",true);
+		$("#bordRelease").val("${braa.bordRelease}");
+		$("#bordRelease").attr("disabled",true); //수정기능에서 공개 비공개 수정할 지 아직 결정 X
 		$("#pwdDiv").remove();
 		$("#write").remove();
 		$("#reset").remove();
 	}else{
+		$("#bordRelease").val("N");
 		$("#braaUpdate").remove();
 		$("#braaDelete").remove();
 	}
@@ -109,7 +112,7 @@ function submitVal(val){
 	<p/>
 	<select id="bordRelease" name="bordRelease">
 		<option value="Y">공개</option>
-		<option value="N" selected>비공개</option>
+		<option value="N">비공개</option>
 	</select>
 </div>
 <div>
