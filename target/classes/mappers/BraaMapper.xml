@@ -64,6 +64,7 @@
 			  ,BORD_NM AS bordNm
               ,BORD_CTS AS bordCts
               ,BORD_STUS AS bordStus
+              ,BORD_RELEASE AS bordRelease
               ,USER_NM AS userNm
               ,USER_EMAIL AS userEmail
               ,USER_PHONE AS userPhone
@@ -78,4 +79,12 @@
 		 FROM BORDTB
 	    WHERE BORD_NO = #{bordNum}
 	</select>
+	
+	<update id="BraaMapper.Braa1000_updateIncreViews" parameterType="java.lang.String">
+		update BORDTB
+		   set BORD_CNT = (select BORD_CNT+1
+		   					 from BORDTB
+		   					where BORD_NO = #{bordNum})
+		 where BORD_NO = #{bordNum}
+	</update>
 </mapper>

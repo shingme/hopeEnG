@@ -40,11 +40,7 @@ public class AdminController {
 			return "comm/AdminLogin";
 		} 
 		
-		//문의 게시판 작성하기 이
-		@RequestMapping(value = "/Braa1000_write.do", method = RequestMethod.GET)
-		public String braaWrite() {
-			return "BraaPage";
-		} 
+	
 
 
 
