@@ -1,5 +1,6 @@
 package org.hope.web.service;
 
+import java.security.MessageDigest;
 import java.util.List;
 import java.util.Map;
 
@@ -19,8 +20,9 @@ public class BraaServiceImpl implements BraaService{
 	private static final Logger logger = LoggerFactory.getLogger(BraaController.class);
 	
 	@Override
-	public void insertBraa(BraaVO braaVO) {
+	public void insertBraa(BraaVO braaVO) throws Exception {
 		// TODO Auto-generated method stub
+		braaVO.setUserPw(sha256(braaVO.getUserPw())); //sha256 공통으로 빼면 애 controller로 빼기
 		braaDAO.insert(braaVO);
 	}
 
@@ -53,22 +55,49 @@ public class BraaServiceImpl implements BraaService{
 	}
 
 	@Override
-	public Boolean confirmPasswd(Map<String, String> map) {
+	public Boolean confirmPasswd(Map<String, String> map) throws Exception {
 		// TODO Auto-generated method stub
-		Boolean flag = false;
-		//비밀번호 암호화해서 비교하기 !SHA-4 ???
-		String savePw = braaDAO.selectPassWd(map.get("bordNum"));
-		logger.info("savePw:"+savePw);
-		if(savePw.equals(map.get("pw"))){
-			flag = true;
+		String newPw = map.get("pw");
+		String savPw = braaDAO.selectPassWd(map.get("bordNum"));
+
+		return comparePw(sha256(newPw), savPw);
+	}
+	
+	public String sha256(String value) throws Exception{
+		//SHA 해싱
+		MessageDigest md = MessageDigest.getInstance("SHA-256");
+		md.update(value.getBytes("utf-8"));
+		byte[] bytes = md.digest();
+		
+		//byte를 Hex 값으로변환
+		StringBuilder builder = new StringBuilder();
+		for(byte b : bytes){
+			builder.append(String.format("%02x", b));
 		}
-		return flag;
+		
+		return builder.toString();
+	}
+	
+	public Boolean comparePw(String newPw, String orinPw){
+		if(newPw.equals(orinPw)){
+			return true;
+		}
+		return false;
 	}
 
 	@Override
 	public int deleteBraa(BraaVO braaVO) {
 		// TODO Auto-generated method stub
 		return braaDAO.delete(braaVO);
+		
+	}
+	
+	public void temp() throws Exception{
+		List<BraaVO> list = braaDAO.hexTemp();
+		String str = "";
+		for(BraaVO val : list){
+			str = sha256(val.getUserPw());
+		}
 		
 	}
 

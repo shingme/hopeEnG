@@ -6,7 +6,7 @@ import java.util.Map;
 import org.hope.web.domain.BraaVO;
 
 public interface BraaService {
-	public void insertBraa(BraaVO braaVO);
+	public void insertBraa(BraaVO braaVO) throws Exception;
 
 	public List<BraaVO> selectBraa(Map<String, String> map);
 	
@@ -18,6 +18,6 @@ public interface BraaService {
 	
 	public int deleteBraa(BraaVO braaVO);
 	
-	public Boolean confirmPasswd(Map<String, String> map);
+	public Boolean confirmPasswd(Map<String, String> map) throws Exception;
 
 }
