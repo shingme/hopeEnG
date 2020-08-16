@@ -1,11 +1,11 @@
-package org.hope.web.comm.admin;
+package org.hope.web.admin;
 
 import javax.inject.Inject;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
-import org.hope.web.comm.admin.LoginDTO;
-import org.hope.web.comm.admin.AdminVO;
+import org.hope.web.admin.LoginDTO;
+import org.hope.web.admin.AdminVO;
 
 public class AdminDAOImpl implements AdminDAO {
 
