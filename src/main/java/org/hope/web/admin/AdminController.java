@@ -34,7 +34,7 @@ public class AdminController {
 		@RequestMapping(value = "", method = RequestMethod.GET)
 		public String home(Locale locale, Model model) {
 
-			return "comm/AdminLogin";
+			return "admin/AdminLogin";
 		} 
 		
 		

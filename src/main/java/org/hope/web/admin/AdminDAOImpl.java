@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 import org.hope.web.admin.LoginDTO;
 import org.hope.web.admin.AdminVO;
 
+@Repository
 public class AdminDAOImpl implements AdminDAO {
 
 	@Inject
