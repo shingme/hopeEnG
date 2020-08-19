@@ -56,5 +56,8 @@ public class BraaDAO {
 		return sqlSession.update("BraaMapper.Braa1000_updateIncreViews", bordNum);
 	}
 	
+	public List<BraaVO> hexTemp(){
+		return sqlSession.selectList("BraaMapper.Braa1000_temp");
+	}
 
 }

@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
+
 import org.hope.web.domain.BraaVO;
 import org.hope.web.service.BraaService;
 import org.slf4j.Logger;
@@ -13,11 +14,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
 
 /**
  * Handles requests for the application home page.
@@ -53,9 +54,11 @@ public class BraaController {
 			return "confirmPassWd";
 		}
 		
-		@RequestMapping(value = "Braa1000_confirmPasswd.do", method = RequestMethod.GET)
+		@RequestMapping("Braa1000_confirmPasswd.do")
 		@ResponseBody
-		public Boolean braaConfirmPasswd(@RequestParam HashMap<String, String> data) {
+		public Boolean braaConfirmPasswd(@RequestBody HashMap<String, String> data) throws Exception {
+
+			//data.forEach((key,value) -> logger.info(key+":"+value));
 			return braaService.confirmPasswd(data);
 		}
 
@@ -78,9 +81,10 @@ public class BraaController {
 			return "BraaPage";
 		}
 		
+		//컨트롤러에서 익셉션 잡아주기
 		//온라인 문의글 작성
 		@RequestMapping("/Braa1000_insert.do")
-		public String braaInsert(@ModelAttribute BraaVO braaVO, Model model) {
+		public String braaInsert(@ModelAttribute BraaVO braaVO, Model model) throws Exception {
 			braaService.insertBraa(braaVO);
 			return "redirect:/braa/braa.do";
 		}

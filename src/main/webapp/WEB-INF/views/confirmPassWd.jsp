@@ -19,8 +19,8 @@
 		$("#confirmPw").click(function(){
 			//비밀번호 암호화 추가해야함
 			var data = {pw : $("#pw").val(), bordNum : num };
-			ajaxComm("/braa/Braa1000_confirmPasswd.do", data, callback);
-			
+			ajaxComm("/braa/Braa1000_confirmPasswd.do", JSON.stringify(data), callback, "POST");
+			// 그냥json으로 보냇을때 문제가 생겻음 ->json을 스트링으로 보내니 문제사라짐
 		})
 		
 		$("#confirmClose").click(function(){
@@ -34,6 +34,8 @@
 			window.close();
 		}else{
 			//alert("비밀번호가 맞지않습니다. 다시 확인해주세요.");
+			$("#confirmMsg span").empty();
+			
 			var append = "비밀번호가 맞지않습니다. <p/>다시 입력해주세요."
 			$("#confirmMsg span").append(append);
 			//$("#pw").val("");
@@ -41,10 +43,10 @@
 	}
 	
 	//공통 js만들면 제거 
-	function ajaxComm(url, data, callback){
+	function ajaxComm(url, data, callback, action){
 		$.ajax({
 			url:url,
-			type:"get",
+			type:action,
 			data:data,
 			dataType:"json",
 			contentType:"application/json; charset=UTF-8",

@@ -75,7 +75,7 @@
 	</select>
 	
 	<select id="BraaMapper.Braa1000_selectPassWd" resultType="java.lang.String" parameterType="java.lang.String">
-	    SELECT USER_PW AS userNm
+	    SELECT USER_PW AS userPw
 		 FROM BORDTB
 	    WHERE BORD_NO = #{bordNum}
 	</select>
@@ -87,4 +87,8 @@
 		   					where BORD_NO = #{bordNum})
 		 where BORD_NO = #{bordNum}
 	</update>
+	
+	<select id="BraaMapper.Braa1000_temp" resultType="org.hope.web.domain.BraaVO" parameterType="org.hope.web.domain.BraaVO">
+	    select bord_no as bordNum, user_pw as userPw from BORDTB where bord_release = 'N'
+	</select>
 </mapper>
