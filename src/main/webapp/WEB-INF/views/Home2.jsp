@@ -19,7 +19,7 @@
         <link href="${pageContext.request.contextPath}/css/styles.css" rel="stylesheet" />
         <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/slick.css">
   		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/slick-theme.css">
-  		<%@ include file="/WEB-INF/views/header.jsp" %>
+  		<%@ include file="/WEB-INF/views/comm/header.jsp" %>
   		<style type="text/css">
     html, body {
       margin: 0;
@@ -565,7 +565,7 @@
                 </div>
             </div>
         </div>
-        <%@ include file="/WEB-INF/views/footer.jsp" %>
+        <%@ include file="/WEB-INF/views/comm/footer.jsp" %>
         
         
         <!-- Bootstrap core JS-->
