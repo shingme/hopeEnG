@@ -3,7 +3,7 @@
 
 <mapper namespace="AdminMapper">
 
-	<select id="AdminMapper.Admin_select" resultType="org.hope.web.admin.AdminVO" parameterType="java.util.HashMap">
+	<select id="AdminMapper.Admin_select" parameterType="org.hope.web.admin.AdminVO" resultType="java.util.HashMap">
 		SELECT ADMIN_ID
 		     , ADMIN_PW
 			 , ADMIN_NM

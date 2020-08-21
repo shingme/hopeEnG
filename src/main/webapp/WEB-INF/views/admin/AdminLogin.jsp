@@ -13,7 +13,7 @@
 <script>
 	$(document).ready(function(){ //메인에서 클릭해서 들어오면 서버에서 무조건 5개 가지고 옴
 		
-		ajaxComm("/admin/adminLogin.do","", adminLoginCallback);
+		//ajaxComm("/admin/adminLogin.do","", adminLoginCallback);
 		
 		$("#LoginBtn").click(function(){
 			alert("클릭");
