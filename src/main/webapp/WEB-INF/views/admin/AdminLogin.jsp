@@ -40,42 +40,9 @@
 			var action = "/admin/loginCheck.do";
 			//$("#loginForm").attr("action", action).submit();
 			ajaxComm("/admin/loginCheck.do", adminData, adminLoginCallback);
-			
+		})	
 	})
-			
-	//공통 js만들면 제거 
-	function ajaxComm(url, adminData, callback){
-			alert("ad : " + JSON.stringify(adminData))
-		$.ajax({
-			url  	    : url,
-			type 	    : "POST",
-			data 	    : adminData,
-			//dataType    :"json",
-			contentType :"application/json; charset=UTF-8",
-			success:callback,
-			error:function(xhr, status, error){
-				console.log(xhr+"\n"+status+"\n"+error);
-			}
-		});
-	}
-			
-			
-			
-	function adminLoginCallback(result){
-		
-		alert("result : " + result );
-		
-		var stus = "";
-		var click = "";
-		
-	
-	   	
-		
-		$("#braaTable").append(braaAppend);
-	}
-	
-	
-})
+
 	
 function submitVal(val){
 	alert("123");
@@ -99,8 +66,8 @@ function submitVal(val){
 		</div>
 		
 		<div style="width: 25%; border: solid; float: left;" >
-			<!--  <button type="button" id="write" onclick="submitVal('insert')">등록</button>-->
-			<input type="submit"  id="LoginBtn" value="로그인">
+			<button type="button" id="login" onclick="submitVal('login')">로그인</button>
+			<!-- input type="submit"  id="LoginBtn" value="로그인"> -->
 		</div>
 	</form>
 </div>

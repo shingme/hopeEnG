@@ -11,9 +11,9 @@ public class AdminServiceImpl implements AdminService{
 	private AdminDAO dao;
 	
 	@Override
-	public AdminVO login(LoginDTO dto)throws Exception{
+	public AdminVO loginCheck(LoginDTO dto)throws Exception{
 		
-		return dao.login(dto);
+		return dao.loginCheck(dto);
 	}
 	
 

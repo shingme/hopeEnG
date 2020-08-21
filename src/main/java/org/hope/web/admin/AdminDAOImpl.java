@@ -16,8 +16,8 @@ public class AdminDAOImpl implements AdminDAO {
 	private static String namespace = "AdminMapper";
 	
 	@Override
-	public AdminVO login(LoginDTO dto) throws Exception{
-		return session.selectOne(namespace + ".login",dto);
+	public AdminVO loginCheck(LoginDTO dto) throws Exception{
+		return session.selectOne(namespace + ".loginCheck",dto);
 	}
 	
 }

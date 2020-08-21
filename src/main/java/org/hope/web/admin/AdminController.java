@@ -38,10 +38,10 @@ public class AdminController {
 		} 
 		
 		
-		@RequestMapping(value = "/adminLogin.do", method = RequestMethod.POST)
+		@RequestMapping(value = "/loginCheck.do", method = RequestMethod.POST)
 		public void loginCheck(LoginDTO dto, HttpSession session, Model model)throws Exception {
 			
-			AdminVO vo = service.login(dto);
+			AdminVO vo = service.loginCheck(dto);
 			if(vo == null) {
 				return;
 			}
