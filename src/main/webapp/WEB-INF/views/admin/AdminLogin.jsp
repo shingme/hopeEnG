@@ -36,17 +36,21 @@
 					adminPw : $('#adminPw').val()
 			};
 			alert("3");
+			
+			var action = "/admin/loginCheck.do";
+			//$("#loginForm").attr("action", action).submit();
 			ajaxComm("/admin/loginCheck.do", adminData, adminLoginCallback);
 			
 	})
 			
 	//공통 js만들면 제거 
 	function ajaxComm(url, adminData, callback){
+			alert("ad : " + JSON.stringify(adminData))
 		$.ajax({
 			url  	    : url,
 			type 	    : "POST",
 			data 	    : adminData,
-			dataType    :"json",
+			//dataType    :"json",
 			contentType :"application/json; charset=UTF-8",
 			success:callback,
 			error:function(xhr, status, error){
@@ -73,7 +77,13 @@
 	
 })
 	
-
+function submitVal(val){
+	alert("123");
+	var action = "/admin/loginCheck.do";
+	$("#loginForm").attr("action", action).submit();
+	
+//	$("#bordWriteForm").attr("action", action).submit();
+}
 	
 	
 </script>
@@ -82,14 +92,14 @@
 
 
 <div style="border: solid; position:absolute; width: 40%; height: 50%;">
-
-	<form id="loginForm" name="loginForm" action="/admin/adminLogin" enctype="multipart/form-data" method="post" onsubmit="return false;">
+	<form id="loginForm" name="loginForm" method="post">
 		<div style="width: 60%; border: solid; float: left;">
 			<input type="text" id="adminId" placeholder="아이디" style="width: 100%">
 			<input type="password" id="adminPw" placeholder="비밀번호"style="width: 100%">
 		</div>
 		
 		<div style="width: 25%; border: solid; float: left;" >
+			<!--  <button type="button" id="write" onclick="submitVal('insert')">등록</button>-->
 			<input type="submit"  id="LoginBtn" value="로그인">
 		</div>
 	</form>
