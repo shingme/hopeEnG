@@ -19,5 +19,5 @@ public interface BraaService {
 	public int deleteBraa(BraaVO braaVO);
 	
 	public Boolean confirmPasswd(Map<String, String> map) throws Exception;
-
+	
 }

@@ -36,7 +36,8 @@
     </update>
     
     <select id="Braa1000_select" resultType="org.hope.web.domain.BraaVO" parameterType="java.util.HashMap">
-		SELECT ROW_NUMBER() OVER () AS rowNm
+		SELECT count(*) over() totalCnt
+			  ,ROW_NUMBER() OVER () AS rowNm
 			  ,BORD_NO AS bordNo
 			  ,BORD_NM AS bordNm
               ,BORD_STUS AS bordStus
