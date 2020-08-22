@@ -7,7 +7,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>온라인 문의목록</title>
-<%@ include file="/WEB-INF/views/header.jsp" %>
+<%@ include file="/WEB-INF/views/comm/header.jsp" %>
 <link href="${pageContext.request.contextPath}/css/error.css" rel="stylesheet" />
 </head>
 <body>
@@ -56,6 +56,6 @@ var temp = "";
 
 
   
-  <%@ include file="/WEB-INF/views/footer.jsp" %>
+  <%@ include file="/WEB-INF/views/comm/footer.jsp" %>
 </body>
 </html>

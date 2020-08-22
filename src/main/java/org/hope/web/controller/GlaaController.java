@@ -34,7 +34,7 @@ public class GlaaController {
 			} 
 			
 	  @RequestMapping(value="/uploadForm", method=RequestMethod.GET) public String
-	  showUploadForm() { return "uploadForm"; }
+	  showUploadForm() { return "GlaaUploadForm"; }
 	 
 
 	// 갤러리 게시물 작성

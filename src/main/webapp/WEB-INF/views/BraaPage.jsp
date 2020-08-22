@@ -7,7 +7,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>작성하기</title>
-<%@ include file="/WEB-INF/views/header.jsp" %>
+<%@ include file="/WEB-INF/views/comm/header.jsp" %>
 </head>
 <body>
 <script src="${pageContext.request.contextPath}/js/jquery-3.5.1.min.js" type="text/javascript"></script>
@@ -152,6 +152,6 @@ function submitVal(val){
 <button type="button" id="braaDelete" onclick="submitVal('braaDelete')">삭제</button>
 </form>
 
-<%@ include file="/WEB-INF/views/footer.jsp" %>
+<%@ include file="/WEB-INF/views/comm/footer.jsp" %>
 </body>
 </html>

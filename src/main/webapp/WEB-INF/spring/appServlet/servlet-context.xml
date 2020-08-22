@@ -27,7 +27,7 @@
 	<resources mapping="/js/**" location="/resources/js/" />
 	
 	
-	<beans:bean id="interceptor" class="org.hope.web.comm.interceptor.interceptor"></beans:bean>
+	<beans:bean id="interceptor" class="org.hope.web.interceptor.interceptor"></beans:bean>
 	
 	<interceptors>
 		<interceptor>
