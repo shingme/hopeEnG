@@ -1,6 +1,7 @@
 package org.hope.web.domain;
 
 public class BraaVO {
+	private int totalCnt;
 	private int rowNm;
 	private int bordNo;
 	private String bordNm;
@@ -15,6 +16,13 @@ public class BraaVO {
 	private String modyDate;
 	private String bordRelease;
 	
+	
+	public int getTotalCnt() {
+		return totalCnt;
+	}
+	public void setTotalCnt(int totalCnt) {
+		this.totalCnt = totalCnt;
+	}
 	public int getRowNm() {
 		return rowNm;
 	}

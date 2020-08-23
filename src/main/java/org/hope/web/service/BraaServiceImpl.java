@@ -91,7 +91,8 @@ public class BraaServiceImpl implements BraaService{
 		return braaDAO.delete(braaVO);
 		
 	}
-	
+
+	//지울예정
 	public void temp() throws Exception{
 		List<BraaVO> list = braaDAO.hexTemp();
 		String str = "";
