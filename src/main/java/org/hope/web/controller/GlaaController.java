@@ -2,7 +2,11 @@ package org.hope.web.controller;
 
 import java.io.File;
 import java.io.IOException;
+
+import java.util.HashMap;
+import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 import java.util.UUID;
 
 import org.hope.web.domain.GlaaVO;
@@ -16,6 +20,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -27,31 +32,48 @@ public class GlaaController {
 	GlaaService glaaService;
 
 	//문의 게시판 목록 이동 
-			@RequestMapping(value = "/glaa.do", method = RequestMethod.GET)
-			public String home(Locale locale, Model model) {
-
-				return "GlaaList";
-			} 
+	@RequestMapping(value = "/glaa.do", method = RequestMethod.GET)
+	public String home(Locale locale, Model model) {
+		System.out.println("목록 페이지 가자");
+		return "GlaaList";
+	} 
 			
-	  @RequestMapping(value="/uploadForm", method=RequestMethod.GET) public String
-	  showUploadForm() { return "GlaaUploadForm"; }
+	@RequestMapping(value="/uploadForm", method=RequestMethod.GET) 
+	public String showUploadForm() { 
+		System.out.println("여긴 되잖아");
+		return "GlaaUploadForm"; 
+	}
+
+	
+	  // 온라인 문의글 목록 조회
+	  
+	@RequestMapping("/Glaa1000_select.do")
+	@ResponseBody 
+	public Map<String, List<GlaaVO>> glaaSelect(@RequestParam HashMap<String, String> paramMap) {
+		  //paramMap.forEach((key, value) -> Logger.info(key + ":" + value));
+	  
+	Map<String, List<GlaaVO>> map = new HashMap<String, List<GlaaVO>>();
+	  
+	List<GlaaVO> glaaList = glaaService.selectGlaa(paramMap);
+	System.out.println(glaaList.get(0).toString()); map.put("glaaList",glaaList); 
+	  
+	return map; 
+	}
 	 
 
+
 	// 갤러리 게시물 작성
-	@RequestMapping("/Glaa1000_insert.do")
+	@RequestMapping(value = "/Glaa1000_insert.do", method = RequestMethod.POST)
+	@ResponseBody 
 	public String glaaInsert(@ModelAttribute GlaaVO glaaVO, Model model) throws Exception{
 		
+		try {
+			glaaService.insertGlaa(glaaVO);
+			return "SUCCESS";
+		} catch (Exception e) {
+			return "FALSE";
+		}
 		
-		System.out.println(model.toString());
-		System.out.println("Here!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-		System.out.println(glaaVO.toString());
-		
-		/*
-		 * System.out.println(glaaVO.toString()); glaaService.insertGlaa(glaaVO);
-		 * System.out.println("HEllo insert function");
-		 */
-		glaaService.insertGlaa(glaaVO);
-		return "GlaaList";
 	}
 
 	@RequestMapping(path = "/uploadFile", method = RequestMethod.POST)

@@ -30,9 +30,10 @@ public class GlaaServiceImpl implements GlaaService{
 		
 		List<GlaaFileVO> glaaFileList = getGlaaFileInfo(glaaVO);
 		
-		glaaDAO.insert(glaaVO);
-		
+		int gllyNo = glaaDAO.insert(glaaVO);
+		System.out.println("갤러리번호 : "+gllyNo);
 		for(GlaaFileVO glaaFileVO : glaaFileList) {
+			glaaFileVO.setGllyNo(gllyNo);
 			glaaDAO.insertGlaaFile(glaaFileVO);
 		}
 		
@@ -50,6 +51,7 @@ public class GlaaServiceImpl implements GlaaService{
 		return glaaDAO.selectDetail(bordNum);
 	}
 
+	
 	@Override
 	public void updateGlaa(GlaaVO glaaVO) {
 		// TODO Auto-generated method stub
@@ -78,7 +80,7 @@ public class GlaaServiceImpl implements GlaaService{
 			if(file.exists() == false) {
 				file.mkdirs();
 			}
-			
+			int i=1;
 			for(MultipartFile multipartFile : files) {
 				
 				fileName = multipartFile.getOriginalFilename();
@@ -86,10 +88,12 @@ public class GlaaServiceImpl implements GlaaService{
 				fileNameKey = getRandomString() + fileExt;
 				fileSize = String.valueOf(multipartFile.getSize());
 				
+				System.out.println("파일명------");
 				System.out.println(fileName);
 				System.out.println(fileExt);
 				System.out.println(fileNameKey);
 				System.out.println(fileSize);
+				System.out.println(filePath);
 				// Save File
 				file = new File(filePath + "/" + fileNameKey);
 				multipartFile.transferTo(file);
@@ -97,9 +101,11 @@ public class GlaaServiceImpl implements GlaaService{
 				glaaFileVO = new GlaaFileVO();
 				glaaFileVO.setGllyNo(gllyNo);
 				glaaFileVO.setFileNameKey(fileNameKey);
-				glaaFileVO.setFilePath(filePath);
+				glaaFileVO.setFilePath(filePath + "\\" + fileNameKey);
 				glaaFileVO.setFileSize(fileSize);
+				glaaFileVO.setFileNo(i);i++;
 				glaaFileList.add(glaaFileVO);
+				
 
 			}
 		}
@@ -116,5 +122,9 @@ public class GlaaServiceImpl implements GlaaService{
 	 * @Override public void insertBoardFile(GlaaFileVO glaaFileVO) {
 	 * glaaDAO.insertGlaaFile(glaaFileVO); }
 	 */
+    
+    public List<Map<String, String>> getImagePathGlaa(Map<String, String> map){
+    	return glaaDAO.selectImagePath(map);
+    }
 
 }

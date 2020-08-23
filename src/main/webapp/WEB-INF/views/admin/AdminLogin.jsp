@@ -33,11 +33,7 @@ function submitVal(val){
 	$("#loginForm").attr("action", action).submit();
 	
 }
-	
-	
 </script>
-
-
 
 
 <div style="border: solid; position:absolute; width: 40%; height: 50%;">

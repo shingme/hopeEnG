@@ -64,6 +64,12 @@ public class AdminController {
 	public String loginsucces(Locale locale, Model model) {
 		return "admin/loginsucces";
 	} 
+	
+	//로그인 성공
+	@RequestMapping(value = "/logout.do", method = RequestMethod.GET)
+	public String logout(Locale locale, Model model) {
+		return "admin/logout";
+	} 
 
 
 }
