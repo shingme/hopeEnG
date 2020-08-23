@@ -30,7 +30,8 @@
 		
 	function callback(result){
 		if(result){
-			window.opener.pageMove(num);
+			window.opener.checkAfterAction(num);
+			//window.opener.pageMove(num);
 			window.close();
 		}else{
 			//alert("비밀번호가 맞지않습니다. 다시 확인해주세요.");
@@ -67,7 +68,6 @@
 		<div>
 			<button type="button" id ="confirmPw">확인</button>
 			<button type="button" id ="confirmClose">닫기</button>
-			<button type="reset">초기화</button>
 		</div>
 		<div id="confirmMsg">
 		 <span></span>

@@ -32,6 +32,8 @@
 	})
 
 	function braaSelectCallback(result){
+		var totalCnt = result.braaList.length;
+		
 		$("#totalCnt").empty();
 		$("#braaTable").empty();
 		
@@ -69,11 +71,11 @@
 			//window.open("${pageContext.request.contextPath}/confirm.jsp","","scrollbars=no,status=no,resizable=no,width=300,height=150");
 			window.open("Braa1000_confirmPasswdWindow.do?bordNum="+bordNum,"","scrollbars=no,status=no,resizable=no,width=300,height=150");		
 		}else{
-			pageMove(bordNum);
+			checkAfterAction(bordNum);
 		}
 	}
 	
-	function pageMove(num){
+	function checkAfterAction(num){
 		window.location.href = "Braa1000_detailSelect.do?bordNum="+num;
 	}
 	

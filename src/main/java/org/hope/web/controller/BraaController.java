@@ -51,7 +51,7 @@ public class BraaController {
 		@RequestMapping(value = "Braa1000_confirmPasswdWindow.do", method = RequestMethod.GET)
 		public String braaConfirmPasswdWindow(@RequestParam String bordNum, Model model) {
 			model.addAttribute("bordNum", bordNum);
-			return "confirmPassWd";
+			return "BraaConfirmPassWd";
 		}
 		
 		@RequestMapping("Braa1000_confirmPasswd.do")
