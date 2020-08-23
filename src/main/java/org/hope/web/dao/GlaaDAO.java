@@ -26,9 +26,12 @@ public class GlaaDAO {
 		this.sqlSession = sqlSession;
 	}
 	
-	public void insert(GlaaVO glaaVO) throws DataAccessException{ 
+	public int insert(GlaaVO glaaVO) throws DataAccessException{ 
 		// TODO Auto-generated method stub
+
 		sqlSession.insert("GlaaMapper.Glaa1000_insert", glaaVO);
+		
+		return glaaVO.getgllyNo();
 	}
 	
 	public void insertGlaaFile(GlaaFileVO glaaFileVO) throws DataAccessException{
@@ -38,12 +41,22 @@ public class GlaaDAO {
 	
 	public List<GlaaVO> select(Map<String, String> map) throws DataAccessException{ 
 		// TODO Auto-generated method stub
-		return sqlSession.selectList("GlaaMapper.Glaa1000_select", map);
+		//System.out.println(map.toString());
+		List<GlaaVO> tmp = sqlSession.selectList("GlaaMapper.Glaa1000_select", map);
+		System.out.println("MAP 테스트!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+		System.out.println(tmp.toString()); 
+		System.out.println("Collection test");
+		System.out.println(tmp.get(0).getGlaaFileVO().toString());
+		return tmp;
 	}
 	
 	public GlaaVO selectDetail(String bordNum) throws DataAccessException{ 
 		// TODO Auto-generated method stub
 		return sqlSession.selectOne("GlaaMapper.Glaa1000_selectDetail", bordNum);
+	}
+
+	public List<Map<String, String>> selectImagePath(Map<String, String> map){
+		return sqlSession.selectList("GlaaMapper.Glaa1000_selectImagePath",map);
 	}
 	
 	public int update(GlaaVO glaaVO) throws DataAccessException{

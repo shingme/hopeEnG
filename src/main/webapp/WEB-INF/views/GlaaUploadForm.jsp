@@ -45,16 +45,25 @@ function insertGlaa(){
         $("#gllyCts").focus();
         return;
     }
+    
+    var fileCheck = document.getElementById("files[0]").value;
+    if(!fileCheck){
+    	alert("파일을 첨부해 주세요");
+    	return;
+    }
+    
+   
         
     var yn = confirm("게시글을 등록하시겠습니까?");        
     if(yn){
     	
-        var filesChk = $("input[name='files[0]']").val();
+     /*    var filesChk = $("input[name='files[0]']").val();
         if(filesChk == ""){
         	
             $("input[name='files[0]']").remove();
             
-        }
+        } */
+        
        
         
         //$("#gllyForm").ajaxForm({

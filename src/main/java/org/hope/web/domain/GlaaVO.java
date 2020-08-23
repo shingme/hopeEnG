@@ -12,8 +12,14 @@ public class GlaaVO {
 	private String regiDate;
 	private String modyDate;
 	private List<MultipartFile> files;
+	private List<GlaaFileVO> glaaFileVO;
 	
-	
+	public List<GlaaFileVO> getGlaaFileVO() {
+		return glaaFileVO;
+	}
+	public void setGlaaFileVO(List<GlaaFileVO> glaaFileVO) {
+		this.glaaFileVO = glaaFileVO;
+	}
 	public List<MultipartFile> getFiles() {
 		return files;
 	}
@@ -59,8 +65,10 @@ public class GlaaVO {
 	@Override
 	public String toString() {
 		return "GlaaVO [gllyNo=" + gllyNo + ", gllyNm=" + gllyNm + ", gllyCts=" + gllyCts + ", showMainYn=" + showMainYn
-				+ ", regiDate=" + regiDate + ", modyDate=" + modyDate + ", files=" + files + "]";
+				+ ", regiDate=" + regiDate + ", modyDate=" + modyDate + ", files=" + files + ", glaaFileVO="
+				+ glaaFileVO + "]";
 	}
+	
 
 
 

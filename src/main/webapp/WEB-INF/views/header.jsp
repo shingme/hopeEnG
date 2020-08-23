@@ -35,7 +35,7 @@
                     <ul class="navbar-nav text-uppercase ml-auto">
                         <li class="nav-item"><a class="nav-link js-scroll-trigger" href="/">메인으로</a></li>
                         <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#portfolio">회사소개</a></li>
-                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="/glaa/uploadForm.do">갤러리</a></li>
+                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="/glaa/glaa.do">갤러리</a></li>
                         <li class="nav-item"><a class="nav-link js-scroll-trigger" href="/braa/braa.do">문의 게시판</a></li>
                     </ul>
                 </div>
