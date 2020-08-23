@@ -17,7 +17,12 @@ public class AdminDAOImpl implements AdminDAO {
 	
 	@Override
 	public AdminVO loginCheck(LoginDTO dto) throws Exception{
-		return session.selectOne(namespace + ".loginCheck",dto);
+		
+		AdminVO vo = session.selectOne(namespace + ".loginCheck",dto);
+		
+		System.out.println("adminVO : "  + vo);
+		
+		return vo;
 	}
 	
 }

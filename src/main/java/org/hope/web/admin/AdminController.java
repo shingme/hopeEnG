@@ -30,28 +30,40 @@ public class AdminController {
 	private  AdminService service;
 
 	private static final Logger logger = LoggerFactory.getLogger(AdminController.class);
-		//관리자 로그인 화면
-		@RequestMapping(value = "", method = RequestMethod.GET)
-		public String home(Locale locale, Model model) {
-
-			return "admin/AdminLogin";
-		} 
-		
-		
-		@RequestMapping(value = "/loginCheck.do", method = RequestMethod.POST)
-		public void loginCheck(LoginDTO dto, HttpSession session, Model model)throws Exception {
-			
-			AdminVO vo = service.loginCheck(dto);
-			if(vo == null) {
-				return;
-			}
-			
-			model.addAttribute("adminVO", vo);
-			
-			
-		}
 	
-
+	//관리자 로그인 화면
+	@RequestMapping(value = "", method = RequestMethod.GET)
+	public String home(Locale locale, Model model, HttpSession session) {
+		if(session.getAttribute("name") != null)
+			return "Home2";
+		else
+			return "admin/AdminLogin";
+	} 
+		
+	//로그인 체크
+	@RequestMapping(value = "/loginCheck.do", method = RequestMethod.POST)
+	public void loginCheck(LoginDTO dto, HttpSession session, Model model)throws Exception {
+		
+		AdminVO vo = service.loginCheck(dto);
+		if(vo == null) {
+			return;
+		}
+		
+		session.setAttribute("name", vo.getAdminNm());
+		model.addAttribute("adminVO", vo);
+	}
+	
+	//로그인 실패
+	@RequestMapping(value = "/loginFail.do", method = RequestMethod.GET)
+	public String loginFail(Locale locale, Model model) {
+		return "admin/loginFail";
+	} 
+	
+	//로그인 성공
+	@RequestMapping(value = "/loginsucces.do", method = RequestMethod.GET)
+	public String loginsucces(Locale locale, Model model) {
+		return "admin/loginsucces";
+	} 
 
 
 }
