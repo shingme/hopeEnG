@@ -43,7 +43,6 @@ public class AdminController {
 	//로그인 체크
 	@RequestMapping(value = "/loginCheck.do", method = RequestMethod.POST)
 	public void loginCheck(LoginDTO dto, HttpSession session, Model model)throws Exception {
-		
 		AdminVO vo = service.loginCheck(dto);
 		if(vo == null) {
 			return;
@@ -59,17 +58,16 @@ public class AdminController {
 		return "admin/loginFail";
 	} 
 	
-	//로그인 성공
-	@RequestMapping(value = "/loginsucces.do", method = RequestMethod.GET)
-	public String loginsucces(Locale locale, Model model) {
-		return "admin/loginsucces";
-	} 
-	
-	//로그인 성공
+	//로그아웃
 	@RequestMapping(value = "/logout.do", method = RequestMethod.GET)
 	public String logout(Locale locale, Model model) {
 		return "admin/logout";
 	} 
 
+	//관리자 문의 게시글 처리
+	@RequestMapping(value="/adminBraaPage.do", method=RequestMethod.GET)
+	public String adminBraaPage(Locale locale, Model model) {
+		return "admin/AdminBraaPage";
+	} 
 
 }

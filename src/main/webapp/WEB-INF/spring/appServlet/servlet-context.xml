@@ -28,7 +28,6 @@
 	
 	
 	<beans:bean id="loginInterceptor" class="org.hope.web.interceptor.LoginInterceptor"></beans:bean>
-	
 	<interceptors>
 		<interceptor>
 			<mapping path="/admin/loginCheck.do"/>
@@ -36,6 +35,12 @@
 		</interceptor>
 	</interceptors>
 
-	
+	<beans:bean id="authInterceptor" class="org.hope.web.interceptor.AuthInterceptor"></beans:bean>
+	<interceptors>
+		<interceptor>
+			<mapping path="/admin/adminBraaPage.do"/>
+			<beans:ref bean="authInterceptor"/>
+		</interceptor>
+	</interceptors>
 	
 </beans:beans>

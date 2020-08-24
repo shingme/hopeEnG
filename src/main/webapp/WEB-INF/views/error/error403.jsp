@@ -7,6 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-
+	접근이 제한된 페이지 입니다.
 </body>
 </html>
