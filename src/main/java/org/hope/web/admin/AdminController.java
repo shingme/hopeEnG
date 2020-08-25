@@ -60,7 +60,8 @@ public class AdminController {
 	
 	//로그아웃
 	@RequestMapping(value = "/logout.do", method = RequestMethod.GET)
-	public String logout(Locale locale, Model model) {
+	public String logout(Locale locale,HttpSession session, Model model) {
+		session.invalidate();
 		return "admin/logout";
 	} 
 
