@@ -102,5 +102,11 @@ public class BraaController {
 			braaService.deleteBraa(braaVO);
 			return "redirect:/braa/braa.do";
 		}
+		
+		//온라인 문의글 관리자 페이지 호출
+		@RequestMapping(value = "Braa1000_adminPageCall.do", method = RequestMethod.GET)
+		public String braaAdminPageCall(@RequestParam String bordNum, Model model) {
+			return "redirect:/admin/adminBraaPage.do?bordNum="+bordNum;
+		}
 
 }

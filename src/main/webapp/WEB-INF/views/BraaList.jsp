@@ -66,6 +66,14 @@
 	}
 	
 	function bordWrite(bordNum, bordRelease){	
+		
+		<%
+			String name = (String)session.getAttribute("name");
+			if(name != null){
+		%>
+			window.location.href = "Braa1000_adminPageCall.do?bordNum="+bordNum;
+		<%}else{%>
+		
 		//비밀번호 입력
 		if(bordRelease == "N"){ //비공개
 			//window.open("${pageContext.request.contextPath}/confirm.jsp","","scrollbars=no,status=no,resizable=no,width=300,height=150");
@@ -73,6 +81,7 @@
 		}else{
 			checkAfterAction(bordNum);
 		}
+		<%}%>
 	}
 	
 	function checkAfterAction(num){
@@ -93,6 +102,8 @@
 			}
 		});
 	}
+	
+
 	
 </script>
 <div class="inner">

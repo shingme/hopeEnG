@@ -30,7 +30,14 @@ $(document).ready(function(){
 	if(flag){ //상세보기
 		$("#checkInfo").prop("checked",true);
 		$("#bordRelease").val("${braa.bordRelease}");
-		$("#bordRelease").attr("disabled",true); //수정기능에서 공개 비공개 수정할 지 아직 결정 X
+		
+		$("#bordRelease").attr("disabled",true);
+		$("#userNm").attr("disabled",true); 
+		$("#userEmail").attr("disabled",true);
+		$("#userPhone").attr("disabled",true);
+		$("#bordNm").attr("disabled",true);
+		$("#bordCts").attr("disabled",true);
+		
 		$("#pwdDiv").remove();
 		$("#write").remove();
 		$("#reset").remove();
@@ -253,11 +260,6 @@ function checkAfterAction(num){
 	<p/>
 	<textarea id="bordCts" name="bordCts" style="resize: none;" placeholder="2000자 이내로 작성해주세요.">${braa.bordCts}</textarea>
 </div>
-<button type="reset" id="reset">초기화</button>
-<button type="button" id="write" onclick="btnClickAction('insert')">등록</button>
-<button type="button" id="braaList">목록</button>
-<button type="button" id="braaUpdate" onclick="btnClickAction('update')">수정</button>
-<button type="button" id="braaDelete" onclick="btnClickAction('delete')">삭제</button>
 </form>
 </div>
 <%@ include file="/WEB-INF/views/comm/footer.jsp" %>

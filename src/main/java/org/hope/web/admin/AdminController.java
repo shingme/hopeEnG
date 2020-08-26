@@ -1,6 +1,8 @@
 package org.hope.web.admin;
 
 import org.hope.web.admin.LoginDTO;
+import org.hope.web.domain.BraaVO;
+import org.hope.web.service.BraaService;
 
 import java.util.HashMap;
 import java.util.List;
@@ -14,10 +16,12 @@ import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  * Handles requests for the application home page.
@@ -28,6 +32,9 @@ public class AdminController {
 	
 	@Inject
 	private  AdminService service;
+	
+	@Autowired
+	BraaService braaService;
 
 	private static final Logger logger = LoggerFactory.getLogger(AdminController.class);
 	
@@ -67,8 +74,10 @@ public class AdminController {
 
 	//관리자 문의 게시글 처리
 	@RequestMapping(value="/adminBraaPage.do", method=RequestMethod.GET)
-	public String adminBraaPage(Locale locale, Model model) {
+	public String braaDetailSelect(@RequestParam String bordNum, Model model) {
+		BraaVO braa = braaService.selectDetailBraa(bordNum);
+		model.addAttribute("braa", braa);
 		return "admin/AdminBraaPage";
-	} 
+	}
 
 }
