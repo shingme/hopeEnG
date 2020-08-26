@@ -38,16 +38,19 @@ function submitVal(val){
 
 <div style="border: solid; position:absolute; width: 40%; height: 50%;">
 	<form id="loginForm" name="loginForm" method="post">
-		<div style="width: 60%; border: solid; float: left;">
+		<div style="width: 100%; border: solid; float: left;">
 			<input type="text" id="adminId" name="adminId" placeholder="아이디" style="width: 100%">
 			<input type="password" id="adminPw" name="adminPw" placeholder="비밀번호"style="width: 100%">
 		</div>
 		
-		<div style="width: 25%; border: solid; float: left;" >
+		<div style="width: 100%; border: solid; float: left;" >
 			<button type="button" id="login" onclick="submitVal('login')">로그인</button>
-			<!-- input type="submit"  id="LoginBtn" value="로그인"> -->
+		</div>
+		<div>
+			관리자 로그인 화면입니다.		
 		</div>
 	</form>
+	
 </div>
 
 </body>

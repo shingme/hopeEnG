@@ -20,8 +20,6 @@ public class AdminDAOImpl implements AdminDAO {
 		
 		AdminVO vo = session.selectOne(namespace + ".loginCheck",dto);
 		
-		System.out.println("adminVO : "  + vo);
-		
 		return vo;
 	}
 	

@@ -13,7 +13,6 @@ import org.springframework.stereotype.Repository;
 
 public interface AdminDAO {
 	
-
 	public AdminVO loginCheck(LoginDTO dto)throws Exception;
 	
 }
