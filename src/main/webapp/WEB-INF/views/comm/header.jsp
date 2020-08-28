@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -20,9 +22,21 @@
         <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/slick.css">
   		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/slick-theme.css">
     </head>
-    <body id="page-top">
     
-     
+    <%
+    	String id;
+    	id = (String)session.getAttribute("name");
+    %>
+    
+    <body id="page-top">
+    <script src="${pageContext.request.contextPath}/js/jquery-3.5.1.min.js" type="text/javascript"></script>
+    <script>
+    $(function(){
+    	
+    });
+    
+    </script>
+     <c:set var="id" value="<%=id%>" />
         <!-- Navigation-->
         <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
             <div class="container">
@@ -33,9 +47,12 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav text-uppercase ml-auto">
+                   		<c:if test="${ id ne null}">
+                    		<li id="adminMenu" class="nav-item"><a class="nav-link js-scroll-trigger" href="/admin/logout.do">로그아웃</a></li>
+                    	</c:if>
                         <li class="nav-item"><a class="nav-link js-scroll-trigger" href="/">메인으로</a></li>
-                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#portfolio">회사소개</a></li>
-                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="/glaa/uploadForm.do">갤러리</a></li>
+                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="/iraa/iraa.do">회사소개</a></li>
+                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="/glaa/glaa.do">갤러리</a></li>
                         <li class="nav-item"><a class="nav-link js-scroll-trigger" href="/braa/braa.do">문의 게시판</a></li>
                     </ul>
                 </div>

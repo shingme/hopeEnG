@@ -45,16 +45,25 @@ function insertGlaa(){
         $("#gllyCts").focus();
         return;
     }
+    
+    var fileCheck = document.getElementById("files[0]").value;
+    if(!fileCheck){
+    	alert("파일을 첨부해 주세요");
+    	return;
+    }
+    
+   
         
     var yn = confirm("게시글을 등록하시겠습니까?");        
     if(yn){
     	
-        var filesChk = $("input[name='files[0]']").val();
+     /*    var filesChk = $("input[name='files[0]']").val();
         if(filesChk == ""){
         	
             $("input[name='files[0]']").remove();
             
-        }
+        } */
+        
        
         
         //$("#gllyForm").ajaxForm({
@@ -70,7 +79,7 @@ function insertGlaa(){
             async   : true,
             type    : "POST",                         
             success : function(obj) {
-               // insertGlaaCallback(obj);                
+                insertGlaaCallback(obj);                
             },           
             error     : function(xhr, status, error) {}
             
@@ -85,12 +94,10 @@ function insertGlaa(){
 function insertGlaaCallback(obj){
 
     if(obj != null){        
-        
-        var result = obj.result;
-        
-        if(result == "SUCCESS"){                
+              
+        if(obj == "SUCCESS"){                
             alert("게시글 등록을 성공하였습니다.");                
-            goGlaaList();                 
+            location.href = "/glaa/glaa.do";          
         } else {                
             alert("게시글 등록을 실패하였습니다.");    
             return;

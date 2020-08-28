@@ -27,16 +27,20 @@
 	<resources mapping="/js/**" location="/resources/js/" />
 	
 	
-	<beans:bean id="interceptor" class="org.hope.web.interceptor.interceptor"></beans:bean>
-	
+	<beans:bean id="loginInterceptor" class="org.hope.web.interceptor.LoginInterceptor"></beans:bean>
 	<interceptors>
 		<interceptor>
-			<mapping path="/doA"/>
-			<mapping path="/doB"/>		
-			<beans:ref bean="interceptor"/>
+			<mapping path="/admin/loginCheck.do"/>
+			<beans:ref bean="loginInterceptor"/>
 		</interceptor>
 	</interceptors>
 
-	
+	<beans:bean id="authInterceptor" class="org.hope.web.interceptor.AuthInterceptor"></beans:bean>
+	<interceptors>
+		<interceptor>
+			<mapping path="/admin/adminBraaPage.do"/>
+			<beans:ref bean="authInterceptor"/>
+		</interceptor>
+	</interceptors>
 	
 </beans:beans>
