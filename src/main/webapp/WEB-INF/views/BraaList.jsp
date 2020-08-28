@@ -42,8 +42,7 @@
 		$("#braaTable").empty();
 		$("#braaTable").empty();
 		
-		$("#totalCnt").append("총 : " + totalCnt + " 게시글");
-		//$("#totalCnt").append("총" + result.paging.total + "게시글");
+		$("#totalCnt").append("총" + result.paging.total + "게시글");
 		var braaAppend = "<tr><th>번호</th><th>제목</th><th>작성자</th><th>날짜</th><th>조회수</th><th>처리상태</th><th>공개여부</th></tr>";
 		var stus = "";
 		var click = "";
