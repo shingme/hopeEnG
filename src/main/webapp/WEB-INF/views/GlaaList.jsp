@@ -6,6 +6,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>갤러리 게시판</title>
 <%@ include file="/WEB-INF/views/header.jsp" %>
+<%@ include file="/WEB-INF/views/comm/header.jsp" %>
 </head>
 <body>
 <H1>여기 갤러리임</H1>
@@ -46,6 +47,7 @@
 	   					
 	   					+ "</tr>"
 /* 		     glaaAppend += "<tr><td>"+item.bordNo+"</td><td><a href='javascript:bordWrite(\""+item.bordNo+"\",\""+item.bordRelease+"\");'>"+item.bordNm+"</a>"
+/* 		    glaaAppend += "<tr><td>"+item.bordNo+"</td><td><a href='javascript:bordWrite(\""+item.bordNo+"\",\""+item.bordRelease+"\");'>"+item.bordNm+"</a>"
 		    		   +"</td><td>"+item.userNm+"</td><td>"+item.modyDate+"</td><td>"+item.bordCnt+"</td><td>"+stus
 		    		   +"</td><td>"+item.bordRelease+"</td></tr>";
  */
@@ -96,4 +98,5 @@
 </div>
 </body>
 <%@ include file="/WEB-INF/views/footer.jsp" %>
+<%@ include file="/WEB-INF/views/comm/footer.jsp" %>
 </html>

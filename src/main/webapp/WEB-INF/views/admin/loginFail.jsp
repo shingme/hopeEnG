@@ -7,14 +7,12 @@
 <title>Insert title here</title>
 </head>
 <body>
-<p>Admin Login</p>
-
-<div>
-	<input type="text" id="AdminId" placeholder="아이디">
-</div>
-<div> 
-	<input type="password" id="AdminPw" placeholder="비밀번호">
-</div>
-
+	<script type="text/javascript">
+		//self.location = "/";
+	</script>
+	
+	로그인에 실패하였습니다.
+	
+	<button> 메인으로 </button>
 </body>
 </html>

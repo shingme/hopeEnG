@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
+
 import org.hope.web.domain.BraaVO;
 import org.hope.web.service.BraaService;
 import org.slf4j.Logger;
@@ -13,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -48,6 +50,20 @@ public class BraaController {
 			logger.info("들어옴");
 			return "BraaPage";
 		} 
+		
+		@RequestMapping(value = "Braa1000_confirmPasswdWindow.do", method = RequestMethod.GET)
+		public String braaConfirmPasswdWindow(@RequestParam String bordNum, Model model) {
+			model.addAttribute("bordNum", bordNum);
+			return "BraaConfirmPassWd";
+		}
+		
+		@RequestMapping("Braa1000_confirmPasswd.do")
+		@ResponseBody
+		public Boolean braaConfirmPasswd(@RequestBody HashMap<String, String> data) throws Exception {
+
+			//data.forEach((key,value) -> logger.info(key+":"+value));
+			return braaService.confirmPasswd(data);
+		}
 
 		//온라인 문의글 목록 조회
 		@RequestMapping("/Braa1000_select.do")
@@ -55,6 +71,7 @@ public class BraaController {
 		public Map<String, List<BraaVO>> braaSelect(@RequestParam HashMap<String, String> paramMap) {
 			paramMap.forEach((key,value) -> logger.info(key+":"+value));
 			
+			//paramMap.forEach((key,value) -> logger.info(key+":"+value));
 			Map<String, List<BraaVO>> map = new HashMap<String, List<BraaVO>>();
 			List<BraaVO> braaList = braaService.selectBraa(paramMap);
 			map.put("braaList", braaList);
@@ -71,10 +88,12 @@ public class BraaController {
 			return "BraaPage";
 		}
 		
+		//컨트롤러에서 익셉션 잡아주기
 		//온라인 문의글 작성
 		@RequestMapping("/Braa1000_insert.do")
 //		@ResponseBody
 		public String braaInsert(@ModelAttribute BraaVO braaVO, Model model) {
+		public String braaInsert(@ModelAttribute BraaVO braaVO, Model model) throws Exception {
 			braaService.insertBraa(braaVO);
 			return "redirect:/braa/braa.do";
 		}
@@ -84,6 +103,19 @@ public class BraaController {
 		public String braaUpdate(@ModelAttribute BraaVO braaVO, Model model) {
 			braaService.updateBraa(braaVO);
 			return "redirect:/braa/braa.do";
+		}
+		
+		//온라인 문의글 삭제
+		@RequestMapping("/Braa1000_delete.do")
+		public String braaDelete(@ModelAttribute BraaVO braaVO) {
+			braaService.deleteBraa(braaVO);
+			return "redirect:/braa/braa.do";
+		}
+		
+		//온라인 문의글 관리자 페이지 호출
+		@RequestMapping(value = "Braa1000_adminPageCall.do", method = RequestMethod.GET)
+		public String braaAdminPageCall(@RequestParam String bordNum, Model model) {
+			return "redirect:/admin/adminBraaPage.do?bordNum="+bordNum;
 		}
 
 }

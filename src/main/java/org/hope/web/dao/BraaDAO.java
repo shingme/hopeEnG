@@ -43,5 +43,22 @@ public class BraaDAO {
 	public int update(BraaVO braaVO) throws DataAccessException{
 		return sqlSession.update("BraaMapper.Braa1000_update", braaVO);
 	}
+	
+	public String selectPassWd(String bordNum) throws DataAccessException{
+		return sqlSession.selectOne("BraaMapper.Braa1000_selectPassWd", bordNum);
+	}
+	
+	public int delete(BraaVO braaVO) throws DataAccessException{
+		return sqlSession.update("BraaMapper.Braa1000_delete", braaVO);
+	}
+	
+	public int updateIncreViewsBraa(String bordNum) throws DataAccessException{
+		return sqlSession.update("BraaMapper.Braa1000_updateIncreViews", bordNum);
+	}
+	
+	//지울예정
+	public List<BraaVO> hexTemp(){
+		return sqlSession.selectList("BraaMapper.Braa1000_temp");
+	}
 
 }

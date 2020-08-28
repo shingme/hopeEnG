@@ -11,6 +11,7 @@
 		<result property="regiDate" column="REGI_DATE"></result>
 		<result property="showMainYn" column="SHOWMAIN_YN"></result>
 		<!--  <collection property="glaaFileVO" column="GL_NO" resultMap="glaaFileListResult" ></collection> -->
+		<!-- <collection property="glaaFileVO" column="GL_NO" resultMap="glaaFileListResult" ></collection> -->
 		<collection property="glaaFileVO" column="GL_NO" javaType="java.util.ArrayList" ofType="org.hope.web.domain.GlaaFileVO" select="GlaaMapper.Glaa1000_selectFileList"/>
 	</resultMap>
 
