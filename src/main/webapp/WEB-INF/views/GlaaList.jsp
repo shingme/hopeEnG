@@ -45,7 +45,7 @@
 	   					+"<td>"+ item.showMainYn +"</td>"
 	   					
 	   					+ "</tr>"
-/* 		    glaaAppend += "<tr><td>"+item.bordNo+"</td><td><a href='javascript:bordWrite(\""+item.bordNo+"\",\""+item.bordRelease+"\");'>"+item.bordNm+"</a>"
+/* 		     glaaAppend += "<tr><td>"+item.bordNo+"</td><td><a href='javascript:bordWrite(\""+item.bordNo+"\",\""+item.bordRelease+"\");'>"+item.bordNm+"</a>"
 		    		   +"</td><td>"+item.userNm+"</td><td>"+item.modyDate+"</td><td>"+item.bordCnt+"</td><td>"+stus
 		    		   +"</td><td>"+item.bordRelease+"</td></tr>";
  */

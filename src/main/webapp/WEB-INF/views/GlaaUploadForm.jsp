@@ -6,10 +6,10 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>File upload using Commons FileUpload</title>
+<title>File upload  using Commons FileUpload</title>
 <%@ include file="/WEB-INF/views/header.jsp" %>
 </head>
-
+ 
 
 <body>
 
@@ -79,7 +79,7 @@ function insertGlaa(){
             async   : true,
             type    : "POST",                         
             success : function(obj) {
-               // insertGlaaCallback(obj);                
+               insertGlaaCallback(obj);                
             },           
             error     : function(xhr, status, error) {}
             
@@ -89,10 +89,11 @@ function insertGlaa(){
     }
  
 }
-
+var tmp;
 /** 게시판 - 작성 콜백 함수 */
 function insertGlaaCallback(obj){
-
+	tmp = obj;
+	alert(tmp);
     if(obj != null){        
         
         var result = obj.result;

@@ -18,5 +18,5 @@ public interface GlaaService {
 	public void updateGlaa(GlaaVO glaaVO);
 	public List<Map<String, String>> getImagePathGlaa(Map<String, String> map);
 	
-	
+	//
 }

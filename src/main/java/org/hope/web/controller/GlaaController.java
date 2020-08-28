@@ -31,7 +31,7 @@ public class GlaaController {
 	@Autowired
 	GlaaService glaaService;
 
-	//문의 게시판 목록 이동 
+	////문의 게시판 목록 이동 
 	@RequestMapping(value = "/glaa.do", method = RequestMethod.GET)
 	public String home(Locale locale, Model model) {
 		System.out.println("목록 페이지 가자");
@@ -53,7 +53,7 @@ public class GlaaController {
 		  //paramMap.forEach((key, value) -> Logger.info(key + ":" + value));
 	  
 	Map<String, List<GlaaVO>> map = new HashMap<String, List<GlaaVO>>();
-	  
+	 // map.get(0).get
 	List<GlaaVO> glaaList = glaaService.selectGlaa(paramMap);
 	System.out.println(glaaList.get(0).toString()); map.put("glaaList",glaaList); 
 	  
@@ -64,6 +64,7 @@ public class GlaaController {
 
 	// 갤러리 게시물 작성
 	@RequestMapping("/Glaa1000_insert.do")
+	@ResponseBody
 	public String glaaInsert(@ModelAttribute GlaaVO glaaVO, Model model) throws Exception{
 		
 		glaaService.insertGlaa(glaaVO);
