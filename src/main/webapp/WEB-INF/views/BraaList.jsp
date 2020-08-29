@@ -5,7 +5,6 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>문의 게시판</title>
-<%@ include file="/WEB-INF/views/header.jsp" %>
 <%@ include file="/WEB-INF/views/comm/header.jsp" %>
 </head>
 <body>

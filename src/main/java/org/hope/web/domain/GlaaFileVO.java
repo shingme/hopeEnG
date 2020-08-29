@@ -49,7 +49,6 @@ public class GlaaFileVO {
 		this.fileSize = fileSize;
 	}
 	
-	//
 	
 	
 	

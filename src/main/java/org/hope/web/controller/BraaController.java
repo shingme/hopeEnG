@@ -92,7 +92,7 @@ public class BraaController {
 		//온라인 문의글 작성
 		@RequestMapping("/Braa1000_insert.do")
 //		@ResponseBody
-		public String braaInsert(@ModelAttribute BraaVO braaVO, Model model) {
+		//public String braaInsert(@ModelAttribute BraaVO braaVO, Model model) {
 		public String braaInsert(@ModelAttribute BraaVO braaVO, Model model) throws Exception {
 			braaService.insertBraa(braaVO);
 			return "redirect:/braa/braa.do";

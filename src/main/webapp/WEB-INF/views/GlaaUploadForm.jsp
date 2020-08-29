@@ -6,8 +6,6 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>File upload  using Commons FileUpload</title>
-<%@ include file="/WEB-INF/views/header.jsp" %>
 <title>File upload using Commons FileUpload</title>
 <%@ include file="/WEB-INF/views/comm/header.jsp" %>
 </head>
@@ -81,7 +79,6 @@ function insertGlaa(){
             async   : true,
             type    : "POST",                         
             success : function(obj) {
-               insertGlaaCallback(obj);                
                 insertGlaaCallback(obj);                
             },           
             error     : function(xhr, status, error) {}
@@ -92,22 +89,14 @@ function insertGlaa(){
     }
  
 }
-var tmp;
 
 /** 게시판 - 작성 콜백 함수 */
 function insertGlaaCallback(obj){
-	tmp = obj;
-	alert(tmp);
 
     if(obj != null){        
-        
-        var result = obj.result;
-        
-        if(result == "SUCCESS"){                
               
         if(obj == "SUCCESS"){                
             alert("게시글 등록을 성공하였습니다.");                
-            goGlaaList();                 
             location.href = "/glaa/glaa.do";          
         } else {                
             alert("게시글 등록을 실패하였습니다.");    

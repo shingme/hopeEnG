@@ -18,7 +18,7 @@ import org.slf4j.LoggerFactory;
 public class GlaaDAO {
 	
 	@Autowired
-	private SqlSession sqlSession; ////상위클래스로 빼기 -> 상위클래스에서 필요한 부분 오버라이드 해서 자식클래스는 불러서 사용
+	private SqlSession sqlSession; //상위클래스로 빼기 -> 상위클래스에서 필요한 부분 오버라이드 해서 자식클래스는 불러서 사용
 	
 	private static final Logger logger = LoggerFactory.getLogger(GlaaController.class);
 	
@@ -46,7 +46,8 @@ public class GlaaDAO {
 		System.out.println("MAP 테스트!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
 		System.out.println(tmp.toString()); 
 		System.out.println("Collection test");
-		System.out.println(tmp.get(0).getGlaaFileVO().toString());
+		
+		//System.out.println(tmp.get(0).getGlaaFileVO().toString());
 		return tmp;
 	}
 	

@@ -20,7 +20,6 @@ public class BraaServiceImpl implements BraaService{
 	private static final Logger logger = LoggerFactory.getLogger(BraaController.class);
 	
 	@Override
-	public void insertBraa(BraaVO braaVO) {
 	public void insertBraa(BraaVO braaVO) throws Exception {
 		// TODO Auto-generated method stub
 		braaVO.setUserPw(sha256(braaVO.getUserPw())); //sha256 공통으로 빼면 애 controller로 빼기

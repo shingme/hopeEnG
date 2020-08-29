@@ -14,7 +14,6 @@
 
 	<!-- Handles HTTP GET requests for /resources/** by efficiently serving up static resources in the ${webappRoot}/resources directory -->
 	<resources mapping="/resources/**" location="/resources/" />
-	<resources mapping="/image/*" location="file:///C:/board/file" />
 
 	<!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
 	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
@@ -26,16 +25,11 @@
 	<resources mapping="/css/**" location="/resources/css/" />
 	<resources mapping="/image/**" location="/resources/image/" />
 	<resources mapping="/js/**" location="/resources/js/" />
-	
-	
-	<beans:bean id="interceptor" class="org.hope.web.comm.interceptor.interceptor"></beans:bean>
+	<resources mapping="/glly/**" location="file:///C:/board/file/"/>
 	
 	<beans:bean id="loginInterceptor" class="org.hope.web.interceptor.LoginInterceptor"></beans:bean>
 	<interceptors>
 		<interceptor>
-			<mapping path="/doA"/>
-			<mapping path="/doB"/>		
-			<beans:ref bean="interceptor"/>
 			<mapping path="/admin/loginCheck.do"/>
 			<beans:ref bean="loginInterceptor"/>
 		</interceptor>

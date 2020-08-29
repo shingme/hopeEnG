@@ -7,7 +7,6 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>작성하기</title>
-<%@ include file="/WEB-INF/views/header.jsp" %>
 <%@ include file="/WEB-INF/views/comm/header.jsp" %>
 </head>
 <body>

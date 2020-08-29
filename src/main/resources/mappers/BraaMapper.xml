@@ -36,7 +36,6 @@
     </update>
     
     <select id="Braa1000_select" resultType="org.hope.web.domain.BraaVO" parameterType="java.util.HashMap">
-		SELECT ROW_NUMBER() OVER () AS rowNm
 		SELECT count(*) over() totalCnt
 			  ,ROW_NUMBER() OVER () AS rowNm
 			  ,BORD_NO AS bordNo
@@ -52,7 +51,6 @@
 			   AND BORD_NM LIKE CONCAT('%',#{bordNm},'%')
 			</if>
 			<if test="userNm!=null and !userNm.equals('')">
-		    AND USER_NM LIKE CONCAT('%',#{userNm},'%')
 		    	AND USER_NM LIKE CONCAT('%',#{userNm},'%')
 		    </if>
 		    <!-- <if test="braaStus!=null and !braaStus.equals('')">

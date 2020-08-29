@@ -10,8 +10,10 @@
 		<result property="gllyCts" column="GL_CTS"></result>
 		<result property="regiDate" column="REGI_DATE"></result>
 		<result property="showMainYn" column="SHOWMAIN_YN"></result>
-		<!--  <collection property="glaaFileVO" column="GL_NO" resultMap="glaaFileListResult" ></collection> -->
+		<result property="firstFilePath" column="FIRST_FILE_PATH"></result>
+		<!-- <collection property="glaaFileVO" column="GL_NO" resultMap="glaaFileListResult" ></collection> -->
 		<collection property="glaaFileVO" column="GL_NO" javaType="java.util.ArrayList" ofType="org.hope.web.domain.GlaaFileVO" select="GlaaMapper.Glaa1000_selectFileList"/>
+		
 	</resultMap>
 
 	<resultMap id="glaaFileListResult" type="org.hope.web.domain.GlaaFileVO">
@@ -25,7 +27,8 @@
               ,GL_CTS
               ,SHOWMAIN_YN
               ,DATE_FORMAT(REGI_DATE, '%Y-%m-%d') as REGI_DATE
-              ,DATE_FORMAT(MODY_DATE, '%Y-%m-%d') as MODY_DATE
+              ,DATE_FORMAT(MODY_DATE, '%Y-%m-%d') as MODY_DATE		
+              ,FIRST_FILE_PATH
 		FROM GLTB
 		WHERE 1=1
 		<if test="bordNm!=null and !bordNm.equals('')">
@@ -47,6 +50,8 @@
   
 		INSERT INTO GLTB(GL_NM, GL_CTS, REGI_DATE, MODY_DATE, SHOWMAIN_YN)
 		VALUES(#{gllyNm},#{gllyCts}, SYSDATE(), SYSDATE(), #{showMainYn})
+		INSERT INTO GLTB(GL_NM, GL_CTS, REGI_DATE, MODY_DATE, SHOWMAIN_YN, FIRST_FILE_PATH)
+		VALUES(#{gllyNm},#{gllyCts}, SYSDATE(), SYSDATE(), #{showMainYn}, #{firstFilePath})
 	
 		<selectKey resultType="Integer" keyProperty="gllyNo" order="AFTER">
     		SELECT LAST_INSERT_ID() as gllyNo

@@ -9,6 +9,10 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.UUID;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.hope.web.domain.BraaVO;
 import org.hope.web.domain.GlaaVO;
 import org.hope.web.service.GlaaService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,7 +35,6 @@ public class GlaaController {
 	@Autowired
 	GlaaService glaaService;
 
-	////문의 게시판 목록 이동 
 	//문의 게시판 목록 이동 
 	@RequestMapping(value = "/glaa.do", method = RequestMethod.GET)
 	public String home(Locale locale, Model model) {
@@ -45,7 +48,13 @@ public class GlaaController {
 		return "GlaaUploadForm"; 
 	}
 
+	//온라인 문의글 상세 조회 
+	@RequestMapping("/Glaa1000_glaaDetail.do")
+	@ResponseBody 
+	public String glaaDetail(HttpServletRequest request, HttpServletResponse response) throws Exception{
 	
+		return "glaa/Glaa1000_glaaDetail.do";
+	}
 	  // 온라인 문의글 목록 조회
 	  
 	@RequestMapping("/Glaa1000_select.do")
@@ -54,10 +63,13 @@ public class GlaaController {
 		  //paramMap.forEach((key, value) -> Logger.info(key + ":" + value));
 	  
 	Map<String, List<GlaaVO>> map = new HashMap<String, List<GlaaVO>>();
-	 // map.get(0).get
 	  
 	List<GlaaVO> glaaList = glaaService.selectGlaa(paramMap);
-	System.out.println(glaaList.get(0).toString()); map.put("glaaList",glaaList); 
+	System.out.println("첫번째파일경로");
+	System.out.println(glaaList.get(0).getFirstFilePath());
+	//System.out.println(glaaList.get(25).toString()); 
+	
+	map.put("glaaList",glaaList); 
 	  
 	return map; 
 	}
@@ -65,15 +77,10 @@ public class GlaaController {
 
 
 	// 갤러리 게시물 작성
-	@RequestMapping("/Glaa1000_insert.do")
-	@ResponseBody
 	@RequestMapping(value = "/Glaa1000_insert.do", method = RequestMethod.POST)
 	@ResponseBody 
 	public String glaaInsert(@ModelAttribute GlaaVO glaaVO, Model model) throws Exception{
 		
-		glaaService.insertGlaa(glaaVO);
-		return "redirect:/glaa/glaa.do";
-		//return "GlaaList";
 		try {
 			glaaService.insertGlaa(glaaVO);
 			return "SUCCESS";
