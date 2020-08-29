@@ -30,7 +30,7 @@ public class BraaDAO {
 		sqlSession.insert("BraaMapper.Braa1000_insert", braaVO);
 	}
 	
-	public List<BraaVO> select(Map<String, String> map) throws DataAccessException{ 
+	public List<BraaVO> select(Map<String, Object> map) throws DataAccessException{ 
 		// TODO Auto-generated method stub
 		return sqlSession.selectList("BraaMapper.Braa1000_select", map);
 	}
@@ -54,6 +54,10 @@ public class BraaDAO {
 	
 	public int updateIncreViewsBraa(String bordNum) throws DataAccessException{
 		return sqlSession.update("BraaMapper.Braa1000_updateIncreViews", bordNum);
+	}
+	
+	public int selectTotalCnt(Map<String, Object> map) throws DataAccessException{
+		return sqlSession.selectOne("BraaMapper.Braa1000_totalCnt", map);
 	}
 	
 	//지울예정

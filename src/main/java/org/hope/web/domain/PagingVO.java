@@ -1,15 +1,14 @@
 package org.hope.web.domain;
 
 public class PagingVO {
-	private int nowPage;
+	private int nowPage; //현재 페이지
 	private int startPage;
 	private int endPage;
-	private int total;
+	private int total; //글 총 갯수
 	private int cntPerPage; //페이지당 글 갯수
 	private int lastPage; //마지막 페이지
 	private int start;
 	private int end;
-	private int cntPage = 10;
 	
 	public PagingVO() {
 	}
@@ -19,27 +18,24 @@ public class PagingVO {
 		setCntPerPage(cntPerPage);
 		setTotal(total);
 		calcLastPage(getTotal(), getCntPerPage());
-		calcStartEndPage(getNowPage(), cntPage);
+		calcStartEndPage(getNowPage(), cntPerPage);
 		calcStartEnd(getNowPage(), getCntPerPage());
 	}
 	
-	public void calcStartEndPage(int nowPage, int cntPage){ //시작, 끝 페이징 계산
-		setEndPage((int)(Math.ceil((double)nowPage/cntPage)*cntPage));
+	public void calcStartEndPage(int nowPage, int cntPerPage){ //시작, 끝 페이징 계산
+		setEndPage((int)(Math.ceil((double)nowPage/cntPerPage)*cntPerPage));
 		if(getLastPage() < getEndPage()){
 			setEndPage(getLastPage());
 		}
 		
-		setStartPage(getEndPage() - cntPage + 1);
-		if(getStartPage() < 1){
-			setStartPage(1);
-		}
+		setStartPage((nowPage-1)/cntPerPage + 1);
 	}
 	
 	public void calcLastPage(int total, int cntPerPage) { // 제일 마지막 페이지 계산
 		setLastPage((int) Math.ceil((double)total / (double)cntPerPage));
 	}
 	
-	public void calcStartEnd(int nowPage, int cntPerPage) {
+	public void calcStartEnd(int nowPage, int cntPerPage) { //쿼리의 limit 값 계산
 		setEnd(nowPage * cntPerPage);
 		setStart(getEnd() - cntPerPage + 1);
 	}
@@ -74,12 +70,6 @@ public class PagingVO {
 	}
 	public void setCntPerPage(int cntPerPage) {
 		this.cntPerPage = cntPerPage;
-	}
-	public int getCntPage() {
-		return cntPage;
-	}
-	public void setCntPage(int cntPage) {
-		this.cntPage = cntPage;
 	}
 	public int getLastPage() {
 		return lastPage;

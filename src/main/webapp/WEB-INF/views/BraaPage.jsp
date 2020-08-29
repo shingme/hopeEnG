@@ -147,14 +147,17 @@ function insertValidCheck(){
 	if(alertFlag){
 		alert(guideTxt);
 		obj.focus();
-		return;
+		return false;
 	}
+	return true;
 }
 
 function btnClickAction(val){
 	var msg = "";
 	if(val == "insert"){ // 입력모드
-		insertValidCheck(); // 입력값 밸리드 체크
+		if(!insertValidCheck()){  // 입력값 밸리드 체크
+			return;
+		}
 		msg = "등록";
 		
 	}else{ // 수정모드

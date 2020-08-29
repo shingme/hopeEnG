@@ -60,7 +60,6 @@ public class BraaController {
 		@RequestMapping("Braa1000_confirmPasswd.do")
 		@ResponseBody
 		public Boolean braaConfirmPasswd(@RequestBody HashMap<String, String> data) throws Exception {
-
 			//data.forEach((key,value) -> logger.info(key+":"+value));
 			return braaService.confirmPasswd(data);
 		}
@@ -68,14 +67,10 @@ public class BraaController {
 		//온라인 문의글 목록 조회
 		@RequestMapping("/Braa1000_select.do")
 		@ResponseBody 
-		public Map<String, List<BraaVO>> braaSelect(@RequestParam HashMap<String, String> paramMap) {
+		public Map<String, Object> braaSelect(@RequestParam HashMap<String, Object> paramMap) {	
 			paramMap.forEach((key,value) -> logger.info(key+":"+value));
-			
-			//paramMap.forEach((key,value) -> logger.info(key+":"+value));
-			Map<String, List<BraaVO>> map = new HashMap<String, List<BraaVO>>();
-			List<BraaVO> braaList = braaService.selectBraa(paramMap);
-			map.put("braaList", braaList);
-			
+			Map<String, Object> map = braaService.selectBraa(paramMap);
+
 			return map;
 		}
 		
