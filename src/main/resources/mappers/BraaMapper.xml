@@ -7,6 +7,19 @@
 		INSERT INTO BORDTB(BORD_NM, BORD_CTS, BORD_RELEASE, USER_NM, USER_EMAIL, USER_PHONE, USER_PW, REGI_DATE, MODY_DATE)
 		VALUES(#{bordNm},#{bordCts},#{bordRelease},#{userNm},#{userEmail},#{userPhone},#{userPw}, SYSDATE(), SYSDATE())
     </insert>
+    
+    <select id="BraaMapper.Braa1000_totalCnt" parameterType="java.util.HashMap" resultType="java.lang.Integer">
+		SELECT count(*) AS cnt
+		  FROM BORDTB
+		 WHERE 1=1
+		   <if test="bordNm!=null and !bordNm.equals('')">
+		   AND BORD_NM LIKE CONCAT('%',#{bordNm},'%')
+		   </if>
+		   <if test="userNm!=null and !userNm.equals('')">
+		   AND USER_NM LIKE CONCAT('%',#{userNm},'%')
+		   </if>
+		   AND BORD_STUS != 'D'
+    </select>
 
     <update id="BraaMapper.Braa1000_update" parameterType="org.hope.web.domain.BraaVO">
     	UPDATE BORDTB
@@ -58,6 +71,7 @@
 		    </if> -->
 		    AND BORD_STUS != 'D'
 		 ORDER BY REGI_DATE DESC
+		 LIMIT #{start}, 5
 	</select>
 	
 	<select id="BraaMapper.Braa1000_selectDetail" resultType="org.hope.web.domain.BraaVO" parameterType="java.lang.String">

@@ -8,7 +8,7 @@ import org.hope.web.domain.BraaVO;
 public interface BraaService {
 	public void insertBraa(BraaVO braaVO) throws Exception;
 
-	public List<BraaVO> selectBraa(Map<String, String> map);
+	public Map<String, Object> selectBraa(Map<String, Object> map);
 	
 	public BraaVO selectDetailBraa(String bordNum);
 	

@@ -1,12 +1,14 @@
 package org.hope.web.service;
 
 import java.security.MessageDigest;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.hope.web.controller.BraaController;
 import org.hope.web.dao.BraaDAO;
 import org.hope.web.domain.BraaVO;
+import org.hope.web.domain.PagingVO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,9 +29,17 @@ public class BraaServiceImpl implements BraaService{
 	}
 
 	@Override
-	public List<BraaVO> selectBraa(Map<String, String> map) {
+	public Map<String, Object> selectBraa(Map<String, Object> map) {
 		// TODO Auto-generated method stub
-		return braaDAO.select(map);
+		Map<String, Object> resultMap = new HashMap<String, Object>();
+		int cnt = braaDAO.selectTotalCnt(map);
+		//페이징 처리
+		PagingVO paging = new PagingVO(cnt, Integer.parseInt((String)map.get("pageNum")), Integer.parseInt((String)map.get("cntPerPage")));
+		map.put("start", paging.getStart()-1);
+		// 페이징 정보도 함께 넘겨줘야함 ! 화면단에 
+		resultMap.put("paging", paging);
+		resultMap.put("braaList", braaDAO.select(map));
+		return resultMap;
 	}
 
 	@Override
