@@ -80,8 +80,7 @@
 			$("#paging > ul").prepend("<li><a class='move prev' href='javascript:movePage("+((result.paging.startPage-1)*result.paging.cntPerPage)+")'>이전</a></li>");
 			$("#paging > ul").prepend("<li><a class='move first' href='javascript:movePage(1)'>처음</a></li>");
 		}
-		//for(var i=((result.paging.startPage-1)*result.paging.cntPerPage)+1; i<=result.paging.endPage; i++){
-		for(var i=result.paging.endPage; i>=((result.paging.startPage-1)*result.paging.cntPerPage)+1; i--){	
+		for(var i=((result.paging.startPage-1)*result.paging.cntPerPage)+1; i<=result.paging.endPage; i++){
 			paging += "<li><a href='javascript:movePage("+i+")'>"+i+"</a></li>";
 			pageNum = i;
 		}
