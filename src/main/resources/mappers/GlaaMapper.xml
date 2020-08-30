@@ -48,8 +48,6 @@
 	
     <insert id="Glaa1000_insert" parameterType="org.hope.web.domain.GlaaVO">
   
-		INSERT INTO GLTB(GL_NM, GL_CTS, REGI_DATE, MODY_DATE, SHOWMAIN_YN)
-		VALUES(#{gllyNm},#{gllyCts}, SYSDATE(), SYSDATE(), #{showMainYn})
 		INSERT INTO GLTB(GL_NM, GL_CTS, REGI_DATE, MODY_DATE, SHOWMAIN_YN, FIRST_FILE_PATH)
 		VALUES(#{gllyNm},#{gllyCts}, SYSDATE(), SYSDATE(), #{showMainYn}, #{firstFilePath})
 	
@@ -82,7 +80,7 @@
 		SELECT GL_NO AS gllyNo
 			  ,GL_NM AS gllyNm
               ,GL_CTS AS gllyCts
-              ,FILE_PATH as filePath
+              ,FIRST_FILE_PATH as firstFilePath
               ,SHOWMAIN_YN as showMainYn
               ,DATE_FORMAT(REGI_DATE, '%Y-%m-%d') AS regiDate
               ,DATE_FORMAT(MODY_DATE, '%Y-%m-%d') AS modyDate

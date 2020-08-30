@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.hope.web.domain.BraaVO;
 import org.hope.web.domain.GlaaVO;
 import org.hope.web.service.GlaaService;
+import org.slf4j.MDC;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -38,23 +39,43 @@ public class GlaaController {
 	//문의 게시판 목록 이동 
 	@RequestMapping(value = "/glaa.do", method = RequestMethod.GET)
 	public String home(Locale locale, Model model) {
-		System.out.println("목록 페이지 가자");
 		return "GlaaList";
 	} 
 			
 	@RequestMapping(value="/uploadForm", method=RequestMethod.GET) 
 	public String showUploadForm() { 
-		System.out.println("여긴 되잖아");
 		return "GlaaUploadForm"; 
 	}
 
 	//온라인 문의글 상세 조회 
-	@RequestMapping("/Glaa1000_glaaDetail.do")
-	@ResponseBody 
-	public String glaaDetail(HttpServletRequest request, HttpServletResponse response) throws Exception{
+	@RequestMapping("/Glaa1000_moveDetailPage.do")
+	//@ResponseBody 
+	public String glaaMoveDetailpage(@RequestParam String gllyNo, Model model) throws Exception{
 	
-		return "glaa/Glaa1000_glaaDetail.do";
+		/*
+		 * model.addAttribute("gllyNo", gllyNo); 
+		 * System.out.println("gllyNo = "+gllyNo);
+		 */
+		return "GlaaPage";
 	}
+	
+	/** 게시판 - 상세 조회  */
+    @RequestMapping(value = "/Glaa1000_getGllyDetail")
+    @ResponseBody
+    public GlaaVO getGllyDetail(HttpServletRequest request, HttpServletResponse response, String gllyNo) throws Exception {
+ 
+        //MDC.put("TRANSACTION_ID", String.valueOf(glaaParam));
+    	 MDC.put("TRANSACTION_ID", gllyNo);
+        System.out.println("상세보자 : ");
+        //System.out.println(glaaParam.toString());
+        // GlaaVO glaa = glaaService.selectDetailGlaa(String.valueOf(glaaParam.getgllyNo()));
+        GlaaVO glaa = glaaService.selectDetailGlaa(gllyNo);
+        
+        MDC.remove("TRANSACTION_ID");
+        
+        return glaa;
+    }
+	
 	  // 온라인 문의글 목록 조회
 	  
 	@RequestMapping("/Glaa1000_select.do")
@@ -89,52 +110,4 @@ public class GlaaController {
 		}
 		
 	}
-
-	@RequestMapping(path = "/uploadFile", method = RequestMethod.POST)
-	public ModelAndView handleFileUpload(@RequestParam("myFileField") MultipartFile file) throws IOException {
-		// 업로드된 파일을 식별할 수 있는 MultipartFile 타입 인수를 받음
-
-		// 파일명
-		String originalFile = file.getOriginalFilename();
-
-		// 파일명 중 확장자만 추출
-		String originalFileExtension = originalFile.substring(originalFile.lastIndexOf("."));
-
-		String storedFileName = UUID.randomUUID().toString().replaceAll("-", "") + originalFileExtension;
-		System.out.println(storedFileName);
-		System.out.println(originalFile + "은 업로드한 파일이다.");
-		System.out.println(storedFileName + "라는 이름으로 업로드 됐다.");
-		System.out.println("파일사이즈는 " + file.getSize());
-		// 파일을 저장하기 위한 파일 객체 생성
-		// File stFile = new File("C:\\".concat(storedFileName));
-
-		// 파일 저장
-		file.transferTo(new File("C:\\Users\\HAHA\\Documents\\" + storedFileName));
-		// file.transferTo(new File("C:\\"));
-
-		ModelMap modelData = new ModelMap();
-
-		if (!file.isEmpty()) {
-			// -- 업로드한 파일을 파일시스템에 저장
-			String successMessage = "File successfully uploaded";
-			System.out.println("here");
-			modelData.put("uploadMessage", successMessage);
-			return new ModelAndView("uploadForm", modelData);
-		}
-		String failureMessage = "File couldn't be uploaded.";
-		modelData.put("uploadMessage", failureMessage);
-		return new ModelAndView("uploadForm", modelData);
-
-	}
-
-	// 파일 업로드 중 예외발생하면 @ExceptionHandler 메서드가 오류 메시지 보여줌
-	@ExceptionHandler(value = Exception.class)
-	public ModelAndView handleException(Exception e) {
-		e.printStackTrace();
-		ModelMap modelData = new ModelMap();
-		String failureMessage = "Exception occurred during upload.";
-		modelData.put("uploadMessage", failureMessage);
-		return new ModelAndView("uploadForm", modelData);
-	}
-
 }

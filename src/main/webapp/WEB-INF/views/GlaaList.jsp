@@ -31,7 +31,7 @@
 		
 	})
 	function gllyDetail(gllyNo){
-		location.href="/glaa/Glaa1000_glaaDetail.do?gllyNo="+gllyNo;
+		location.href="/glaa/Glaa1000_moveDetailPage.do?gllyNo="+gllyNo;
 	}
 
 	function glaaSelectCallback(result){
@@ -46,38 +46,18 @@
 	   		glaaAppend += "<tr>"
 	   					+"<td>"+ item.gllyNo +"</td>"
 	   					//+"<td>"+ item.gllyNm +"</td>"
-	   					
-	   					+"<td on click='javascript:gllyDetail("+item.gllyNo+");' style='cursor:Pointer'>"+item.gllyNm + "</td>"
+	   					+"<td><a href='javascript:gllyDetail(\""+item.gllyNo+"\");'>"+item.gllyNm+"</a>"
+	   					//+"<td on click='javascript:gllyDetail("+item.gllyNo+");' style='cursor:Pointer'>"+item.gllyNm + "</td>"
 	   					+"<td>"+ item.regiDate +"</td>"
 	   					+"<td>"+ item.showMainYn +"</td>"
 	   					+"<td>"+ "<img src=\"<spring:url value='/glly/"+item.firstFilePath.substr(14)+"'/>\" width=\"200\"/>" +"</td>"
 	   					+ "</tr>"
-/* 		    glaaAppend += "<tr><td>"+item.bordNo+"</td><td><a href='javascript:bordWrite(\""+item.bordNo+"\",\""+item.bordRelease+"\");'>"+item.bordNm+"</a>"
-		    		   +"</td><td>"+item.userNm+"</td><td>"+item.modyDate+"</td><td>"+item.bordCnt+"</td><td>"+stus
-		    		   +"</td><td>"+item.bordRelease+"</td></tr>";
- */
+
 		});
 		
 		$("#glaaTable").append(glaaAppend);
 	}
-	function gllyDetail(bordNum, bordRelease){	
-		
-		<%
-			String name = (String)session.getAttribute("name");
-			if(name != null){
-		%>
-			window.location.href = "Braa1000_adminPageCall.do?bordNum="+bordNum;
-		<%}else{%>
-		
-		//비밀번호 입력
-		if(bordRelease == "N"){ //비공개
-			//window.open("${pageContext.request.contextPath}/confirm.jsp","","scrollbars=no,status=no,resizable=no,width=300,height=150");
-			window.open("Braa1000_confirmPasswdWindow.do?bordNum="+bordNum,"","scrollbars=no,status=no,resizable=no,width=300,height=150");		
-		}else{
-			checkAfterAction(bordNum);
-		}
-		<%}%>
-	}
+	
 	function bordWrite(bordNum, bordRelease){		
 		//비밀번호 입력
 		/* if(bordRelease == "N"){ //비공개

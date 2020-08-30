@@ -74,7 +74,6 @@ public class GlaaVO {
 	public String toString() {
 		return "GlaaVO [gllyNo=" + gllyNo + ", gllyNm=" + gllyNm + ", gllyCts=" + gllyCts + ", showMainYn=" + showMainYn
 				+ ", regiDate=" + regiDate + ", modyDate=" + modyDate + ", files=" + files + ", glaaFileVO="
-				+ glaaFileVO + "]";
 				+ glaaFileVO + ", firstFilePath=" + firstFilePath + "]";
 	}
 	

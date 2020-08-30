@@ -51,9 +51,11 @@ public class GlaaDAO {
 		return tmp;
 	}
 	
-	public GlaaVO selectDetail(String bordNum) throws DataAccessException{ 
+	public GlaaVO selectDetail(String gllyNo) throws DataAccessException{ 
 		// TODO Auto-generated method stub
-		return sqlSession.selectOne("GlaaMapper.Glaa1000_selectDetail", bordNum);
+		GlaaVO tmp = sqlSession.selectOne("GlaaMapper.Glaa1000_selectDetail", gllyNo);
+		System.out.println(tmp.toString());
+		return tmp;
 	}
 
 	public List<Map<String, String>> selectImagePath(Map<String, String> map){
