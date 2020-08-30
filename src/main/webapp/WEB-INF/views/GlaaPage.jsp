@@ -146,24 +146,24 @@
         <div class="inner">    
             <h2>게시글 상세</h2>
             <form id="boardForm" name="boardForm">        
-                <table width="100%" class="table01">
+                <table width="100%" class="table">
                     <colgroup>
                         <col width="15%">
                         <col width="35%">
                         <col width="15%">
                         <col width="*">
                     </colgroup>
-                    <tbody id="tbody">
+                    <tbody id="tbody"> 	
                        
                     </tbody>
                 </table>        
                 <input type="hidden" id="glly_no"        name="glly_no"    value="${gllyNo}"/> <!-- 게시글 번호 -->
                 <input type="hidden" id="search_type"    name="search_type"     value="S"/> <!-- 조회 타입 - 상세(S)/수정(U) -->
             </form>
-            <div class="btn_right mt15">
-                <button type="button" class="btn black mr5" onclick="javascript:goGlaaList();">목록으로</button>
-                <button type="button" class="btn black mr5" onclick="javascript:goGlaaUpdate();">수정하기</button>
-                <button type="button" class="btn black" onclick="javascript:deleteBoard();">삭제하기</button>
+            <div class="" style="margin-top:30px;">
+                <button type="button" onclick="javascript:goGlaaList();">목록으로</button>
+                <button type="button" onclick="javascript:goGlaaUpdate();">수정하기</button>
+                <button type="button" onclick="javascript:deleteBoard();">삭제하기</button>
             </div>
         </div>
     </div>

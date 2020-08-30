@@ -32,16 +32,19 @@
 		})
 		
 		$("#write").click(function(){
+			//window.location.href = "<c:url value='/braa/Braa1000_write.do'/>";
 			window.location.href = "Braa1000_write.do";
 		})
 	})
 
 	function braaSelectCallback(result){
+		var totalCnt = result.braaList.length;
+		
 		$("#totalCnt").empty();
 		$("#braaTable").empty();
 		$("#braaTable").empty();
 		
-		$("#totalCnt").append("총" + result.paging.total + "게시글");
+		$("#totalCnt").append("총 : " + totalCnt + " 게시글");
 		var braaAppend = "<tr><th>번호</th><th>제목</th><th>작성자</th><th>날짜</th><th>조회수</th><th>처리상태</th><th>공개여부</th></tr>";
 		var stus = "";
 		var click = "";
@@ -69,24 +72,29 @@
 		//페이징 처리
 		var paging = "";
 		$("#paging").empty();
+		
+		
 		$("#paging").append("<ul>");
-
-		for(var i=((result.paging.startPage-1)*result.paging.cntPerPage)+1; i<=result.paging.endPage; i++){
-			paging += "<li onclick='movePage("+i+")'>"+i+"</li>";
+		
+		if(result.paging.startPage > 1){
+			$("#paging > ul").prepend("<li><a class='move prev' href='javascript:movePage("+((result.paging.startPage-1)*result.paging.cntPerPage)+")'>이전</a></li>");
+			$("#paging > ul").prepend("<li><a class='move first' href='javascript:movePage(1)'>처음</a></li>");
+		}
+		//for(var i=((result.paging.startPage-1)*result.paging.cntPerPage)+1; i<=result.paging.endPage; i++){
+		for(var i=result.paging.endPage; i>=((result.paging.startPage-1)*result.paging.cntPerPage)+1; i--){	
+			paging += "<li><a href='javascript:movePage("+i+")'>"+i+"</a></li>";
 			pageNum = i;
 		}
 		$("#paging ul").append(paging);
+		if(result.paging.endPage < result.paging.lastPage){
+			$("#paging > ul").append("<li><a class='move next' href='javascript:movePage("+(result.paging.endPage+1)+")'>다음</a></li>");
+			$("#paging > ul").append("<li><a class='move end' href='javascript:movePage("+(result.paging.lastPage)+")'>끝</a></li>");
+		}
 		$("#paging").append("</ul>");
 		
-		if(result.paging.startPage > 1){
-			$("#paging").prepend("<span onclick='movePage("+((result.paging.startPage-1)*result.paging.cntPerPage)+")'>prev</span>");
-			$("#paging").prepend("<span onclick='movePage(1)'>시작</span>");
-		}
 		
-		if(result.paging.endPage < result.paging.lastPage){
-			$("#paging").append("<span onclick='movePage("+(result.paging.endPage+1)+")'>next</span>");
-			$("#paging").append("<span onclick='movePage("+(result.paging.lastPage)+")'>끝</span>");
-		}
+		
+		
 	}
 	
 	function movePage(num){
@@ -125,28 +133,35 @@
 			}
 		});
 	}
-	
+	$(document).ajaxStart(function(){
+		$('#Progress_Loading').show(); //ajax실행시 로딩바를 보여준다.
+	})
+	$(document).ajaxStop(function(){
+		$('#Progress_Loading').hide(); //ajax종료시 로딩바를 숨겨준다.
+	});
 </script>
 <div class="inner">
-	<div>
-		<span id="totalCnt"></span>
-		<select id="select">
+	<h2 class="" > 온라인 문의 </h2>
+	<div style="margin-bottom:15px;">
+		<select id="select"  class="form-control" style="width:100px;float:left;">
 			<option value="bordNm">제목</option>
 			<option value="userNm">이름</option>
 		</select>
-		<input type="text" id="searchText"/>
-		<button id="searchBtn">검색</button>
+		<input  class="form-control-mid" type="text" id="searchText" style="float:left;margin-left:5px;"/>
+		<button id="searchBtn" style="margin-left:10px;">검색</button>
+		<span id="totalCnt" class="totalCnt"></span>
 	</div>
 	<div>
-		<table id="braaTable" width="500" cellpadding="7" cellspacing="0" border="1">
+		<table id="braaTable" width="500" cellpadding="7" cellspacing="0" border="1" class="table">
 		</table>
 	</div>
-	<div id="paging">
+	<div id="paging" class="paging">
 
 	</div>
 	<div>
-		<button id="write">작성하기</button>
+		<button id="write" style="float:right;">작성하기</button>
 	</div>
+	<div class="clear-space"></div>
 </div>
 </body>
 <%@ include file="/WEB-INF/views/comm/footer.jsp" %>
