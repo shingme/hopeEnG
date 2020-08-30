@@ -14,6 +14,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
 import org.springframework.web.multipart.MultipartFile;
 
 @Service
@@ -53,10 +54,13 @@ public class GlaaServiceImpl implements GlaaService{
 
 	
 	@Override
-	public void updateGlaa(GlaaVO glaaVO) {
+	public int updateGlaa(Model model) {
 		// TODO Auto-generated method stub
-		int num = glaaDAO.update(glaaVO);
-		logger.debug("num:"+num);
+		
+		
+		
+		return glaaDAO.updateGlaa(model);
+		
 	}
 	
 	public List<GlaaFileVO> getGlaaFileInfo(GlaaVO glaaVO) throws Exception{

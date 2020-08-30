@@ -64,11 +64,8 @@ public class GlaaController {
     @ResponseBody
     public GlaaVO getGllyDetail(HttpServletRequest request, HttpServletResponse response, String gllyNo) throws Exception {
  
-        //MDC.put("TRANSACTION_ID", String.valueOf(glaaParam));
-    	 MDC.put("TRANSACTION_ID", gllyNo);
-        System.out.println("상세보자 : ");
-        //System.out.println(glaaParam.toString());
-        // GlaaVO glaa = glaaService.selectDetailGlaa(String.valueOf(glaaParam.getgllyNo()));
+    	MDC.put("TRANSACTION_ID", gllyNo);
+
         GlaaVO glaa = glaaService.selectDetailGlaa(gllyNo);
         
         MDC.remove("TRANSACTION_ID");
@@ -81,14 +78,15 @@ public class GlaaController {
 	@RequestMapping("/Glaa1000_select.do")
 	@ResponseBody 
 	public Map<String, List<GlaaVO>> glaaSelect(@RequestParam HashMap<String, String> paramMap) {
-		  //paramMap.forEach((key, value) -> Logger.info(key + ":" + value));
+	
 	  
 	Map<String, List<GlaaVO>> map = new HashMap<String, List<GlaaVO>>();
 	  
 	List<GlaaVO> glaaList = glaaService.selectGlaa(paramMap);
-	System.out.println("첫번째파일경로");
-	System.out.println(glaaList.get(0).getFirstFilePath());
-	//System.out.println(glaaList.get(25).toString()); 
+	/*
+	 * System.out.println("첫번째파일경로");
+	 * System.out.println(glaaList.get(0).getFirstFilePath());
+	 */
 	
 	map.put("glaaList",glaaList); 
 	  
@@ -110,4 +108,23 @@ public class GlaaController {
 		}
 		
 	}
+	
+	@RequestMapping(value = "/boardUpdate")
+	public String boardUpdate(HttpServletRequest request, HttpServletResponse response) throws Exception {
+
+		return "board/boardUpdate";
+	}
+	 
+
+    /** 게시판 - 수정 */
+	/*
+	 * @RequestMapping( value = "/Glaa1000_updateGlly")
+	 * 
+	 * @ResponseBody public int updateBoard(HttpServletRequest request,
+	 * HttpServletResponse response, Model model) throws Exception{
+	 * 
+	 * GlaaVO glaa = glaaService.updateGlaa(model);
+	 * 
+	 * return glaa; }
+	 */
 }

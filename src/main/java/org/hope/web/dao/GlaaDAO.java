@@ -3,6 +3,7 @@ package org.hope.web.dao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Repository;
+import org.springframework.ui.Model;
 
 import java.util.List;
 import java.util.Map;
@@ -62,8 +63,9 @@ public class GlaaDAO {
 		return sqlSession.selectList("GlaaMapper.Glaa1000_selectImagePath",map);
 	}
 	
-	public int update(GlaaVO glaaVO) throws DataAccessException{
-		return sqlSession.update("GlaaMapper.Glaa1000_update", glaaVO);
+	public int updateGlaa(Model model) throws DataAccessException{
+		
+		return sqlSession.update("GlaaMapper.Glaa1000_update", model);
 	}
 
 }

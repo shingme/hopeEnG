@@ -30,8 +30,9 @@
     }
     
     /** 게시판 - 수정 페이지 이동 */
-    function goBoardUpdate(){
-    	
+    function goGlaaUpdate(){
+    	var gllyNo = $("#glly_no").val();
+    	location.href = "/glaa/Glaa1000_updateGlly" + gllyNo;
     }
     
     /** 게시판 - 상세 조회  */
@@ -161,7 +162,7 @@
             </form>
             <div class="btn_right mt15">
                 <button type="button" class="btn black mr5" onclick="javascript:goGlaaList();">목록으로</button>
-                <button type="button" class="btn black mr5" onclick="javascript:goBoardUpdate();">수정하기</button>
+                <button type="button" class="btn black mr5" onclick="javascript:goGlaaUpdate();">수정하기</button>
                 <button type="button" class="btn black" onclick="javascript:deleteBoard();">삭제하기</button>
             </div>
         </div>
