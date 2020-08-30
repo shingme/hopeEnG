@@ -14,13 +14,13 @@
 <script>
 var flag = false;
 var pwFlag = false;
-var updMode = false; //수정모드 체
+var updMode = false; //수정모드
 var num = "${braa.bordNo}";
 var originUserNm = "";
 var originUserEmail = "";
 var originUserPhone = "";
 var originBordNm = "";
-var originBordCts = ""; 
+var originBordCts = "";
 
 if("${braa}" != ""){ // 상세보기 일 때 
 	flag = true;
@@ -30,7 +30,7 @@ $(document).ready(function(){
 	if(flag){ //상세보기
 		$("#checkInfo").prop("checked",true);
 		$("#bordRelease").val("${braa.bordRelease}");
-		$("#bordRelease").attr("disabled",true);
+		$("#bordRelease").attr("disabled",true); //수정기능에서 공개 비공개 수정할 지 아직 결정 X
 		$("#pwdDiv").remove();
 		$("#write").remove();
 		$("#reset").remove();
@@ -110,50 +110,26 @@ function compareContxt(){
 	return contxtFlag;
 }
 
-function chkEmail(str, chk) {
-	var regExp = "";
-	
-	if(chk == "email"){
-		regExp = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
-	}else{ // tel
-		regExp = /^(01[016789]{1}|02|0[3-9]{1}[0-9]{1})-?[0-9]{3,4}-?[0-9]{4}$/;
-	}
-
-    if(regExp.test(str)){
-    	return true;
-    }else{
-    	return false;
-    }
-}
-
 function insertValidCheck(){
 	var alertFlag = true;
 	var guideTxt = ""
 	var obj = "";
 	
-	if(!updMode && !$("#checkInfo").is(":checked")){ //읽기모드며 체크되어있지 않을 때
+	if($("#checkInfo").is(":checked") == false){
 		guideTxt = "개인정보 수집 및 이용 동의에 체크해주세요.";
 		obj = $("#checkInfo");
 	}else if($("#userNm").val() == undefined || $("#userNm").val() == ""){
 		guideTxt = "이름을 입력해주세요.";
 		obj = $("#userNm");
-	}else if(!updMode && ($("#userPw").attr("disabled") == undefined
-								&& ($("#userPw").val() == undefined || $("#userPw").val() == ""))){
+	}else if($("#userPw").attr("disabled") == undefined
+			&& ($("#userPw").val() == undefined || $("#userPw").val() == "")){
 			guideTxt = "비밀번호를 입력해주세요.";
 			obj = $("#userPw");
-	}else if(!chkEmail($("#userEmail").val(), "email")){
-		if($("#userEmail").val() == undefined || $("#userEmail").val() == ""){
-			guideTxt = "이메일을 입력해주세요.";
-		}else{
-			guideTxt = "이메일을 확인해주세요.";
-		}
+	}else if($("#userEmail").val() == undefined || $("#userEmail").val() == ""){
+		guideTxt = "이메일을 입력해주세요.";
 		obj = $("#userEmail");
-	}else if(!chkEmail($("#userPhone").val(), "tel")){ 
-		if($("#userPhone").val() == undefined || $("#userPhone").val() == ""){
-			guideTxt = "연락처를 입력해주세요.";
-		}else{
-			guideTxt = "올바른 연락처를 입력해주세요.";
-		}
+	}else if($("#userPhone").val() == undefined || $("#userPhone").val() == ""){
+		guideTxt = "연락처를 입력해주세요.";
 		obj = $("#userPhone");
 	}else if($("#bordNm").val() == undefined || $("#bordNm").val() == ""){
 		guideTxt = "제목을 입력해주세요.";
@@ -161,13 +137,13 @@ function insertValidCheck(){
 	}else if($("#bordCts").val() == undefined || $("#bordCts").val() == ""){
 		guideTxt = "내용을 입력해주세요.";
 		obj = $("#bordCts");
-	}else if(!updMode && pwFlag){
-			guideTxt = "비밀번호를 확인해주세요"
-			obj = $("#userPwCheck");
+	}else if(pwFlag){
+		guideTxt = "비밀번호를 확인해주세요"
+		obj = $("#userPwCheck");
 	}else{
 		alertFlag = false;
 	}
-
+	
 	if(alertFlag){
 		alert(guideTxt);
 		obj.focus();
@@ -187,10 +163,6 @@ function btnClickAction(val){
 	}else{ // 수정모드
 		if(updMode){ //수정가능 모드
 			if(val == "update"){
-				if(!insertValidCheck()){  // 입력값 밸리드 체크
-					return;
-				}
-				
 				if(compareContxt()){
 					alert("수정된게 없습니다.");
 					return;
@@ -207,7 +179,7 @@ function btnClickAction(val){
 			}
 		}else{ // 수정불가 모드  비번 입력해야함
 			//수정모드로 들어가기 위한 비번 입력창
-			window.open("Braa1000_confirmPasswdWindow.do?bordNum="+num,"","scrollbars=no,status=no,resizable=no,width=300,height=150");
+			window.open("Braa1000_confirmPasswdWindow.do?bordNum="+num,"","scrollbars=no,status=no,resizable=no,width=300,height=180");
 			return;
 		}
 	}
@@ -218,53 +190,31 @@ function btnClickAction(val){
 }
 
 function checkAfterAction(num){
-	ajaxComm("Braa1000_detailSelectUpd.do?bordNum="+num,"",callback, "get");
-}
-
-function callback(result){
+	console.log("열기");
 	updMode = true;
-	$("#userEmail").val(result.userEmail);
-	$("#userPhone").val(result.userPhone)
-	
 	$("#braaDelete").css('display','block');
 	$("input, textarea").prop("readonly", false);
 }
-
-//공통 js만들면 제거 
-function ajaxComm(url, data, callback, action){
-	$.ajax({
-		url:url,
-		type:action,
-		data:data,
-		dataType:"json",
-		contentType:"application/json; charset=UTF-8",
-		success:callback,
-		error:function(xhr, status, error){
-			console.log(xhr+"\n"+status+"\n"+error);
-		}
-	});
-}
-
 </script>
 <div class="inner">
+<h2 class="" > 온라인 문의 작성하기</h2>
 <form name="bordWriteForm" id="bordWriteForm" method="POST">
 <input type="hidden" name="bordNo" id="bordNo" value=0>
 <div id="infoCheck">
-	<div>
-		<label for="agree">개인정보 수집 및 이용 동의</label>
-		<div>
-			블라블라_상민님이 내용 채울실 것
-		</div>
+	<div style="margin-bottom:15px;">
+		<label for="agree" style="width:30%;min-width:200px;">개인정보 수집 및 이용 동의</label>
+		<span>
+			1. 목적 : 문의글 작성자, 문의 글 확인, 협의 진행, 고지사항 전달, 등록자와의 원활한 의사소통<br>
+			2. 항목 : 아이디(이메일주소), 비밀번호, 이름, 생년월일, 휴대폰번호<br>
+		</span>
+		<input type="checkbox" id="checkInfo">
+		<span for="">개인정보 수집 및 이용에 동의합니다.</span>
 	</div>
-	<div>
-	<input type="checkbox" id="checkInfo">
-	<label for="">개인정보 수집 및 이용에 동의합니다.</label>
-	</div>
-	</div>
+</div>
 <div>
 	<label for="name">공개여부</label>
 	<p/>
-	<select id="bordRelease" name="bordRelease">
+	<select id="bordRelease" class="form-control-small" name="bordRelease" >
 		<option value="Y">공개</option>
 		<option value="N">비공개</option>
 	</select>
@@ -272,39 +222,39 @@ function ajaxComm(url, data, callback, action){
 <div>
 	<label for="name">이름</label>
 	<p/>
-	<input type="text" id="userNm" name="userNm" value="${braa.userNm}">
+	<input class="form-control-small" type="text" id="userNm" name="userNm" value="${braa.userNm}">
 </div>
 <div id="pwdDiv">
 	<label for="pwd">비밀번호</label>
 	<p/>
-	<input type="password" id="userPw" name="userPw">
-	<br/><span>비밀번호 분실 시 찾을 수 없습니다.</span>
+	<input class="form-control-small" type="password" id="userPw" name="userPw">
+	<span style="color:#ada8a8;">비밀번호 분실 시 찾을 수 없습니다.</span>
 </div>
 <div id="pwdCheckDiv">
 	<label for="pwdCheck">비밀번호 확인</label>
 	<p/>
-	<input type="password" id="userPwCheck" name="userPwCheck">
-	<span id="pwCheckMsg"></span>
+	<input class="form-control-small" type="password" id="userPwCheck" name="userPwCheck">
+	<span id="pwCheckMsg" style="color:#ada8a8;"></span>
 </div>
 <div id="email">
 	<label for="email">이메일</label>
 	<p/>
-	<input type="text" id="userEmail" name="userEmail" value="${braa.userEmail}" placeholder="you@example.com">
+	<input class="form-control-mid" type="text" id="userEmail" name="userEmail" value="${braa.userEmail}" placeholder="you@example.com">
 </div>
 <div id="tel">
 	<label for="tel">연락처</label>
 	<p/>
-	<input type="text" id="userPhone" name="userPhone" value="${braa.userPhone}" placeholder="00*-000*-0000" maxlength="13">
+	<input class="form-control-mid" type="text" id="userPhone" name="userPhone" value="${braa.userPhone}" placeholder="00*-000*-0000" maxlength="13">
 </div>
 <div>
 	<label for="title">제목</label>
 	<p/>
-	<input type="text" id="bordNm" name="bordNm" value="${braa.bordNm}">
+	<input class="form-control" style="width:90%;" type="text" id="bordNm" name="bordNm" value="${braa.bordNm}">
 </div>
 <div>
 	<label for="content">내용</label>
 	<p/>
-	<textarea id="bordCts" name="bordCts" style="resize: none;" placeholder="2000자 이내로 작성해주세요." maxlength="2000">${braa.bordCts}</textarea>
+	<textarea id="bordCts" class="form-control" style="width:90%;" name="bordCts" cols="30" rows="10" style="resize: none;" placeholder="2000자 이내로 작성해주세요.">${braa.bordCts}</textarea>
 </div>
 <button type="reset" id="reset">초기화</button>
 <button type="button" id="write" onclick="btnClickAction('insert')">등록</button>
@@ -312,6 +262,7 @@ function ajaxComm(url, data, callback, action){
 <button type="button" id="braaUpdate" onclick="btnClickAction('update')">수정</button>
 <button type="button" id="braaDelete" onclick="btnClickAction('delete')">삭제</button>
 </form>
+<div class="clear-space"></div>
 </div>
 <%@ include file="/WEB-INF/views/comm/footer.jsp" %>
 </body>
