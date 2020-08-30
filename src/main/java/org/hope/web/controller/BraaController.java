@@ -76,9 +76,6 @@ public class BraaController {
 		
 		//온라인 문의글 상세 조회 
 		@RequestMapping("/Braa1000_detailSelect.do")
-	//	@ResponseBody 
-		public String braaDetailSelect(@RequestParam String bordNum, Model model) {
-			BraaVO braa = braaService.selectDetailBraa(bordNum);
 		public String braaDetailSelect(@RequestParam HashMap<String, String> paramMap, HttpSession session, Model model) {
 			String updMode = paramMap.get("updMode");
 			BraaVO braa = braaService.selectDetailBraa(paramMap.get("bordNum"));
