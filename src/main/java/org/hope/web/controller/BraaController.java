@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 /**
  * Handles requests for the application home page.
@@ -40,12 +41,14 @@ public class BraaController {
 		//문의 게시판 목록 이동 
 		@RequestMapping(value = "/braa.do", method = RequestMethod.GET)
 		public String home(Locale locale, Model model) {
+
 			return "BraaList";
 		} 
 		
 		//문의 게시판 작성하기
 		@RequestMapping(value = "/Braa1000_write.do", method = RequestMethod.GET)
 		public String braaWrite() {
+			logger.info("들어옴");
 			return "BraaPage";
 		} 
 		
@@ -67,6 +70,7 @@ public class BraaController {
 		public Map<String, Object> braaSelect(@RequestParam HashMap<String, Object> paramMap) {	
 			//paramMap.forEach((key,value) -> logger.info(key+":"+value));
 			Map<String, Object> map = braaService.selectBraa(paramMap);
+
 			return map;
 		}
 		
@@ -92,6 +96,8 @@ public class BraaController {
 		//컨트롤러에서 익셉션 잡아주기
 		//온라인 문의글 작성
 		@RequestMapping("/Braa1000_insert.do")
+//		@ResponseBody
+		//public String braaInsert(@ModelAttribute BraaVO braaVO, Model model) {
 		public String braaInsert(@ModelAttribute BraaVO braaVO, Model model) throws Exception {
 			braaService.insertBraa(braaVO);
 			return "redirect:/braa/braa.do";

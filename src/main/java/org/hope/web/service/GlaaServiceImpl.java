@@ -29,7 +29,7 @@ public class GlaaServiceImpl implements GlaaService{
 		// TODO Auto-generated method stub
 		
 		List<GlaaFileVO> glaaFileList = getGlaaFileInfo(glaaVO);
-		
+		glaaVO.setFirstFilePath(glaaFileList.get(0).getFilePath());
 		int gllyNo = glaaDAO.insert(glaaVO);
 		System.out.println("갤러리번호 : "+gllyNo);
 		for(GlaaFileVO glaaFileVO : glaaFileList) {
@@ -46,9 +46,9 @@ public class GlaaServiceImpl implements GlaaService{
 	}
 
 	@Override
-	public GlaaVO selectDetailGlaa(String bordNum) {
+	public GlaaVO selectDetailGlaa(String gllyNo) {
 		// TODO Auto-generated method stub
-		return glaaDAO.selectDetail(bordNum);
+		return glaaDAO.selectDetail(gllyNo);
 	}
 
 	

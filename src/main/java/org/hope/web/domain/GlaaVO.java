@@ -13,6 +13,7 @@ public class GlaaVO {
 	private String modyDate;
 	private List<MultipartFile> files;
 	private List<GlaaFileVO> glaaFileVO;
+	private String firstFilePath;
 	
 	public List<GlaaFileVO> getGlaaFileVO() {
 		return glaaFileVO;
@@ -62,12 +63,20 @@ public class GlaaVO {
 	public void setModyDate(String modyDate) {
 		this.modyDate = modyDate;
 	}
+	
+	public String getFirstFilePath() {
+		return firstFilePath;
+	}
+	public void setFirstFilePath(String firstFilePath) {
+		this.firstFilePath = firstFilePath;
+	}
 	@Override
 	public String toString() {
 		return "GlaaVO [gllyNo=" + gllyNo + ", gllyNm=" + gllyNm + ", gllyCts=" + gllyCts + ", showMainYn=" + showMainYn
 				+ ", regiDate=" + regiDate + ", modyDate=" + modyDate + ", files=" + files + ", glaaFileVO="
-				+ glaaFileVO + "]";
+				+ glaaFileVO + ", firstFilePath=" + firstFilePath + "]";
 	}
+	
 	
 
 

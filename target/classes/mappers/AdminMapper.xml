@@ -3,13 +3,13 @@
 
 <mapper namespace="AdminMapper">
 
-	<select id="AdminMapper.Admin_select" resultType="org.hope.web.admin.AdminVO" parameterType="java.util.HashMap">
-		SELECT ADMIN_ID
-		     , ADMIN_PW
-			 , ADMIN_NM
-			 , ADMIN_PHONE
-			 , ADMIN_EMAIL
-			 , LOGN_DATE
+	<select id="loginCheck" parameterType="org.hope.web.admin.LoginDTO" resultType="org.hope.web.admin.AdminVO">
+		SELECT ADMIN_ID as adminId
+		     , ADMIN_PW as adminPw
+			 , ADMIN_NM as adminNm
+			 , ADMIN_PHONE as adminPhone
+			 , ADMIN_EMAIL as adminEmail
+			 , LOGN_DATE as lognDate
 	      FROM ADMINTB
 	     WHERE ADMIN_ID = #{adminId}
 	       AND ADMIN_PW = #{adminPw}
