@@ -32,7 +32,6 @@
 		})
 		
 		$("#write").click(function(){
-			//window.location.href = "<c:url value='/braa/Braa1000_write.do'/>";
 			window.location.href = "Braa1000_write.do";
 		})
 	})

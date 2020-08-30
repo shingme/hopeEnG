@@ -31,15 +31,12 @@
 	function callback(result){
 		if(result){
 			window.opener.checkAfterAction(num);
-			//window.opener.pageMove(num);
 			window.close();
 		}else{
-			//alert("비밀번호가 맞지않습니다. 다시 확인해주세요.");
 			$("#confirmMsg span").empty();
 			
 			var append = "비밀번호가 맞지않습니다. <p/>다시 입력해주세요."
 			$("#confirmMsg span").append(append);
-			//$("#pw").val("");
 		}
 	}
 	

@@ -14,13 +14,13 @@
 <script>
 var flag = false;
 var pwFlag = false;
-var updMode = false; //수정모드
+var updMode = false; //수정모드 체
 var num = "${braa.bordNo}";
 var originUserNm = "";
 var originUserEmail = "";
 var originUserPhone = "";
 var originBordNm = "";
-var originBordCts = "";
+var originBordCts = ""; 
 
 if("${braa}" != ""){ // 상세보기 일 때 
 	flag = true;
@@ -30,7 +30,7 @@ $(document).ready(function(){
 	if(flag){ //상세보기
 		$("#checkInfo").prop("checked",true);
 		$("#bordRelease").val("${braa.bordRelease}");
-		$("#bordRelease").attr("disabled",true); //수정기능에서 공개 비공개 수정할 지 아직 결정 X
+		$("#bordRelease").attr("disabled",true);
 		$("#pwdDiv").remove();
 		$("#write").remove();
 		$("#reset").remove();
@@ -190,11 +190,33 @@ function btnClickAction(val){
 }
 
 function checkAfterAction(num){
-	console.log("열기");
+	ajaxComm("Braa1000_detailSelectUpd.do?bordNum="+num,"",callback, "get");
+}
+
+function callback(result){
 	updMode = true;
+	$("#userEmail").val(result.userEmail);
+	$("#userPhone").val(result.userPhone)
+	
 	$("#braaDelete").css('display','block');
 	$("input, textarea").prop("readonly", false);
 }
+
+//공통 js만들면 제거 
+function ajaxComm(url, data, callback, action){
+	$.ajax({
+		url:url,
+		type:action,
+		data:data,
+		dataType:"json",
+		contentType:"application/json; charset=UTF-8",
+		success:callback,
+		error:function(xhr, status, error){
+			console.log(xhr+"\n"+status+"\n"+error);
+		}
+	});
+}
+
 </script>
 <div class="inner">
 <form name="bordWriteForm" id="bordWriteForm" method="POST">
