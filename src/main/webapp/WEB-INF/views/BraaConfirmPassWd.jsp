@@ -5,6 +5,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>비밀번호 확인</title>
+<link href="${pageContext.request.contextPath}/css/styles.css" rel="stylesheet" />
 </head>
 <body>
 <script src="${pageContext.request.contextPath}/js/jquery-3.5.1.min.js" type="text/javascript"></script>
@@ -13,14 +14,21 @@
 	var num = "${bordNum}";
 		
 	$(document).ready(function(){
+		$("#bordNum").val(num);
 		var guideMsg = "게시글 " +num+"번의 비밀번호를 입력하세요.";
 		$("#guideMsg span").append(guideMsg);
 		
+		$("#pw").keypress(function(event){
+		     if ( event.which == 13 ) {
+		    	 $("#confirmPw").click();
+		         return false;
+		     }
+		});
+
 		$("#confirmPw").click(function(){
 			//비밀번호 암호화 추가해야함
 			var data = {pw : $("#pw").val(), bordNum : num };
 			ajaxComm("/braa/Braa1000_confirmPasswd.do", JSON.stringify(data), callback, "POST");
-			// 그냥json으로 보냇을때 문제가 생겻음 ->json을 스트링으로 보내니 문제사라짐
 		})
 		
 		$("#confirmClose").click(function(){
@@ -54,13 +62,14 @@
 			}
 		});
 	}
+	
 </script>
-	<form>
+	<form style="height:230px;">
 		<div id="guideMsg">
 			<span></span> 
 		</div>
 		<div>
-			<input type="password" id="pw">
+			<input class="form-control-small"  type="password" id="pw">
 		</div>
 		<div>
 			<button type="button" id ="confirmPw">확인</button>
