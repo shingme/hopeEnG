@@ -50,7 +50,7 @@
 	   					//+"<td on click='javascript:gllyDetail("+item.gllyNo+");' style='cursor:Pointer'>"+item.gllyNm + "</td>"
 	   					+"<td>"+ item.regiDate +"</td>"
 	   					+"<td>"+ item.showMainYn +"</td>"
-	   					+"<td>"+ "<img src=\"<spring:url value='/glly/"+item.firstFilePath.substr(14)+"'/>\" width=\"200\"/>" +"</td>"
+	   					+"<td>"+ "<img src=\"<spring:url value='/glly/"+item.firstFilePath+"'/>\" width=\"200\"/>" +"</td>"
 	   					+ "</tr>"
 
 		});

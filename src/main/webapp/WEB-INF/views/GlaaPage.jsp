@@ -21,29 +21,29 @@
 <script type="text/javascript">
     
     $(document).ready(function(){        
-    	getGllyDetail();        
+    	getGlaaDetail();        
     });
     
-    /** 게시판 - 목록 페이지 이동 */
+    /** 갤러리 - 목록 페이지 이동 */
     function goGlaaList(){                
         location.href = "/glaa/glaa.do";
     }
     
-    /** 게시판 - 수정 페이지 이동 */
-    function goBoardUpdate(){
-    	
+    /** 갤러리 - 수정 페이지 이동 */
+    function goGlaaUpdate(){
+    	var gllyNo = $("#glly_no").val();
+    	location.href = "/glaa/Glaa1000_updateGlaa" + gllyNo;
     }
     
-    /** 게시판 - 상세 조회  */
-    function getGllyDetail(boardSeq){
+    /** 갤러리 - 상세 조회  */
+    function getGlaaDetail(boardSeq){
         
         var gllyNo = $("#glly_no").val();
- 		//alert(gllyNo);
         if(gllyNo != ""){
             
             $.ajax({    
                 
-                url        : "/glaa/Glaa1000_getGllyDetail",
+                url        : "/glaa/Glaa1000_getGlaaDetail",
                 data    : {gllyNo : gllyNo},
               
                 dataType: "JSON",
@@ -52,7 +52,7 @@
                 async   : true,
                 type    : "POST",    
                 success : function(obj) {
-                    getBoardDetailCallback(obj);                
+                    getGlaaDetailCallback(obj);                
                 },           
                 error     : function(xhr, status, error) {}
                 
@@ -63,7 +63,7 @@
     }
     
     /** 게시판 - 상세 조회  콜백 함수 */
-    function getBoardDetailCallback(obj){
+    function getGlaaDetailCallback(obj){
         
         var str = "";
         
@@ -78,7 +78,7 @@
             str += "</tr>";
             str += "<tr>";
             str += "<th>이미지</th>";
-            str += "<td>"+ "<img src='/glly/"+obj.firstFilePath.substr(14)+"' width=\"600\"/>" +"</td>";
+            str += "<td>"+ "<img src='/glly/"+obj.firstFilePath+"' width=\"600\"/>" +"</td>";
             str += "</tr>";
             str += "<tr>";
             str += "<th>내용</th>";
@@ -91,28 +91,27 @@
             return;
         }        
         
-       // $("#tbody").html(str);
         $("#tbody").append(str);
     }
     
     /** 게시판 - 삭제  */
-    function deleteBoard(){
+    function deleteGlaa(){
  
-        var boardSeq = $("#board_seq").val();
+        var glaaSeq = $("#glaa_seq").val();
         
         var yn = confirm("게시글을 삭제하시겠습니까?");        
         if(yn){
             
             $.ajax({    
                 
-                url        : "/board/deleteBoard",
+                url        : "/glaa/Glaa1000_deleteGlaa",
                 data    : $("#boardForm").serialize(),
                 dataType: "JSON",
                 cache   : false,
                 async   : true,
                 type    : "POST",    
                 success : function(obj) {
-                    deleteBoardCallback(obj);                
+                    deleteGlaaCallback(obj);                
                 },           
                 error     : function(xhr, status, error) {}
                 
@@ -121,7 +120,7 @@
     }
     
     /** 게시판 - 삭제 콜백 함수 */
-    function deleteBoardCallback(obj){
+    function deleteGlaaCallback(obj){
     
         if(obj != null){        
             
@@ -129,7 +128,7 @@
             
             if(result == "SUCCESS"){                
                 alert("게시글 삭제를 성공하였습니다.");                
-                goBoardList();                
+                goGlaaList();                
             } else {                
                 alert("게시글 삭제를 실패하였습니다.");    
                 return;
@@ -161,7 +160,7 @@
             </form>
             <div class="btn_right mt15">
                 <button type="button" class="btn black mr5" onclick="javascript:goGlaaList();">목록으로</button>
-                <button type="button" class="btn black mr5" onclick="javascript:goBoardUpdate();">수정하기</button>
+                <button type="button" class="btn black mr5" onclick="javascript:goGlaaUpdate();">수정하기</button>
                 <button type="button" class="btn black" onclick="javascript:deleteBoard();">삭제하기</button>
             </div>
         </div>

@@ -14,6 +14,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
 import org.springframework.web.multipart.MultipartFile;
 
 @Service
@@ -26,10 +27,10 @@ public class GlaaServiceImpl implements GlaaService{
 	
 	@Override
 	public void insertGlaa(GlaaVO glaaVO) throws Exception {
-		// TODO Auto-generated method stub
+
 		
 		List<GlaaFileVO> glaaFileList = getGlaaFileInfo(glaaVO);
-		glaaVO.setFirstFilePath(glaaFileList.get(0).getFilePath());
+		glaaVO.setFirstFilePath(glaaFileList.get(0).getFileNameKey());
 		int gllyNo = glaaDAO.insert(glaaVO);
 		System.out.println("갤러리번호 : "+gllyNo);
 		for(GlaaFileVO glaaFileVO : glaaFileList) {
@@ -41,24 +42,27 @@ public class GlaaServiceImpl implements GlaaService{
 
 	@Override
 	public List<GlaaVO> selectGlaa(Map<String, String> map) {
-		// TODO Auto-generated method stub
+
 		return glaaDAO.select(map);
 	}
 
 	@Override
 	public GlaaVO selectDetailGlaa(String gllyNo) {
-		// TODO Auto-generated method stub
+
 		return glaaDAO.selectDetail(gllyNo);
 	}
 
 	
 	@Override
-	public void updateGlaa(GlaaVO glaaVO) {
-		// TODO Auto-generated method stub
-		int num = glaaDAO.update(glaaVO);
-		logger.debug("num:"+num);
+	public int updateGlaa(Model model) {
+
+		return glaaDAO.updateGlaa(model);
+		
 	}
 	
+	
+	
+	@Override
 	public List<GlaaFileVO> getGlaaFileInfo(GlaaVO glaaVO) throws Exception{
 		List<MultipartFile> files = glaaVO.getFiles();
 		List<GlaaFileVO> glaaFileList = new ArrayList<GlaaFileVO>();
@@ -67,7 +71,9 @@ public class GlaaServiceImpl implements GlaaService{
 		int gllyNo = glaaVO.getgllyNo();
 		String fileName = null;
 		String fileNameKey = null;
-		String filePath = "C:\\board\\file";
+		String rootPath = glaaVO.getFirstFilePath();
+		String filePath = rootPath+"resources/image/gallery";
+		
 		String fileSize = null;
 		String fileExt = null;
 		if(files == null ) {
@@ -88,12 +94,7 @@ public class GlaaServiceImpl implements GlaaService{
 				fileNameKey = getRandomString() + fileExt;
 				fileSize = String.valueOf(multipartFile.getSize());
 				
-				System.out.println("파일명------");
-				System.out.println(fileName);
-				System.out.println(fileExt);
-				System.out.println(fileNameKey);
-				System.out.println(fileSize);
-				System.out.println(filePath);
+				
 				// Save File
 				file = new File(filePath + "/" + fileNameKey);
 				multipartFile.transferTo(file);
@@ -101,7 +102,7 @@ public class GlaaServiceImpl implements GlaaService{
 				glaaFileVO = new GlaaFileVO();
 				glaaFileVO.setGllyNo(gllyNo);
 				glaaFileVO.setFileNameKey(fileNameKey);
-				glaaFileVO.setFilePath(filePath + "\\" + fileNameKey);
+				glaaFileVO.setFilePath(filePath + "/" + fileNameKey);
 				glaaFileVO.setFileSize(fileSize);
 				glaaFileVO.setFileNo(i);i++;
 				glaaFileList.add(glaaFileVO);
@@ -117,11 +118,6 @@ public class GlaaServiceImpl implements GlaaService{
  
         return UUID.randomUUID().toString().replaceAll("-", "");
     }
-
-	/*
-	 * @Override public void insertBoardFile(GlaaFileVO glaaFileVO) {
-	 * glaaDAO.insertGlaaFile(glaaFileVO); }
-	 */
     
     public List<Map<String, String>> getImagePathGlaa(Map<String, String> map){
     	return glaaDAO.selectImagePath(map);

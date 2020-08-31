@@ -3,6 +3,7 @@ package org.hope.web.dao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Repository;
+import org.springframework.ui.Model;
 
 import java.util.List;
 import java.util.Map;
@@ -27,7 +28,6 @@ public class GlaaDAO {
 	}
 	
 	public int insert(GlaaVO glaaVO) throws DataAccessException{ 
-		// TODO Auto-generated method stub
 
 		sqlSession.insert("GlaaMapper.Glaa1000_insert", glaaVO);
 		
@@ -40,21 +40,15 @@ public class GlaaDAO {
 	}
 	
 	public List<GlaaVO> select(Map<String, String> map) throws DataAccessException{ 
-		// TODO Auto-generated method stub
-		//System.out.println(map.toString());
+
 		List<GlaaVO> tmp = sqlSession.selectList("GlaaMapper.Glaa1000_select", map);
-		System.out.println("MAP 테스트!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-		System.out.println(tmp.toString()); 
-		System.out.println("Collection test");
-		
-		//System.out.println(tmp.get(0).getGlaaFileVO().toString());
+
 		return tmp;
 	}
 	
 	public GlaaVO selectDetail(String gllyNo) throws DataAccessException{ 
-		// TODO Auto-generated method stub
+
 		GlaaVO tmp = sqlSession.selectOne("GlaaMapper.Glaa1000_selectDetail", gllyNo);
-		System.out.println(tmp.toString());
 		return tmp;
 	}
 
@@ -62,8 +56,9 @@ public class GlaaDAO {
 		return sqlSession.selectList("GlaaMapper.Glaa1000_selectImagePath",map);
 	}
 	
-	public int update(GlaaVO glaaVO) throws DataAccessException{
-		return sqlSession.update("GlaaMapper.Glaa1000_update", glaaVO);
+	public int updateGlaa(Model model) throws DataAccessException{
+		
+		return sqlSession.update("GlaaMapper.Glaa1000_update", model);
 	}
 
 }

@@ -25,7 +25,7 @@
 	<resources mapping="/css/**" location="/resources/css/" />
 	<resources mapping="/image/**" location="/resources/image/" />
 	<resources mapping="/js/**" location="/resources/js/" />
-	<resources mapping="/glly/**" location="file:///C:/board/file/"/>
+	<resources mapping="/glly/**" location="/resources/image/gallery/"/>
 	
 	<beans:bean id="loginInterceptor" class="org.hope.web.interceptor.LoginInterceptor"></beans:bean>
 	<interceptors>
