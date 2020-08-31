@@ -14,14 +14,21 @@
 	var num = "${bordNum}";
 		
 	$(document).ready(function(){
+		$("#bordNum").val(num);
 		var guideMsg = "게시글 " +num+"번의 비밀번호를 입력하세요.";
 		$("#guideMsg span").append(guideMsg);
 		
+		$("#pw").keypress(function(event){
+		     if ( event.which == 13 ) {
+		    	 $("#confirmPw").click();
+		         return false;
+		     }
+		});
+
 		$("#confirmPw").click(function(){
 			//비밀번호 암호화 추가해야함
 			var data = {pw : $("#pw").val(), bordNum : num };
 			ajaxComm("/braa/Braa1000_confirmPasswd.do", JSON.stringify(data), callback, "POST");
-			// 그냥json으로 보냇을때 문제가 생겻음 ->json을 스트링으로 보내니 문제사라짐
 		})
 		
 		$("#confirmClose").click(function(){
@@ -32,15 +39,12 @@
 	function callback(result){
 		if(result){
 			window.opener.checkAfterAction(num);
-			//window.opener.pageMove(num);
 			window.close();
 		}else{
-			//alert("비밀번호가 맞지않습니다. 다시 확인해주세요.");
 			$("#confirmMsg span").empty();
 			
 			var append = "비밀번호가 맞지않습니다. <p/>다시 입력해주세요."
 			$("#confirmMsg span").append(append);
-			//$("#pw").val("");
 		}
 	}
 	
@@ -58,6 +62,7 @@
 			}
 		});
 	}
+	
 </script>
 	<form style="height:230px;">
 		<div id="guideMsg">
