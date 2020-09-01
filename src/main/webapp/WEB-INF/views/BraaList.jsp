@@ -38,13 +38,11 @@
 	})
 
 	function braaSelectCallback(result){
-		var totalCnt = result.braaList.length;
-		
 		$("#totalCnt").empty();
 		$("#braaTable").empty();
 		$("#braaTable").empty();
 		
-		$("#totalCnt").append("총 : " + totalCnt + " 게시글");
+		$("#totalCnt").append("총" + result.paging.total + "게시글");
 		var braaAppend = "<tr><th>번호</th><th>제목</th><th>작성자</th><th>날짜</th><th>조회수</th><th>처리상태</th><th>공개여부</th></tr>";
 		var stus = "";
 		var click = "";
@@ -90,14 +88,9 @@
 			$("#paging > ul").append("<li><a class='move end' href='javascript:movePage("+(result.paging.lastPage)+")'>끝</a></li>");
 		}
 		$("#paging").append("</ul>");
-		
-		
-		
-		
 	}
 	
 	function movePage(num){
-		console.log("num:"+num);
 		searchArr["pageNum"] = num;
 		searchArr["cntPerPage"] = cntPerPage;
 		
@@ -117,7 +110,6 @@
 		
 		//비밀번호 입력
 		if(bordRelease == "N"){ //비공개
-			//window.open("${pageContext.request.contextPath}/confirm.jsp","","scrollbars=no,status=no,resizable=no,width=300,height=150");
 			window.open("Braa1000_confirmPasswdWindow.do?bordNum="+bordNum,"","scrollbars=no,status=no,resizable=no,width=300,height=150");		
 		}else{
 			checkAfterAction(bordNum);
