@@ -12,6 +12,10 @@
 <body>
 <H1>갤러리</H1>
 <script src="${pageContext.request.contextPath}/js/jquery-3.5.1.min.js" type="text/javascript"></script>
+	<%
+		String name;
+		name = (String)session.getAttribute("name");
+	%>
 <script>
 	$(document).ready(function(){ //메인에서 클릭해서 들어오면 서버에서 무조건 5개 가지고 옴
 		
@@ -46,7 +50,11 @@
 	   		glaaAppend += "<tr>"
 	   					+"<td>"+ item.gllyNo +"</td>"
 	   					//+"<td>"+ item.gllyNm +"</td>"
+	   					<%if(name != null){%>
 	   					+"<td><a href='javascript:gllyDetail(\""+item.gllyNo+"\");'>"+item.gllyNm+"</a>"
+	   					<%}else{%>
+	   					+"<td>"+ item.gllyNm +"</td>"
+	   					<%}%>
 	   					//+"<td on click='javascript:gllyDetail("+item.gllyNo+");' style='cursor:Pointer'>"+item.gllyNm + "</td>"
 	   					+"<td>"+ item.regiDate +"</td>"
 	   					+"<td>"+ item.showMainYn +"</td>"
@@ -86,6 +94,9 @@
 		$('#Progress_Loading').hide(); //ajax종료시 로딩바를 숨겨준다.
 	});
 </script>
+
+
+
 <div class="inner">
 <h2 class="" > 갤러리</h2>
 	<div style="margin-bottom:15px;">
@@ -101,7 +112,9 @@
 		</table>
 	</div>
 	<div>
+		<%if(name != null){ %>
 		<button id="write" style="float:right;">작성하기</button>
+		<%} %>
 	</div>
 </div>
 </body>

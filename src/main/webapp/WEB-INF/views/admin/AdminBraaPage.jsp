@@ -16,11 +16,8 @@ var flag = false;
 var pwFlag = false;
 var updMode = false; //수정모드
 var num = "${braa.bordNo}";
-var originUserNm = "";
-var originUserEmail = "";
-var originUserPhone = "";
-var originBordNm = "";
-var originBordCts = "";
+
+var originBordStus = "";
 
 if("${braa}" != ""){ // 상세보기 일 때 
 	flag = true;
@@ -47,11 +44,7 @@ $(document).ready(function(){
 			$("#userPw").next().remove();	
 		}
 		
-		originUserNm = $("#userNm").val();
-		originUserEmail = $("#userEmail").val();
-		originUserPhone = $("#userPhone").val();
-		originBordNm = $("#bordNm").val();
-		originBordCts = $("#bordCts").val();
+		originBordCts = $("#bordStus").val();
 		
 		if($("#bordRelease").val() == "Y"){ // 공개모드
 			$("input, textarea").prop("readonly", true);
@@ -79,84 +72,19 @@ $(document).ready(function(){
 		}
 	})
 	
-	$("#userPwCheck").focusout(function(){
-		var val1 = $("#userPw").val();
-		var val2 = $("#userPwCheck").val();
-		
-		$("#pwCheckMsg").empty();
-		
-		if(val1 != val2){
-			pwFlag = true;
-			$("#pwCheckMsg").append("비밀번호가 불일치합니다.");
-		}else{
-			pwFlag = false;
-			$("#pwCheckMsg").append("비밀번호가 일치합니다.");
-		}
-		return;
-	})
+
 	
 })
 
 function compareContxt(){
 	var contxtFlag = true;
-	if(originUserNm != $("#userNm").val()){
-		contxtFlag = false;
-	}
-	if(originUserEmail != $("#userEmail").val()){
-		contxtFlag = false;
-	}
-	if(originUserPhone != $("#userPhone").val()){
-		contxtFlag = false;
-	}
-	if(originBordNm != $("#bordNm").val()){
-		contxtFlag = false;
-	}
-	if(originBordCts != $("#bordCts").val()){
+	
+	if(originBordStus != $("#bordStus").val()){
 		contxtFlag = false;
 	}
 	return contxtFlag;
 }
 
-function insertValidCheck(){
-	var alertFlag = true;
-	var guideTxt = ""
-	var obj = "";
-	
-	if($("#checkInfo").is(":checked") == false){
-		guideTxt = "개인정보 수집 및 이용 동의에 체크해주세요.";
-		obj = $("#checkInfo");
-	}else if($("#userNm").val() == undefined || $("#userNm").val() == ""){
-		guideTxt = "이름을 입력해주세요.";
-		obj = $("#userNm");
-	}else if($("#userPw").attr("disabled") == undefined
-			&& ($("#userPw").val() == undefined || $("#userPw").val() == "")){
-			guideTxt = "비밀번호를 입력해주세요.";
-			obj = $("#userPw");
-	}else if($("#userEmail").val() == undefined || $("#userEmail").val() == ""){
-		guideTxt = "이메일을 입력해주세요.";
-		obj = $("#userEmail");
-	}else if($("#userPhone").val() == undefined || $("#userPhone").val() == ""){
-		guideTxt = "연락처를 입력해주세요.";
-		obj = $("#userPhone");
-	}else if($("#bordNm").val() == undefined || $("#bordNm").val() == ""){
-		guideTxt = "제목을 입력해주세요.";
-		obj = $("#bordNm");
-	}else if($("#bordCts").val() == undefined || $("#bordCts").val() == ""){
-		guideTxt = "내용을 입력해주세요.";
-		obj = $("#bordCts");
-	}else if(pwFlag){
-		guideTxt = "비밀번호를 확인해주세요"
-		obj = $("#userPwCheck");
-	}else{
-		alertFlag = false;
-	}
-	
-	if(alertFlag){
-		alert(guideTxt);
-		obj.focus();
-		return;
-	}
-}
 
 function btnClickAction(val){
 	var msg = "";
@@ -200,6 +128,7 @@ function checkAfterAction(num){
 	$("input, textarea").prop("readonly", false);
 }
 </script>
+
 <div class="inner">
 <form name="bordWriteForm" id="bordWriteForm" method="POST">
 <input type="hidden" name="bordNo" id="bordNo" value=0>
@@ -260,6 +189,18 @@ function checkAfterAction(num){
 	<p/>
 	<textarea id="bordCts" name="bordCts" style="resize: none;" placeholder="2000자 이내로 작성해주세요.">${braa.bordCts}</textarea>
 </div>
+
+	<%
+		String name;
+		name = (String)session.getAttribute("name");
+	%>
+<div>
+	<label for="status">처리 상태</label>
+	<input type="radio" id="bordStus" name="bordStus" value="S" ${ braa.bordStus eq 'S' ? "checked" : ""}>대기중
+	<input type="radio" id="bordStus" name="bordStus" value="P" ${ braa.bordStus eq 'P' ? "checked" : ""}>처리중
+	<input type="radio" id="bordStus" name="bordStus" value="C" ${ braa.bordStus eq 'C' ? "checked" : ""}>완료
+</div>
+<button type="button" id="braaUpdate" onclick="btnClickAction('update')">수정</button>
 </form>
 </div>
 <%@ include file="/WEB-INF/views/comm/footer.jsp" %>

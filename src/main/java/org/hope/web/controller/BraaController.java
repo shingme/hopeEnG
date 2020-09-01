@@ -106,6 +106,7 @@ public class BraaController {
 		//온라인 문의글 작성
 		@RequestMapping("/Braa1000_update.do")
 		public String braaUpdate(@ModelAttribute BraaVO braaVO, Model model) {
+			//System.out.println("BraaVO : " + braaVO);
 			braaService.updateBraa(braaVO);
 			return "redirect:/braa/braa.do";
 		}
