@@ -10194,8 +10194,8 @@ img::-moz-selection {
 }
 
 #mainNav {
-  padding-top: 1rem;
-  padding-bottom: 1rem;
+  padding-top: 1.25rem;
+  padding-bottom: 1.25rem;
   background-color: #212529;
   position:fixed;
 }
@@ -10209,7 +10209,7 @@ img::-moz-selection {
   border: 0;
 }
 #mainNav .navbar-brand {
-  color: #fed136;
+  color: #e6e4df;
   font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   font-weight: 700;
   letter-spacing: 0.0625em;
@@ -10230,8 +10230,8 @@ img::-moz-selection {
 
 @media (min-width: 992px) {
   #mainNav {
-    padding-top: 1.5rem;
-    padding-bottom: 1.5rem;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
     border: none;	
     /* background-color: transparent; */
     transition: padding-top 0.3s ease-in-out, padding-bottom 0.3s ease-in-out;
@@ -10724,4 +10724,41 @@ section#contact form#contactForm :-ms-input-placeholder {
 	font-size: 33px;
     font-weight: bold;
 }
+/*회사소개 css*/
+.infoSpan{
+	font-size: 25px;
+	color: #133f91;
+	font-weight: bold;
+}
+.imgTxt {
+	text-align: center;
+	font-size: 20px;
+	margin: 0 auto;
+	display: block;
+}
 
+.infoTxt{
+	float: left;
+	width: 50%;
+	padding: 2%;
+	font-size: 20px;
+}
+.infoChart {
+	margin-bottom: 25px;
+	width: 50%;
+	float: left;
+}
+.infoChart img{
+	width: 100%;
+}
+
+@media (max-width: 800px) {
+	.infoTxt{
+		width:100%;
+	}
+	
+	.infoChart {
+		width:100%;
+		display:contents;
+	}
+}
