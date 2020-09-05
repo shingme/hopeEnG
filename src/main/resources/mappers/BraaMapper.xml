@@ -39,6 +39,9 @@
     		 <if test="userPhone!=null and !userPhone.equals('')"> 
     		 	USER_PHONE = #{userPhone},
     		 </if>
+    		 <if test="bordStus!=null and !bordStus.equals('')"> 
+    		 	BORD_STUS = #{bordStus},
+    		 </if>
     		 MODY_DATE = SYSDATE()
     	</set>
     	WHERE BORD_NO = #{bordNo}

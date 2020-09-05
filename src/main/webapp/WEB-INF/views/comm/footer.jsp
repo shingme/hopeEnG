@@ -17,13 +17,17 @@
         <footer class="footer py-4" id="footer-Section">
             <div class="container">
                 <div class="row align-items-center">
-                    <div class="col-lg-4 text-lg-left">Copyright © (주)희망이앤지 2020</div>
-                    <div class="col-lg-4 my-3 my-lg-0" style="padding-left: 60px;">
+                    <div class="col-lg-4 text-lg-left" style="max-width:25%;">Copyright © (주)희망이앤지<br> 2020 All rights reserved.</div>
+                    
+                    <div class="col-lg-4 my-3 my-lg-0" style="padding-left: 60px;min-width:45%;max-width:45%;">
+                    	ADRESS - 경남 거제시 문동동 1길 16-2<br>
+						PHONE - 055-632-2735 / FAX - 055-635-2735
+                    	
                         <%--<a class="btn btn-light btn-social mx-2" href="#!"><i class="fab fa-twitter"></i></a>
                         <a class="btn btn-light btn-social mx-2" href="#!"><i class="fab fa-facebook-f"></i></a>
                         <a class="btn btn-light btn-social mx-2" href="#!"><i class="fab fa-linkedin-in"></i></a> --%>
                     </div>
-                    <div class="col-lg-4 text-lg-right">
+                    <div class="col-lg-4 text-lg-right" style="max-width:20%;">
                         <%--<a class="mr-3" href="#!">보안정책</a>
                         <a href="#!">이용약관</a>--%>
                     </div>

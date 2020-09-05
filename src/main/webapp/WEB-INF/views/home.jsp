@@ -7,8 +7,6 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>Agency - Start Bootstrap Theme</title>
-        <link rel="icon" type="image/x-icon" href="/image/img/favicon.ico" />
         <!-- Font Awesome icons (free version)-->
         <script src="https://use.fontawesome.com/releases/v5.13.0/js/all.js" crossorigin="anonymous"></script>
         <!-- Google fonts-->
@@ -79,7 +77,60 @@
 	        prevArrow : "<button type='button' class='slick-prev'>Previous</button>",		// 이전 화살표 모양 설정
 			nextArrow : "<button type='button' class='slick-next'>Next</button>"		// 다음 화살표 모양 설정
 	       });
+	   	  
+			
+			ajaxComm("/Home1000_select.do","",homeSelectCallback);
+			
      	});
+     	
+     	function homeSelectCallback(result){
+    		var stus = "";
+    		var click = "";
+    		console.log(result.HomeList);
+    		console.log(result.HomeList.length);
+    		if(result.HomeList.length >0){
+	    		for(var i=0; i<result.HomeList.length;i++){
+	    			if(i>2) break;
+	    			$("#gally0"+(i+1)).append("<img class='img-fluid' src=\'/glly/"+result.HomeList[i].firstFilePath.substr(14)+"'/>");
+	    		}
+	    		
+	    		for(var i=1;i<=2;i++){
+	    			console.log($("#gally0"+i+">img").length);
+	    			if($("#gally0"+i+">img").length == "0"){
+	    				console.log(i);
+	    				$("#gally0"+i).append("<img class='img-fluid' src='/image/img/portfolio/02-thumbnail.jpg' alt='' />");
+	    			}
+	 
+	    		}
+    		}
+    		else{
+    			$("#gally01").append("<img class='img-fluid' src='/image/img/portfolio/02-thumbnail.jpg' alt='' />");
+    			$("#gally02").append("<img class='img-fluid' src='/image/img/portfolio/03-thumbnail.jpg' alt='' />");
+    		}
+    		
+    		return;
+    	}
+     	
+     	function ajaxComm(url, data, callback){
+    		$.ajax({
+    			url:url,
+    			type:"get",
+    			data:data,
+    			dataType:"json",
+    			contentType:"application/json; charset=UTF-8",
+    			success:callback,
+    			error:function(xhr, status, error){
+    				console.log(xhr+"\n"+status+"\n"+error);
+    			}
+    		});
+    	}
+    	$(document).ajaxStart(function(){
+    		$('#Progress_Loading').show(); //ajax실행시 로딩바를 보여준다.
+    	})
+    	$(document).ajaxStop(function(){
+    		$('#Progress_Loading').hide(); //ajax종료시 로딩바를 숨겨준다.
+    	});
+     	
    	 </script>
     </head>
     <body id="page-top">
@@ -127,32 +178,32 @@
 		      <img data-lazy="http://placehold.it/350x300?text=6-350w"  data-srcset="http://placehold.it/650x300?text=6-650w 650w, http://placehold.it/960x300?text=6-960w 960w">
 		    </div> -->
         
-            <div class="container" style="background:url('../image/img/main/main_bg1.jpg') no-repeat center; height:640px;  background-size:100%; max-width:none;">
-                <div class="masthead-subheading">회사소개 문구1</div>
-                <div class="masthead-heading text-uppercase">상세 소개1</div>
+            <div class="container" style="background:url('../image/img/main/main_bg1.jpg') no-repeat center; height:640px;  background-size:100%; max-width:none;background-size: cover;">
+                <div class="masthead-subheading">For Number One!</div>
+                <div class="masthead-heading text-uppercase">최고의 품질과 서비스<br><br> 끊임없는 신기술 역량함양으로 고객만족 실현</div>
                 <a class="btn btn-primary btn-xl text-uppercase js-scroll-trigger" href="/braa/braa.do">문의하기</a>
             </div>
-            <div class="container" style="background:url('../image/img/main/main_bg2.jpg') no-repeat center; height:640px; background-size:100%; max-width:none;">
+            <div class="container" style="background:url('../image/img/main/main_bg2.jpg') no-repeat center; height:640px; background-size:100%; max-width:none;background-size: cover;">
                 <div class="masthead-subheading">회사소개 문구2</div>
                 <div class="masthead-heading text-uppercase">상세 소개2</div>
                 <a class="btn btn-primary btn-xl text-uppercase js-scroll-trigger" href="/braa/braa.do">문의하기</a>
             </div>
-            <div class="container" style="background:url('../image/img/main/main_bg3.jpg') no-repeat center; height:640px; background-size:100%; max-width:none;">
+            <div class="container" style="background:url('../image/img/main/main_bg3.jpg') no-repeat center; height:640px; background-size:100%; max-width:none;background-size: cover;">
                 <div class="masthead-subheading">회사소개 문구3</div>
                 <div class="masthead-heading text-uppercase">상세 소개3</div>
                 <a class="btn btn-primary btn-xl text-uppercase js-scroll-trigger" href="/braa/braa.do">문의하기</a>
             </div>
-            <div class="container" style="background:url('../image/img/main/main_bg1.jpg') no-repeat center; height:640px; background-size:100%; max-width:none;">
+            <div class="container" style="background:url('../image/img/main/main_bg1.jpg') no-repeat center; height:640px; background-size:100%; max-width:none;background-size: cover;">
                 <div class="masthead-subheading">회사소개 문구4</div>
                 <div class="masthead-heading text-uppercase">상세 소개4</div>
                 <a class="btn btn-primary btn-xl text-uppercase js-scroll-trigger" href="/braa/braa.do">문의하기</a>
             </div>
-            <div class="container" style="background:url('../image/img/main/main_bg2.jpg') no-repeat center; height:640px; background-size:100%; max-width:none;">
+            <div class="container" style="background:url('../image/img/main/main_bg2.jpg') no-repeat center; height:640px; background-size:100%; max-width:none;background-size: cover;">
                 <div class="masthead-subheading">회사소개 문구5</div>
                 <div class="masthead-heading text-uppercase">상세 소개5</div>
                 <a class="btn btn-primary btn-xl text-uppercase js-scroll-trigger" href="/braa/braa.do">문의하기</a>
             </div>
-            <div class="container" style="background:url('../image/img/main/main_bg3.jpg') no-repeat center; height:640px; background-size:100%; max-width:none;">
+            <div class="container" style="background:url('../image/img/main/main_bg3.jpg') no-repeat center; height:640px; background-size:100%; max-width:none;background-size: cover;">
                 <div class="masthead-subheading">회사소개 문구6</div>
                 <div class="masthead-heading text-uppercase">상세 소개6</div>
                 <a class="btn btn-primary btn-xl text-uppercase js-scroll-trigger" href="/braa/braa.do">문의하기</a>
@@ -163,33 +214,34 @@
         <section class="page-section" id="services">
             <div class="container">
                 <div class="text-center">
-                    <h2 class="section-heading text-uppercase">회사 소개</h2>
-                    <h3 class="section-subheading text-muted">(주)희망이앤지 회사 소개입니다.</h3>
+                    <h2 class="section-heading text-uppercase">(주)희망이앤지 소개</h2>
+                    <h3 class="section-subheading text-muted">자동제어 및 전기공사를 이끄는 기업 ㈜희망ENG는 일류기업으로 성장하기 위해 최고의 품질과 서비스를 제공하기 위해 최선을 다하고 있으며,<br>끊임없는 노력으로 신기술 역량함양으로  고객의 만족을 실현하기 위해 노력하고 있습니다.
+                    </h3>
                 </div>
                 <div class="row text-center">
                     <div class="col-md-4">
                         <span class="fa-stack fa-4x">
                             <i class="fas fa-circle fa-stack-2x text-primary"></i>
-                            <i class="fas fa-shopping-cart fa-stack-1x fa-inverse"></i>
+                            <i class="fas fa-user fa-stack-1x fa-inverse"></i>
                         </span>
                         <h4 class="my-3">정직함</h4>
-                        <p class="text-muted">저희 회사는 정직합니다.</p>
+                        <p class="text-muted">사람을 위한, 사람을 <br>향한 기술을 연구하고 개발합니다.</p>
                     </div>
                     <div class="col-md-4">
                         <span class="fa-stack fa-4x">
                             <i class="fas fa-circle fa-stack-2x text-primary"></i>
                             <i class="fas fa-laptop fa-stack-1x fa-inverse"></i>
                         </span>
-                        <h4 class="my-3">모범</h4>
-                        <p class="text-muted">타의 모범이 됩니다.</p>
+                        <h4 class="my-3">팀워크</h4>
+                        <p class="text-muted">개개인의 능력뿐만 아니라<br>팀워크 또한 최고를 자랑합니다.</p>
                     </div>
                     <div class="col-md-4">
                         <span class="fa-stack fa-4x">
                             <i class="fas fa-circle fa-stack-2x text-primary"></i>
-                            <i class="fas fa-lock fa-stack-1x fa-inverse"></i>
+                            <i class="fas fa-tools fa-stack-1x fa-inverse"></i>
                         </span>
                         <h4 class="my-3">기술력</h4>
-                        <p class="text-muted">세계안전협회가 인정한 기술력</p>
+                        <p class="text-muted">쏟아져 나오는 신기술들의 기술력 함양을 통한<br>고객 만족을 위해 노력하고 있습니다.</p>
                     </div>
                 </div>
             </div>
@@ -225,11 +277,10 @@
                     </div>
                     <div class="col-lg-4 col-sm-6 mb-4">
                         <div class="portfolio-item">
-                            <a class="portfolio-link" href="/glaa/uploadForm.do">
-                                <div class="portfolio-hover">
+                            <a id="gally01" class="portfolio-link" href="/glaa/glaa.do">
+                                <div  class="portfolio-hover">
                                     <div class="portfolio-hover-content"><i class="fas fa-plus fa-3x"></i></div>
                                 </div>
-                                <img class="img-fluid" src="/image/img/portfolio/02-thumbnail.jpg" alt="" />
                             </a>
                             <div class="portfolio-caption">
                                 <div class="portfolio-caption-heading">전기부품</div>
@@ -239,11 +290,10 @@
                     </div>
                     <div class="col-lg-4 col-sm-6 mb-4">
                         <div class="portfolio-item">
-                            <a class="portfolio-link" href="/glaa/uploadForm.do">
+                            <a id="gally02" class="portfolio-link" href="/glaa/glaa.do">
                                 <div class="portfolio-hover">
                                     <div class="portfolio-hover-content"><i class="fas fa-plus fa-3x"></i></div>
                                 </div>
-                                <img class="img-fluid" src="/image/img/portfolio/03-thumbnail.jpg" alt="" />
                             </a>
                             <div class="portfolio-caption">
                                 <div class="portfolio-caption-heading">관리시스템</div>
@@ -318,19 +368,19 @@
         </section>
         <!-- Clients-->
         <div class="py-5">
-            <div class="container">
+            <div class="container slick_icon" id="">
                 <div class="row">
                     <div class="col-md-3 col-sm-6 my-3">
-                        <a href="#!"><img class="img-fluid d-block mx-auto" src="/image/img/logos/envato.jpg" alt="" /></a>
+                        <a href="#!"><img class="img-fluid d-block mx-auto" src="/image/img/main/DSME.png" alt="" /></a>
                     </div>
                     <div class="col-md-3 col-sm-6 my-3">
-                        <a href="#!"><img class="img-fluid d-block mx-auto" src="/image/img/logos/designmodo.jpg" alt="" /></a>
+                        <a href="#!"><img class="img-fluid d-block mx-auto" src="/image/img/main/metanetDT.png" alt="" /></a>
                     </div>
                     <div class="col-md-3 col-sm-6 my-3">
-                        <a href="#!"><img class="img-fluid d-block mx-auto" src="/image/img/logos/themeforest.jpg" alt="" /></a>
+                        <a href="#!"><img class="img-fluid d-block mx-auto" src="/image/img/main/STM.png" alt="" /></a>
                     </div>
                     <div class="col-md-3 col-sm-6 my-3">
-                        <a href="#!"><img class="img-fluid d-block mx-auto" src="/image/img/logos/creative-market.jpg" alt="" /></a>
+                        <a href="#!"><img class="img-fluid d-block mx-auto" src="/image/img/main/KICS.png" alt="" /></a>
                     </div>
                 </div>
             </div>
@@ -340,9 +390,9 @@
             <div class="container">
                 <div class="text-center">
                     <h2 class="section-heading text-uppercase">문의하기</h2>
-                    <h3 class="section-subheading text-muted">궁금한 사항을 문의합니다.</h3>
+                    <h3 class="section text-muted">궁금하신 사항이나 문의사항 글을 올려주시면,<br>성심성의껏 답해 드리겠습니다.</h3>
                 </div>
-                    <div class="text-center">
+                    <div class="text-center" style="margin-top:15px;">
                         <div id="success"></div>
                         <button class="btn btn-primary btn-xl text-uppercase" id="sendMessageButton" type="submit" onclick="location.href='/braa/braa.do'">문의하기</button>
                     </div>
