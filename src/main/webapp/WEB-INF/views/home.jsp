@@ -214,7 +214,7 @@
         <section class="page-section" id="services">
             <div class="container">
                 <div class="text-center">
-                    <h2 class="section-heading text-uppercase">(주)희망이앤지 소개</h2>
+                    <h2 class="section-heading text-uppercase">(주)희망이엔지 소개</h2>
                     <h3 class="section-subheading text-muted">자동제어 및 전기공사를 이끄는 기업 ㈜희망ENG는 일류기업으로 성장하기 위해 최고의 품질과 서비스를 제공하기 위해 최선을 다하고 있으며,<br>끊임없는 노력으로 신기술 역량함양으로  고객의 만족을 실현하기 위해 노력하고 있습니다.
                     </h3>
                 </div>

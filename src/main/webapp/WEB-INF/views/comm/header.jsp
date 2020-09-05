@@ -8,7 +8,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>(주)희망이앤지</title>
+        <title>(주)희망이엔지</title>
         <link rel="icon" type="image/x-icon" href="/image/img/logos/HMeng_icon.png" />
         <!-- Font Awesome icons (free version)-->
         <script src="https://use.fontawesome.com/releases/v5.13.0/js/all.js" crossorigin="anonymous"></script>
@@ -41,7 +41,7 @@
         <!-- Navigation-->
         <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
             <div class="container">
-                <a class="navbar-brand js-scroll-trigger" href="/"><img src="/image/img/logos/HMeng_icon.png" style="width:60px;height:60px;filter:invert(1)" alt="" />희망이앤지</a>
+                <a class="navbar-brand js-scroll-trigger" href="/"><img src="/image/img/logos/HMeng_icon.png" style="width:60px;height:60px;filter:invert(1)" alt="" />희망이엔지</a>
                 <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
                     Menu
                     <i class="fas fa-bars ml-1"></i>

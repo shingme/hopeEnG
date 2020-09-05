@@ -17,7 +17,7 @@
         <footer class="footer py-4" id="footer-Section">
             <div class="container">
                 <div class="row align-items-center">
-                    <div class="col-lg-4 text-lg-left" style="max-width:25%;">Copyright © (주)희망이앤지<br> 2020 All rights reserved.</div>
+                    <div class="col-lg-4 text-lg-left" style="max-width:25%;">Copyright © (주)희망이엔지<br> 2020 All rights reserved.</div>
                     
                     <div class="col-lg-4 my-3 my-lg-0" style="padding-left: 60px;min-width:45%;max-width:45%;">
                     	ADRESS - 경남 거제시 문동동 1길 16-2<br>
