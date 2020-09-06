@@ -92,20 +92,20 @@
 
     
     
-    <select id="GlaaMapper.Glaa1000_update" parameterType="org.hope.web.domain.GlaaVO">
+    <update id="GlaaMapper.Glaa1000_update" parameterType="org.hope.web.domain.GlaaVO">
     	UPDATE GLTB
     		SET GL_NM = #{gllyNm}
     		,	GL_CTS = #{gllyCts}
     		, 	MODY_DATE = SYSDATE()
     		,	SHOWMAIN_YN = #{showMainYn}
     		WHERE GL_NO = #{gllyNo}
-    </select>
+    </update>
 
 
-	<delete id="GlaaMapper.Glaa1000_delete" parameterType="org.hope.web.domain.GlaaVO">
+	<delete id="GlaaMapper.Glaa1000_delete" parameterType="java.lang.String" >
 		DELETE
 		FROM GLTB
-		WHERE BO
+		WHERE GL_NO=#{gllyNo}
 		
 	</delete>
 </mapper>

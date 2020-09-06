@@ -65,5 +65,11 @@ public class GlaaDAO {
 	public int selectTotalCnt(Map<String, Object> map) throws DataAccessException{
 		return sqlSession.selectOne("GlaaMapper.Glaa1000_totalCnt", map);
 	}
+	
+	// 삭제
+	public int deleteGlaa(String gllyNo) throws DataAccessException{
+		System.out.println(gllyNo);
+		return sqlSession.delete("GlaaMapper.Glaa1000_delete", gllyNo);
+	}
 
 }

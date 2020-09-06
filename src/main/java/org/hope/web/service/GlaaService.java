@@ -19,5 +19,5 @@ public interface GlaaService {
 	public int updateGlaa(GlaaVO glaa);
 	public List<Map<String, String>> getImagePathGlaa(Map<String, String> map);
 	
-	
+	public int deleteGlaa(String gllyNo);
 }
