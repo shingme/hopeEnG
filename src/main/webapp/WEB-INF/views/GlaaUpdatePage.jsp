@@ -97,26 +97,30 @@
     
     // 갤러리 수정
     function updateGlaaDetail(){
-    	var gllyNm = $("#glly_nm").val();
+    	var obj = new Object();
+    	/* var gllyNm = $("#glly_nm").val();
     	var gllyCts = $("#glly_cts").val();
-    	var showMainYn = $("#showMainYn").val();
+    	var showMainYn = $("#showMainYn").val(); */
+    	obj.gllyNm = $("#glly_nm").val();
+    	obj.gllyCts = $("#glly_cts").val();
+    	obj.showMainYn = $("#showMainYn").val();
     	
-    	if(gllyNm == ""){
+    	if(obj.gllyNm == ""){
     		alert("제목을 입력해주세요.");
     		$("#glly_nm").focus();
     		return;
     	}
-    	if(gllyCts == ""){
+    	if(obj.gllyCts == ""){
     		alert("내용을 입력해주세요.");
     		$("#glly_cts").focus();
     		return;
     	}
-    	
+    	//var jsonData = JSON.stringify(obj);
     	var yn = confirm("게시물을 수정하시겠습니까?");
     	if(yn){
     		$.ajax({
     			url			: "/glaa/Glaa1000_updateGlaa",
-    			data		: $("#boardForm").serialize(),
+    			data		: $("#glaaVO").serialize(),//jsonData//
     			dataType	: "JSON",
     			cache		: false,
     			async 		: true,
@@ -151,7 +155,7 @@
     <div id="container">
         <div class="inner">    
             <h2>게시글 상세</h2>
-            <form id="boardForm" name="boardForm">        
+            <form id="glaaVO" name="glaaVO">        
                 <table width="100%" class="table01">
                     <colgroup>
                         <col width="15%">
@@ -169,22 +173,22 @@
 							</tr>
 							<tr>
 								<th>제목<span class="t_red">*</span></th>
-								<td><input id="glly_nm" name="glly_nm" value=""
+								<td><input id="glly_nm" name="gllyNm" value=""
 									class="tbox01" /></td>
 							</tr>
 							<tr>
 								<th>내용<span class="t_red">*</span></th>
-								<td colspan="3"><textarea id="glly_cts" name="glly_cts"
+								<td colspan="3"><textarea id="glly_cts" name="gllyCts"
 										cols="50" rows="5" class="textarea01"></textarea></td>
 							</tr>
 						</tbody>
 					</table>        
-                <input type="hidden" id="glly_no"        name="glly_no"    value="${gllyNo}"/> <!-- 게시글 번호 -->
+                <input type="hidden" id="glly_no"        name="gllyNo"    value="${gllyNo}"/> <!-- 게시글 번호 -->
                 <input type="hidden" id="search_type"    name="search_type"     value="S"/> <!-- 조회 타입 - 상세(S)/수정(U) -->
             </form>
             <div class="btn_right mt15">
                 <button type="button" class="btn black mr5" onclick="javascript:goGlaaList();">목록으로</button>
-                <button type="button" class="btn black" onclick="javascript:deleteBoard();">삭제하기</button>
+                <button type="button" class="btn black" onclick="javascript:updateGlaaDetail();">수정하기</button>
             </div>
         </div>
     </div>

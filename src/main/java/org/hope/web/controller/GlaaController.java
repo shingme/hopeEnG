@@ -111,6 +111,7 @@ public class GlaaController {
 	@RequestMapping(value="/Glaa1000_updateGlaa")
 	@ResponseBody
 	public int updateGlaa(HttpServletRequest request, HttpServletResponse response, GlaaVO glaa) {
+		System.out.println("이번엔 여기 : "+glaa.toString());
 		int result = glaaService.updateGlaa(glaa);
 		return result;
 	}

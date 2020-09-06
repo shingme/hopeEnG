@@ -55,7 +55,7 @@
 	   					//+"<td>"+ item.gllyNm +"</td>"
 	   					<%-- <%if(name != null){%> --%>
 	   					+"<td><a href='javascript:gllyDetail(\""+item.gllyNo+"\");'>"+item.gllyNm+"</a>"
-	   					<%-- <%}else{%>
+	   					<%-- <%}else{%> 
 	   					+"<td>"+ item.gllyNm +"</td>"
 	   					<%}%> --%>
 	   					//+"<td on click='javascript:gllyDetail("+item.gllyNo+");' style='cursor:Pointer'>"+item.gllyNm + "</td>"
