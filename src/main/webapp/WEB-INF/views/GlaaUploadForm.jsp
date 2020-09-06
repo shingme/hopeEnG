@@ -110,7 +110,7 @@ function insertGlaaCallback(obj){
                    		<tr>
                             <th>메인화면 표시 여부<span class="t_red">*</span></th>
                             <td>
-                            <select id="showMainYn" name="showMainYn">
+                            <select id="showMainYn" class="form-control-small" name="showMainYn">
 							<option value="Y">표시</option>
 							<option value="N" selected>미표시</option>
 							</select>
@@ -118,11 +118,11 @@ function insertGlaaCallback(obj){
                         </tr>
                         <tr>
                             <th>제목<span class="t_red">*</span></th>
-                            <td><input id="gllyNm" name="gllyNm" value="" class="tbox01"/></td>
+                            <td><input class="form-control" id="gllyNm" name="gllyNm" value="" class="tbox01"/></td>
                         </tr>
                         <tr>
                             <th>내용<span class="t_red">*</span></th>
-                            <td><textarea id="gllyCts" name="gllyCts" cols="30" rows="10" class="textarea01"></textarea></td>
+                            <td><textarea class="form-control" id="gllyCts" name="gllyCts" cols="30" rows="10" class="textarea01"></textarea></td>
                         </tr>
                         <tr>
                             <th scope="row">첨부파일</th>
@@ -132,11 +132,12 @@ function insertGlaaCallback(obj){
 					
                     </tbody>
                 </table>
+                <div class="" style="margin-top:20px;">
+	                <button type="button" class="" onclick="javascript:goGlaaList();">목록으로</button>
+	                <button type="button" class="" onclick="javascript:insertGlaa();">등록하기</button>
+	            </div>
             </form>
-            <div class="btn_right mt15">
-                <button type="button" class="btn black mr5" onclick="javascript:goGlaaList();">목록으로</button>
-                <button type="button" class="btn black" onclick="javascript:insertGlaa();">등록하기</button>
-            </div>
+            
         </div>
     </div>
 </div>
