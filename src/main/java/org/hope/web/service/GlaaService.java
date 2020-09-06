@@ -12,11 +12,11 @@ public interface GlaaService {
 
 
 	public List<GlaaFileVO> getGlaaFileInfo(GlaaVO glaaVO) throws Exception;
-	public List<GlaaVO> selectGlaa(Map<String, String> map);
+	public Map<String, Object> selectGlaa(Map<String, Object> map);
 	
 	public GlaaVO selectDetailGlaa(String bordNum);
 	
-	public int updateGlaa(Model model);
+	public int updateGlaa(GlaaVO glaa);
 	public List<Map<String, String>> getImagePathGlaa(Map<String, String> map);
 	
 	

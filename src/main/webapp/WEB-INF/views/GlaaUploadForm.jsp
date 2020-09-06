@@ -20,12 +20,12 @@ $(document).ready(function(){
     
 });
     
-/** 게시판 - 목록 페이지 이동 */
+/** 갤러리 - 목록 페이지 이동 */
 function goGlaaList(){                
     location.href = "/glaa/glaa.do";
 }
 
-/** 게시판 - 작성  */
+/** 갤러리 - 작성  */
 function insertGlaa(){
 
 	var formData = new FormData($('#gllyForm')[0])
@@ -57,20 +57,8 @@ function insertGlaa(){
     var yn = confirm("게시글을 등록하시겠습니까?");        
     if(yn){
     	
-     /*    var filesChk = $("input[name='files[0]']").val();
-        if(filesChk == ""){
-        	
-            $("input[name='files[0]']").remove();
-            
-        } */
-        
-       
-        
-        //$("#gllyForm").ajaxForm({
         $.ajax({
             url   : "/glaa/Glaa1000_insert.do",
-            //data : $("#gllyForm").serialize(),
-			//dataType : "JSON",
 			data : formData,
 			contentType : false,
 			processData : false,
@@ -105,117 +93,7 @@ function insertGlaaCallback(obj){
     }
 }
 
-/*  $(document).ready(function(){
-
-	$("#glaaList").click(function(){
-		window.location.href = "glaa.do";
-	})
-	
-
-})  */
-
-
-/* function submitVal(val){
-	var action = "";
-	//alert("hello");
-	if(val == "insert"){
-		var gllyWriteForm = document.gllyWriteForm;
-		var alertFlag = true;
-		var guideTxt = ""
-		var obj = "";
-		
-		if($("#gllyNm").val() == undefined || $("#gllyNm").val() == ""){
-			guideTxt = "제목을 입력해주세요.";
-			obj = $("#gllyNm");
-		}else if($("#gllyCts").val() == undefined || $("#gllyCts").val() == ""){
-			guideTxt = "내용을 입력해주세요.";
-			obj = $("#gllyCts");
-		}else{
-			alertFlag = false;
-		}
-		
-		if(alertFlag){
-			alert(guideTxt);
-			obj.focus();
-			return;
-		}
-		
-		var yn = confirm("게시글을 등록하시겠습니까?");
-		if(yn){
-			$.ajax({
-				url : "/glaa/Glaa1000_insert.do",
-				data : $("#gllyWriteForm").serialize(),
-				dataType : "JSON",
-				cache : false,
-				async : true,
-				type : "POST",
-				success : function(obj){
-					//insertBoardCallback(obj);
-				},
-				error : function(xhr, status, error){}
-			})
-		}
-		action = "/glaa/Glaa1000_insert.do";
-	}else{ //update
-		$("#gllyNo").val(num);
-		action = "/glaa/Glaa1000_update.do"
-	}
-	$("gllyWriteForm").attr("action", action).submit();
-} */
 </script>
-
-<%-- 
-<form name="gllyWriteForm" id="gllyWriteForm" method="POST">
-<input type="hidden" name="gllyNo" id="gllyNo" value=0>
-
-
-<div>
-	<label for="name">메인화면 표시 여부</label>
-	<p/>
-	<select id="gllyShowMain" name="gllyShowMain">
-		<option value="Y">표시</option>
-		<option value="N" selected>미표시</option>
-	</select>
-</div>
-<div>
-	<label for="title">제목</label>
-	<p/>
-	<input type="text" id="gllyNm" name="gllyNm" value="${glaa.gllyNm}">
-</div>
-<div>
-	<label for="content">내용</label>
-	<p/>
-	<textarea id="gllyCts" name="gllyCts">${glaa.gllyCts}</textarea>
-</div>
-
-<button type="reset" id="reset">초기화</button>
-<button type="button" id="write" onclick="submitVal('insert')">등록</button>
-<button type="button" id="glaaUpdate" onclick="submitVal('glaaUpdate')">수정</button>
-</form>
-<button type="button" id="glaaList">목록</button>
-
-<form method="post" action="/glaa/uploadFile" enctype="multipart/form-data">
-<table style="padding-left: 200px;">
-	<tr>
-		<td colspan="2"><c:out value="${uploadMessage}"/></td>
-	<tr>
-	<tr>
-		<td><b>Select the file to be uploaded : &nbsp;</b></td>
-		<td><input type="file" name="myFileField" /></td>
-	</tr>
-	<tr>
-		<td colspan="2" align="center"><input type="button"
-			value="Upload file" onclick="document.forms[0].submit();" /></td>
-	</tr>
-</table>
-</form> --%>
-
-
-
-
-
-
-
 
 <div id="wrap">
     <div id="container">
@@ -232,7 +110,7 @@ function insertGlaaCallback(obj){
                    		<tr>
                             <th>메인화면 표시 여부<span class="t_red">*</span></th>
                             <td>
-                            <select id="showMainYn" name="showMainYn" class="form-control-small" style="width:200px;">
+                            <select id="showMainYn" name="showMainYn">
 							<option value="Y">표시</option>
 							<option value="N" selected>미표시</option>
 							</select>
@@ -240,11 +118,11 @@ function insertGlaaCallback(obj){
                         </tr>
                         <tr>
                             <th>제목<span class="t_red">*</span></th>
-                            <td><input id="gllyNm" name="gllyNm" value="" class="form-control"/></td>
+                            <td><input id="gllyNm" name="gllyNm" value="" class="tbox01"/></td>
                         </tr>
                         <tr>
                             <th>내용<span class="t_red">*</span></th>
-                            <td><textarea id="gllyCts" name="gllyCts" cols="30" rows="10" class="form-control"></textarea></td>
+                            <td><textarea id="gllyCts" name="gllyCts" cols="30" rows="10" class="textarea01"></textarea></td>
                         </tr>
                         <tr>
                             <th scope="row">첨부파일</th>
@@ -254,15 +132,13 @@ function insertGlaaCallback(obj){
 					
                     </tbody>
                 </table>
-	            <div class="btn_right mt15">
-		            <button type="button" onclick="javascript:goGlaaList();">목록으로</button>
-		            <button type="button" onclick="javascript:insertGlaa();">등록하기</button>
-	            </div>
             </form>
-            <div class="clear-space"></div>
+            <div class="btn_right mt15">
+                <button type="button" class="btn black mr5" onclick="javascript:goGlaaList();">목록으로</button>
+                <button type="button" class="btn black" onclick="javascript:insertGlaa();">등록하기</button>
+            </div>
         </div>
     </div>
 </div>
 </body>
-<%@ include file="/WEB-INF/views/comm/footer.jsp" %>
 </html>

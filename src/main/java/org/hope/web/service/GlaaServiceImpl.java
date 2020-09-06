@@ -2,6 +2,7 @@ package org.hope.web.service;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -10,6 +11,7 @@ import org.hope.web.controller.GlaaController;
 import org.hope.web.dao.GlaaDAO;
 import org.hope.web.domain.GlaaFileVO;
 import org.hope.web.domain.GlaaVO;
+import org.hope.web.domain.PagingVO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,10 +29,10 @@ public class GlaaServiceImpl implements GlaaService{
 	
 	@Override
 	public void insertGlaa(GlaaVO glaaVO) throws Exception {
-		// TODO Auto-generated method stub
+
 		
 		List<GlaaFileVO> glaaFileList = getGlaaFileInfo(glaaVO);
-		glaaVO.setFirstFilePath(glaaFileList.get(0).getFilePath());
+		glaaVO.setFirstFilePath(glaaFileList.get(0).getFileNameKey());
 		int gllyNo = glaaDAO.insert(glaaVO);
 		System.out.println("갤러리번호 : "+gllyNo);
 		for(GlaaFileVO glaaFileVO : glaaFileList) {
@@ -41,28 +43,48 @@ public class GlaaServiceImpl implements GlaaService{
 	}
 
 	@Override
-	public List<GlaaVO> selectGlaa(Map<String, String> map) {
-		// TODO Auto-generated method stub
-		return glaaDAO.select(map);
+	public Map<String, Object> selectGlaa(Map<String, Object> map) {
+		int cnt = glaaDAO.selectTotalCnt(map);
+		
+		Map<String, Object> resultMap = new HashMap<String, Object>();
+		//페이징 처리
+		PagingVO paging = new PagingVO(cnt, Integer.parseInt((String)map.get("pageNum")), Integer.parseInt((String)map.get("cntPerPage")));
+		map.put("start", paging.getStart()-1);
+		
+		//페이징 정보도 함께 전달
+		resultMap.put("paging", paging);
+		resultMap.put("glaaList", glaaDAO.select(map));
+		return resultMap;
 	}
+
+	/*
+	 * @Override public List<GlaaVO> selectGlaa(Map<String, Object> map) { int cnt =
+	 * glaaDAO.selectTotalCnt(map);
+	 * 
+	 * //페이징 처리 PagingVO paging = new PagingVO(cnt,
+	 * Integer.parseInt((String)map.get("pageNum")),
+	 * Integer.parseInt((String)map.get("cntPerPage")));
+	 * 
+	 * return glaaDAO.select(map); }
+	 */
 
 	@Override
 	public GlaaVO selectDetailGlaa(String gllyNo) {
-		// TODO Auto-generated method stub
+
 		return glaaDAO.selectDetail(gllyNo);
 	}
 
 	
 	@Override
-	public int updateGlaa(Model model) {
-		// TODO Auto-generated method stub
-		
-		
-		
-		return glaaDAO.updateGlaa(model);
+	public int updateGlaa(GlaaVO glaa) {
+
+		return glaaDAO.updateGlaa(glaa);
 		
 	}
 	
+	
+	
+	@Override
 	public List<GlaaFileVO> getGlaaFileInfo(GlaaVO glaaVO) throws Exception{
 		List<MultipartFile> files = glaaVO.getFiles();
 		List<GlaaFileVO> glaaFileList = new ArrayList<GlaaFileVO>();
@@ -71,7 +93,9 @@ public class GlaaServiceImpl implements GlaaService{
 		int gllyNo = glaaVO.getgllyNo();
 		String fileName = null;
 		String fileNameKey = null;
-		String filePath = "C:\\board\\file";
+		String rootPath = glaaVO.getFirstFilePath();
+		String filePath = rootPath+"resources/image/gallery";
+		
 		String fileSize = null;
 		String fileExt = null;
 		if(files == null ) {
@@ -92,12 +116,7 @@ public class GlaaServiceImpl implements GlaaService{
 				fileNameKey = getRandomString() + fileExt;
 				fileSize = String.valueOf(multipartFile.getSize());
 				
-				System.out.println("파일명------");
-				System.out.println(fileName);
-				System.out.println(fileExt);
-				System.out.println(fileNameKey);
-				System.out.println(fileSize);
-				System.out.println(filePath);
+				
 				// Save File
 				file = new File(filePath + "/" + fileNameKey);
 				multipartFile.transferTo(file);
@@ -105,7 +124,7 @@ public class GlaaServiceImpl implements GlaaService{
 				glaaFileVO = new GlaaFileVO();
 				glaaFileVO.setGllyNo(gllyNo);
 				glaaFileVO.setFileNameKey(fileNameKey);
-				glaaFileVO.setFilePath(filePath + "\\" + fileNameKey);
+				glaaFileVO.setFilePath(filePath + "/" + fileNameKey);
 				glaaFileVO.setFileSize(fileSize);
 				glaaFileVO.setFileNo(i);i++;
 				glaaFileList.add(glaaFileVO);
@@ -121,11 +140,6 @@ public class GlaaServiceImpl implements GlaaService{
  
         return UUID.randomUUID().toString().replaceAll("-", "");
     }
-
-	/*
-	 * @Override public void insertBoardFile(GlaaFileVO glaaFileVO) {
-	 * glaaDAO.insertGlaaFile(glaaFileVO); }
-	 */
     
     public List<Map<String, String>> getImagePathGlaa(Map<String, String> map){
     	return glaaDAO.selectImagePath(map);

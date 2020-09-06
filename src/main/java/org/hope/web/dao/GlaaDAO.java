@@ -28,7 +28,6 @@ public class GlaaDAO {
 	}
 	
 	public int insert(GlaaVO glaaVO) throws DataAccessException{ 
-		// TODO Auto-generated method stub
 
 		sqlSession.insert("GlaaMapper.Glaa1000_insert", glaaVO);
 		
@@ -40,22 +39,16 @@ public class GlaaDAO {
 		
 	}
 	
-	public List<GlaaVO> select(Map<String, String> map) throws DataAccessException{ 
-		// TODO Auto-generated method stub
-		//System.out.println(map.toString());
+	public List<GlaaVO> select(Map<String, Object> map) throws DataAccessException{ 
+
 		List<GlaaVO> tmp = sqlSession.selectList("GlaaMapper.Glaa1000_select", map);
-		System.out.println("MAP 테스트!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-		System.out.println(tmp.toString()); 
-		System.out.println("Collection test");
-		
-		//System.out.println(tmp.get(0).getGlaaFileVO().toString());
+
 		return tmp;
 	}
 	
 	public GlaaVO selectDetail(String gllyNo) throws DataAccessException{ 
-		// TODO Auto-generated method stub
+
 		GlaaVO tmp = sqlSession.selectOne("GlaaMapper.Glaa1000_selectDetail", gllyNo);
-		System.out.println(tmp.toString());
 		return tmp;
 	}
 
@@ -63,9 +56,14 @@ public class GlaaDAO {
 		return sqlSession.selectList("GlaaMapper.Glaa1000_selectImagePath",map);
 	}
 	
-	public int updateGlaa(Model model) throws DataAccessException{
+	public int updateGlaa(GlaaVO glaa) throws DataAccessException{
 		
-		return sqlSession.update("GlaaMapper.Glaa1000_update", model);
+		return sqlSession.update("GlaaMapper.Glaa1000_update", glaa);
+	}
+	
+	// 게시물 수 
+	public int selectTotalCnt(Map<String, Object> map) throws DataAccessException{
+		return sqlSession.selectOne("GlaaMapper.Glaa1000_totalCnt", map);
 	}
 
 }

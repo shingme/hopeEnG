@@ -1,3 +1,4 @@
+
 package org.hope.web.controller;
 
 import java.io.File;
@@ -36,71 +37,55 @@ public class GlaaController {
 	@Autowired
 	GlaaService glaaService;
 
-	//문의 게시판 목록 이동 
+	//갤러리 리스트 페이지 이동
 	@RequestMapping(value = "/glaa.do", method = RequestMethod.GET)
 	public String home(Locale locale, Model model) {
 		return "GlaaList";
 	} 
-			
+	
+	//갤러리 작성 페이지 이동
 	@RequestMapping(value="/uploadForm", method=RequestMethod.GET) 
 	public String showUploadForm() { 
 		return "GlaaUploadForm"; 
 	}
 
-	//온라인 문의글 상세 조회 
+	//갤러리 상세 페이지 이동
 	@RequestMapping("/Glaa1000_moveDetailPage.do")
-	//@ResponseBody 
 	public String glaaMoveDetailpage(@RequestParam String gllyNo, Model model) throws Exception{
-	
-		/*
-		 * model.addAttribute("gllyNo", gllyNo); 
-		 * System.out.println("gllyNo = "+gllyNo);
-		 */
+
 		return "GlaaPage";
 	}
 	
-	/** 게시판 - 상세 조회  */
-    @RequestMapping(value = "/Glaa1000_getGllyDetail")
+	// 갤러리 상세 조회
+    @RequestMapping(value = "/Glaa1000_getGlaaDetail")
     @ResponseBody
     public GlaaVO getGllyDetail(HttpServletRequest request, HttpServletResponse response, String gllyNo) throws Exception {
  
     	MDC.put("TRANSACTION_ID", gllyNo);
-
-        GlaaVO glaa = glaaService.selectDetailGlaa(gllyNo);
-        
+        GlaaVO glaa = glaaService.selectDetailGlaa(gllyNo);    
         MDC.remove("TRANSACTION_ID");
         
         return glaa;
     }
 	
-	  // 온라인 문의글 목록 조회
-	  
+	// 갤러리 목록 조회
 	@RequestMapping("/Glaa1000_select.do")
 	@ResponseBody 
-	public Map<String, List<GlaaVO>> glaaSelect(@RequestParam HashMap<String, String> paramMap) {
-	
-	  
-	Map<String, List<GlaaVO>> map = new HashMap<String, List<GlaaVO>>();
-	  
-	List<GlaaVO> glaaList = glaaService.selectGlaa(paramMap);
-	/*
-	 * System.out.println("첫번째파일경로");
-	 * System.out.println(glaaList.get(0).getFirstFilePath());
-	 */
-	
-	map.put("glaaList",glaaList); 
+	public Map<String, Object> glaaSelect(@RequestParam HashMap<String, Object> paramMap) {
+
+	Map<String, Object> map = glaaService.selectGlaa(paramMap);
 	  
 	return map; 
 	}
-	 
-
 
 	// 갤러리 게시물 작성
 	@RequestMapping(value = "/Glaa1000_insert.do", method = RequestMethod.POST)
 	@ResponseBody 
-	public String glaaInsert(@ModelAttribute GlaaVO glaaVO, Model model) throws Exception{
+	public String glaaInsert(@ModelAttribute GlaaVO glaaVO, Model model, HttpServletRequest request) throws Exception{
 		
 		try {
+			String root = request.getSession().getServletContext().getRealPath("/");
+			glaaVO.setFirstFilePath(root);
 			glaaService.insertGlaa(glaaVO);
 			return "SUCCESS";
 		} catch (Exception e) {
@@ -109,22 +94,30 @@ public class GlaaController {
 		
 	}
 	
-	@RequestMapping(value = "/boardUpdate")
-	public String boardUpdate(HttpServletRequest request, HttpServletResponse response) throws Exception {
+	// 갤러리 수정화면 이동
+	@RequestMapping(value = "/Glaa1000_moveUpdateGlaaPage")
+	public String glaaUpdate(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
-		return "board/boardUpdate";
+		return "GlaaUpdatePage";
 	}
-	 
 
-    /** 게시판 - 수정 */
-	/*
-	 * @RequestMapping( value = "/Glaa1000_updateGlly")
-	 * 
-	 * @ResponseBody public int updateBoard(HttpServletRequest request,
-	 * HttpServletResponse response, Model model) throws Exception{
-	 * 
-	 * GlaaVO glaa = glaaService.updateGlaa(model);
-	 * 
-	 * return glaa; }
-	 */
+	// 갤러리 수정
+	@RequestMapping(value="/Glaa1000_updateGlaa", method = RequestMethod.POST)
+	@ResponseBody
+	public String updateGlaa(HttpServletRequest request, HttpServletResponse response, GlaaVO glaa) throws Exception{
+		
+		try {
+			glaaService.updateGlaa(glaa);
+			return "SUCCESS";
+		} catch (Exception e) {
+			return "FALSE";
+		}
+	}
+	// 프로젝트 루트 찾기
+	@RequestMapping(value="/Glaa1000_getRootPath")
+	public String getRootPath(HttpServletRequest request) {
+		String root = request.getSession().getServletContext().getRealPath("/");
+		return root;
+	}
 }
+
