@@ -62,9 +62,7 @@ public class GlaaController {
     public GlaaVO getGllyDetail(HttpServletRequest request, HttpServletResponse response, String gllyNo) throws Exception {
  
     	MDC.put("TRANSACTION_ID", gllyNo);
-
-        GlaaVO glaa = glaaService.selectDetailGlaa(gllyNo);
-        
+        GlaaVO glaa = glaaService.selectDetailGlaa(gllyNo);    
         MDC.remove("TRANSACTION_ID");
         
         return glaa;
@@ -73,16 +71,12 @@ public class GlaaController {
 	// 갤러리 목록 조회
 	@RequestMapping("/Glaa1000_select.do")
 	@ResponseBody 
-	public Map<String, List<GlaaVO>> glaaSelect(@RequestParam HashMap<String, String> paramMap) {
-	Map<String, List<GlaaVO>> map = new HashMap<String, List<GlaaVO>>(); 
-	List<GlaaVO> glaaList = glaaService.selectGlaa(paramMap);
-	
-	map.put("glaaList",glaaList); 
+	public Map<String, Object> glaaSelect(@RequestParam HashMap<String, Object> paramMap) {
+
+	Map<String, Object> map = glaaService.selectGlaa(paramMap);
 	  
 	return map; 
 	}
-	 
-
 
 	// 갤러리 게시물 작성
 	@RequestMapping(value = "/Glaa1000_insert.do", method = RequestMethod.POST)
@@ -108,12 +102,16 @@ public class GlaaController {
 	}
 
 	// 갤러리 수정
-	@RequestMapping(value="/Glaa1000_updateGlaa")
+	@RequestMapping(value="/Glaa1000_updateGlaa", method = RequestMethod.POST)
 	@ResponseBody
-	public int updateGlaa(HttpServletRequest request, HttpServletResponse response, GlaaVO glaa) {
-		System.out.println("이번엔 여기 : "+glaa.toString());
-		int result = glaaService.updateGlaa(glaa);
-		return result;
+	public String updateGlaa(HttpServletRequest request, HttpServletResponse response, GlaaVO glaa) throws Exception{
+		
+		try {
+			glaaService.updateGlaa(glaa);
+			return "SUCCESS";
+		} catch (Exception e) {
+			return "FALSE";
+		}
 	}
 	// 프로젝트 루트 찾기
 	@RequestMapping(value="/Glaa1000_getRootPath")

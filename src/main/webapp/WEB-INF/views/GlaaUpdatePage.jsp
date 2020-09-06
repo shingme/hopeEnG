@@ -63,22 +63,6 @@
         var str = "";
         
         if(obj != null){                                
-/*             str += "<tr>";
-            str += "<th>제목</th>";
-            str= + "<td>"+ obj.gllyNm +"</td>";
-            str= + "</tr>";        
-            str += "<tr>";
-            str += "<th>작성일시</th>";
-            str += "<td>"+ obj.regiDate +"</td>";
-            str += "</tr>";
-            str += "<tr>";
-            str += "<th>이미지</th>";
-            str += "<td>"+ "<img src='/glly/"+obj.firstFilePath+"' width=\"600\"/>" +"</td>";
-            str += "</tr>";
-            str += "<tr>";
-            str += "<th>내용</th>";
-            str += "<td colspan='3'>"+ obj.gllyCts +"</td>";
-            str += "</tr>"; */
             str += "<tr>";
             str += "<th>이미지</th>";
             str += "<td>"+ "<img src='/glly/"+obj.firstFilePath+"' width=\"600\"/>" +"</td>";
@@ -98,9 +82,6 @@
     // 갤러리 수정
     function updateGlaaDetail(){
     	var obj = new Object();
-    	/* var gllyNm = $("#glly_nm").val();
-    	var gllyCts = $("#glly_cts").val();
-    	var showMainYn = $("#showMainYn").val(); */
     	obj.gllyNm = $("#glly_nm").val();
     	obj.gllyCts = $("#glly_cts").val();
     	obj.showMainYn = $("#showMainYn").val();
@@ -127,19 +108,20 @@
     			type		: "POST",
     			success		: function(obj){
     				updateGlaaCallback(obj);
+    				
     			},
     			error		: function(xhr, status, error){}
     		});
     	}
     }
     // 수정 콜백함수
-    function updateGlaaCallback(boj){
+    function updateGlaaCallback(obj){
     	if(obj != null){
-    		var result = obj.result;
     		
-    		if(result == "SUCCESS"){
+    		
+    		if(obj == "SUCCESS"){
     			alert("게시글 수정을 성공하였습니다.");
-    			goGlaaList();
+    			location.href ="/glaa/glaa.do";
     		}else{
     			alert("게시글 수정을 실패하였습니다.");
     			return;

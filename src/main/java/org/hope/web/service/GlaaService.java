@@ -12,7 +12,7 @@ public interface GlaaService {
 
 
 	public List<GlaaFileVO> getGlaaFileInfo(GlaaVO glaaVO) throws Exception;
-	public List<GlaaVO> selectGlaa(Map<String, String> map);
+	public Map<String, Object> selectGlaa(Map<String, Object> map);
 	
 	public GlaaVO selectDetailGlaa(String bordNum);
 	
