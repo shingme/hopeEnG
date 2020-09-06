@@ -15,12 +15,17 @@
 	<%
 		String name;
 		name = (String)session.getAttribute("name");
-		//System.out.println("THIS IS NAME ="+name);
 	%>
 <script>
+	var pageNum = 1;
+	var cntPerPage = 5;
+	var searchArr = new Object();
+	
 	$(document).ready(function(){ //메인에서 클릭해서 들어오면 서버에서 무조건 5개 가지고 옴
+		searchArr["pageNum"] = pageNum;
+		searchArr["cntPerPage"] = cntPerPage;
 		
-		ajaxComm("/glaa/Glaa1000_select.do","",glaaSelectCallback);
+		ajaxComm("/glaa/Glaa1000_select.do",searchArr,glaaSelectCallback);
 		
 		$("#searchBtn").click(function(){
 			var url = "/glaa/Glaa1000_select.do";
@@ -30,20 +35,23 @@
 			ajaxComm(url, searchArr, glaaSelectCallback);			
 		})
 		$("#write").click(function(){
-			//window.location.href = "<c:url value='/glaa/Glaa1000_write.do'/>";
 			window.location.href = "/glaa/uploadForm.do";
 		})
 		
 	})
+
 	function gllyDetail(gllyNo){
-		
-		//alert(gllyNo);
+
 		location.href="/glaa/Glaa1000_moveDetailPage.do?gllyNo="+gllyNo;
 	}
 
 	function glaaSelectCallback(result){
+		$("#totalCnt").empty();
 		$("#glaaTable").empty();
-		var glaaAppend = "<tr><th>번호</th><th>제목</th><th>날짜</th><th>공개여부</th><th>사진</th></tr>";
+		
+		$("#totalCnt").append("총"+result.paging.total+"게시글");
+		
+		var glaaAppend = "<tr><th>번호</th><th>제목</th><th>날짜</th><th>사진</th></tr>";
 		var stus = "";
 		var click = "";
 		
@@ -60,20 +68,44 @@
 	   					<%}%> --%>
 	   					//+"<td on click='javascript:gllyDetail("+item.gllyNo+");' style='cursor:Pointer'>"+item.gllyNm + "</td>"
 	   					+"<td>"+ item.regiDate +"</td>"
-	   					+"<td>"+ item.showMainYn +"</td>"
-	   					+"<td>"+ "<img src=\"<spring:url value='/glly/"+item.firstFilePath+"'/>\" width=\"200\"/>" +"</td>"
+	   					//+"<td>"+ item.showMainYn +"</td>"
+	   					+"<td>"+ "<img src=\"<spring:url value='/glly/"+item.firstFilePath+"'/>\" width=\"200\" />" +"</td>"
 	   					+ "</tr>"
 
 		});
 		
 		$("#glaaTable").append(glaaAppend);
+		
+		//페이징 처리
+		var paging ="";
+		$("#paging").empty();
+		
+		$("#paging").append("<ul>");
+		if(result.paging.startPage > 1){
+			$("#paging > ul").prepend("<li><a class='move prev' href='javascript:movePage("+((result.paging.startPage-1)*result.paging.cntPerPage)+")'>이전</a></li>");
+			$("#paging > ul").prepend("<li><a class='move first' href='javascript:movePage(1)'>처음</a></li>");
+		}
+		for(var i=((result.paging.startPage-1)*result.paging.cntPerPage)+1; i<=result.paging.endPage; i++){
+			paging += "<li><a href='javascript:movePage("+i+")'>"+i+"</a></li>";
+			pageNum = i;
+		}
+		$("#paging ul").append(paging);
+		if(result.paging.endPage < result.paging.lastPage){
+			$("#paging > ul").append("<li><a class='move next' href='javascript:movePage("+(result.paging.endPage+1)+")'>다음</a></li>");
+			$("#paging > ul").append("<li><a class='move end' href='javascript:movePage("+(result.paging.lastPage)+")'>끝</a></li>");
+		}
+		$("#paging").append("</ul>");
+		
 	}
+	function movePage(num){
+		searchArr["pageNum"] = num;
+		searchArr["cntPerPage"] = cntPerPage;
+		
+		ajaxComm("/glaa/Glaa1000_select.do",searchArr,glaaSelectCallback);
+	}
+
 	
 	function bordWrite(bordNum, bordRelease){		
-		//비밀번호 입력
-		/* if(bordRelease == "N"){ //비공개
-			window.open("${pageContext.request.contextPath}/confirm.jsp","","scrollbars=no,status=no,resizable=no,width=300,height=150");
-		} */
 		window.location.href = "Glaa1000_detailSelect.do?bordNum="+bordNum;
 	}
 	
@@ -114,6 +146,10 @@
 		<table class="table" id="glaaTable" width="500" cellpadding="7" cellspacing="0" border="1">
 		</table>
 	</div>
+	<div id="paging" class="paging">
+
+	</div>
+	
 	<div>
 		<%if(name != null){ %>
 		<button id="write" style="float:right;">작성하기</button>

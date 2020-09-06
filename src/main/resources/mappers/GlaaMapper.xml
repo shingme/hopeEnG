@@ -22,7 +22,9 @@
 		<result property="filePath" column="FILE_PATH"></result>
 	</resultMap>
 	<select id="GlaaMapper.Glaa1000_select" resultMap="glaaSelectListResult">
-		SELECT GL_NO
+		select *
+		from
+		(SELECT GL_NO
 			  ,GL_NM
               ,GL_CTS
               ,SHOWMAIN_YN
@@ -34,7 +36,9 @@
 		<if test="gllyNm!=null and !gllyNm.equals('')">
 		AND GL_NM LIKE CONCAT('%',#{gllyNm},'%')
 	    </if>
-	    <!-- AND GL_NO=#{gllyNo} -->
+	    ORDER BY REGI_DATE DESC
+	    ) T1
+	    LIMIT #{start},5
 	</select>
 	
 	<select id="GlaaMapper.Glaa1000_selectFileList" resultMap="glaaFileListResult" >
@@ -75,14 +79,15 @@
 	
 	
 	<select id="GlaaMapper.Glaa1000_totalCnt" parameterType="java.util.HashMap" resultType="java.lang.Integer">
-		SELECT COUNT(*) AS cnt
-		FROM GLTB
-		WHERE 1=1
-			<if test="gllyNm!=null and !gllyNm.equals('')">
-			AND GL_NM LIKE CONCAT('%',#{gllyNo},'%')
-			</if>
+	SELECT COUNT(*) AS cnt
+	FROM GLTB
+	WHERE 1=1
+	<if test="gllyNm!=null and !gllyNm.equals('')">
+		AND GL_NM LIKE CONCAT('%',#{gllyNo},'%')
+	</if>
 	
 	</select>
+	
 	
 
     
@@ -96,4 +101,11 @@
     		WHERE GL_NO = #{gllyNo}
     </select>
 
+
+	<delete id="GlaaMapper.Glaa1000_delete" parameterType="org.hope.web.domain.GlaaVO">
+		DELETE
+		FROM GLTB
+		WHERE BO
+		
+	</delete>
 </mapper>

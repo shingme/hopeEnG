@@ -2,6 +2,7 @@ package org.hope.web.service;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -10,6 +11,7 @@ import org.hope.web.controller.GlaaController;
 import org.hope.web.dao.GlaaDAO;
 import org.hope.web.domain.GlaaFileVO;
 import org.hope.web.domain.GlaaVO;
+import org.hope.web.domain.PagingVO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,10 +43,30 @@ public class GlaaServiceImpl implements GlaaService{
 	}
 
 	@Override
-	public List<GlaaVO> selectGlaa(Map<String, String> map) {
+	public Map<String, Object> selectGlaa(Map<String, Object> map) {
+		int cnt = glaaDAO.selectTotalCnt(map);
 		
-		return glaaDAO.select(map);
+		Map<String, Object> resultMap = new HashMap<String, Object>();
+		//페이징 처리
+		PagingVO paging = new PagingVO(cnt, Integer.parseInt((String)map.get("pageNum")), Integer.parseInt((String)map.get("cntPerPage")));
+		map.put("start", paging.getStart()-1);
+		
+		//페이징 정보도 함께 전달
+		resultMap.put("paging", paging);
+		resultMap.put("glaaList", glaaDAO.select(map));
+		return resultMap;
 	}
+
+	/*
+	 * @Override public List<GlaaVO> selectGlaa(Map<String, Object> map) { int cnt =
+	 * glaaDAO.selectTotalCnt(map);
+	 * 
+	 * //페이징 처리 PagingVO paging = new PagingVO(cnt,
+	 * Integer.parseInt((String)map.get("pageNum")),
+	 * Integer.parseInt((String)map.get("cntPerPage")));
+	 * 
+	 * return glaaDAO.select(map); }
+	 */
 
 	@Override
 	public GlaaVO selectDetailGlaa(String gllyNo) {

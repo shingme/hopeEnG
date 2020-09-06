@@ -70,8 +70,8 @@
         if(obj != null){                                
             str += "<tr>";
             str += "<th>제목</th>";
-            str= + "<td>"+ obj.gllyNm +"</td>";
-            str= + "</tr>";        
+            str += "<td>"+ obj.gllyNm +"</td>";
+            str += "</tr>";        
             str += "<tr>";
             str += "<th>작성일시</th>";
             str += "<td>"+ obj.regiDate +"</td>";

@@ -39,7 +39,7 @@ public class GlaaDAO {
 		
 	}
 	
-	public List<GlaaVO> select(Map<String, String> map) throws DataAccessException{ 
+	public List<GlaaVO> select(Map<String, Object> map) throws DataAccessException{ 
 
 		List<GlaaVO> tmp = sqlSession.selectList("GlaaMapper.Glaa1000_select", map);
 
