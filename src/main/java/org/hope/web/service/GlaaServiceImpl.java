@@ -42,7 +42,7 @@ public class GlaaServiceImpl implements GlaaService{
 
 	@Override
 	public List<GlaaVO> selectGlaa(Map<String, String> map) {
-
+		
 		return glaaDAO.select(map);
 	}
 
@@ -54,9 +54,9 @@ public class GlaaServiceImpl implements GlaaService{
 
 	
 	@Override
-	public int updateGlaa(Model model) {
+	public int updateGlaa(GlaaVO glaa) {
 
-		return glaaDAO.updateGlaa(model);
+		return glaaDAO.updateGlaa(glaa);
 		
 	}
 	

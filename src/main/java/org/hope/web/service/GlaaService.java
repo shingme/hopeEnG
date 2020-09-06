@@ -16,7 +16,7 @@ public interface GlaaService {
 	
 	public GlaaVO selectDetailGlaa(String bordNum);
 	
-	public int updateGlaa(Model model);
+	public int updateGlaa(GlaaVO glaa);
 	public List<Map<String, String>> getImagePathGlaa(Map<String, String> map);
 	
 	

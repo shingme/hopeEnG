@@ -56,9 +56,14 @@ public class GlaaDAO {
 		return sqlSession.selectList("GlaaMapper.Glaa1000_selectImagePath",map);
 	}
 	
-	public int updateGlaa(Model model) throws DataAccessException{
+	public int updateGlaa(GlaaVO glaa) throws DataAccessException{
 		
-		return sqlSession.update("GlaaMapper.Glaa1000_update", model);
+		return sqlSession.update("GlaaMapper.Glaa1000_update", glaa);
+	}
+	
+	// 게시물 수 
+	public int selectTotalCnt(Map<String, Object> map) throws DataAccessException{
+		return sqlSession.selectOne("GlaaMapper.Glaa1000_totalCnt", map);
 	}
 
 }

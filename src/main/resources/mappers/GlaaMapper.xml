@@ -31,7 +31,7 @@
               ,FIRST_FILE_PATH
 		FROM GLTB
 		WHERE 1=1
-		<if test="bordNm!=null and !bordNm.equals('')">
+		<if test="gllyNm!=null and !gllyNm.equals('')">
 		AND GL_NM LIKE CONCAT('%',#{gllyNm},'%')
 	    </if>
 	    <!-- AND GL_NO=#{gllyNo} -->
@@ -73,7 +73,27 @@
 	    WHERE GL_NO = #{gllyNo}
 	</select>
 	
+	
+	<select id="GlaaMapper.Glaa1000_totalCnt" parameterType="java.util.HashMap" resultType="java.lang.Integer">
+		SELECT COUNT(*) AS cnt
+		FROM GLTB
+		WHERE 1=1
+			<if test="gllyNm!=null and !gllyNm.equals('')">
+			AND GL_NM LIKE CONCAT('%',#{gllyNo},'%')
+			</if>
+	
+	</select>
+	
 
-
+    
+    
+    <select id="GlaaMapper.Glaa1000_update" parameterType="org.hope.web.domain.GlaaVO">
+    	UPDATE GLTB
+    		SET GL_NM = #{gllyNm}
+    		,	GL_CTS = #{gllyCts}
+    		, 	MODY_DATE = SYSDATE()
+    		,	SHOWMAIN_YN = #{showMainYn}
+    		WHERE GL_NO = #{gllyNo}
+    </select>
 
 </mapper>

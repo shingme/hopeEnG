@@ -70,7 +70,7 @@ public class GlaaController {
         return glaa;
     }
 	
-	// 온라인 문의글 목록 조회
+	// 갤러리 목록 조회
 	@RequestMapping("/Glaa1000_select.do")
 	@ResponseBody 
 	public Map<String, List<GlaaVO>> glaaSelect(@RequestParam HashMap<String, String> paramMap) {
@@ -100,12 +100,21 @@ public class GlaaController {
 		
 	}
 	
-	@RequestMapping(value = "/Glaa1000_updateGlaa")
+	// 갤러리 수정화면 이동
+	@RequestMapping(value = "/Glaa1000_moveUpdateGlaaPage")
 	public String glaaUpdate(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
-		return "board/boardUpdate";
+		return "GlaaUpdatePage";
 	}
 
+	// 갤러리 수정
+	@RequestMapping(value="/Glaa1000_updateGlaa")
+	@ResponseBody
+	public int updateGlaa(HttpServletRequest request, HttpServletResponse response, GlaaVO glaa) {
+		int result = glaaService.updateGlaa(glaa);
+		return result;
+	}
+	// 프로젝트 루트 찾기
 	@RequestMapping(value="/Glaa1000_getRootPath")
 	public String getRootPath(HttpServletRequest request) {
 		String root = request.getSession().getServletContext().getRealPath("/");

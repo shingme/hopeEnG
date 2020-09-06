@@ -15,6 +15,7 @@
 	<%
 		String name;
 		name = (String)session.getAttribute("name");
+		//System.out.println("THIS IS NAME ="+name);
 	%>
 <script>
 	$(document).ready(function(){ //메인에서 클릭해서 들어오면 서버에서 무조건 5개 가지고 옴
@@ -35,6 +36,8 @@
 		
 	})
 	function gllyDetail(gllyNo){
+		
+		//alert(gllyNo);
 		location.href="/glaa/Glaa1000_moveDetailPage.do?gllyNo="+gllyNo;
 	}
 
@@ -50,11 +53,11 @@
 	   		glaaAppend += "<tr>"
 	   					+"<td>"+ item.gllyNo +"</td>"
 	   					//+"<td>"+ item.gllyNm +"</td>"
-	   					<%if(name != null){%>
+	   					<%-- <%if(name != null){%> --%>
 	   					+"<td><a href='javascript:gllyDetail(\""+item.gllyNo+"\");'>"+item.gllyNm+"</a>"
-	   					<%}else{%>
+	   					<%-- <%}else{%>
 	   					+"<td>"+ item.gllyNm +"</td>"
-	   					<%}%>
+	   					<%}%> --%>
 	   					//+"<td on click='javascript:gllyDetail("+item.gllyNo+");' style='cursor:Pointer'>"+item.gllyNm + "</td>"
 	   					+"<td>"+ item.regiDate +"</td>"
 	   					+"<td>"+ item.showMainYn +"</td>"
