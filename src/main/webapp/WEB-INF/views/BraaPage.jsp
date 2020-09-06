@@ -109,27 +109,50 @@ function compareContxt(){
 	}
 	return contxtFlag;
 }
+function chkEmail(str, chk) {
+	var regExp = "";
+	
+	if(chk == "email"){
+		regExp = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
+	}else{ // tel
+		regExp = /^(01[016789]{1}|02|0[3-9]{1}[0-9]{1})-?[0-9]{3,4}-?[0-9]{4}$/;
+	}
+
+    if(regExp.test(str)){
+    	return true;
+    }else{
+    	return false;
+    }
+}
 
 function insertValidCheck(){
 	var alertFlag = true;
 	var guideTxt = ""
 	var obj = "";
 	
-	if($("#checkInfo").is(":checked") == false){
+	if(!updMode && !$("#checkInfo").is(":checked")){ //읽기모드며 체크되어있지 않을 때
 		guideTxt = "개인정보 수집 및 이용 동의에 체크해주세요.";
 		obj = $("#checkInfo");
 	}else if($("#userNm").val() == undefined || $("#userNm").val() == ""){
 		guideTxt = "이름을 입력해주세요.";
 		obj = $("#userNm");
-	}else if($("#userPw").attr("disabled") == undefined
-			&& ($("#userPw").val() == undefined || $("#userPw").val() == "")){
+	}else if(!updMode && ($("#userPw").attr("disabled") == undefined
+								&& ($("#userPw").val() == undefined || $("#userPw").val() == ""))){
 			guideTxt = "비밀번호를 입력해주세요.";
 			obj = $("#userPw");
-	}else if($("#userEmail").val() == undefined || $("#userEmail").val() == ""){
-		guideTxt = "이메일을 입력해주세요.";
+	}else if(!chkEmail($("#userEmail").val(), "email")){
+		if($("#userEmail").val() == undefined || $("#userEmail").val() == ""){
+			guideTxt = "이메일을 입력해주세요.";
+		}else{
+			guideTxt = "이메일을 확인해주세요.";
+		}
 		obj = $("#userEmail");
-	}else if($("#userPhone").val() == undefined || $("#userPhone").val() == ""){
-		guideTxt = "연락처를 입력해주세요.";
+	}else if(!chkEmail($("#userPhone").val(), "tel")){ 
+		if($("#userPhone").val() == undefined || $("#userPhone").val() == ""){
+			guideTxt = "연락처를 입력해주세요.";
+		}else{
+			guideTxt = "올바른 연락처를 입력해주세요.";
+		}
 		obj = $("#userPhone");
 	}else if($("#bordNm").val() == undefined || $("#bordNm").val() == ""){
 		guideTxt = "제목을 입력해주세요.";
@@ -137,12 +160,13 @@ function insertValidCheck(){
 	}else if($("#bordCts").val() == undefined || $("#bordCts").val() == ""){
 		guideTxt = "내용을 입력해주세요.";
 		obj = $("#bordCts");
-	}else if(pwFlag){
-		guideTxt = "비밀번호를 확인해주세요"
-		obj = $("#userPwCheck");
+	}else if(!updMode && pwFlag){
+			guideTxt = "비밀번호를 확인해주세요"
+			obj = $("#userPwCheck");
 	}else{
 		alertFlag = false;
 	}
+
 	
 	if(alertFlag){
 		alert(guideTxt);
@@ -163,6 +187,10 @@ function btnClickAction(val){
 	}else{ // 수정모드
 		if(updMode){ //수정가능 모드
 			if(val == "update"){
+				if(!insertValidCheck()){  // 입력값 밸리드 체크
+					return;
+				}
+				
 				if(compareContxt()){
 					alert("수정된게 없습니다.");
 					return;
@@ -189,12 +217,35 @@ function btnClickAction(val){
 	$("#bordWriteForm").attr("action", "/braa/Braa1000_"+val+".do").submit();
 }
 
+
 function checkAfterAction(num){
-	console.log("열기");
+	ajaxComm("Braa1000_detailSelectUpd.do?bordNum="+num,"",callback, "get");
+}
+
+function callback(result){
 	updMode = true;
+	$("#userEmail").val(result.userEmail);
+	$("#userPhone").val(result.userPhone)
+	
 	$("#braaDelete").css('display','block');
 	$("input, textarea").prop("readonly", false);
 }
+
+//공통 js만들면 제거 
+function ajaxComm(url, data, callback, action){
+	$.ajax({
+		url:url,
+		type:action,
+		data:data,
+		dataType:"json",
+		contentType:"application/json; charset=UTF-8",
+		success:callback,
+		error:function(xhr, status, error){
+			console.log(xhr+"\n"+status+"\n"+error);
+		}
+	});
+}
+
 </script>
 <div class="inner">
 <h2 class="" > 온라인 문의 작성하기</h2>
