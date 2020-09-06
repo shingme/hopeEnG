@@ -7,7 +7,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
-<title>갤러리상세</title>
+<title>갤러리수정</title>
 <%@ include file="/WEB-INF/views/comm/header.jsp" %>
 
 <%    
@@ -29,11 +29,6 @@
         location.href = "/glaa/glaa.do";
     }
     
-    /** 갤러리 - 수정 페이지 이동 */
-    function goGlaaUpdate(){
-    	var gllyNo = $("#glly_no").val();
-    	location.href = "/glaa/Glaa1000_moveUpdateGlaaPage?gllyNo=" + gllyNo;
-    }
     
     /** 갤러리 - 상세 조회  */
     function getGlaaDetail(boardSeq){
@@ -68,7 +63,7 @@
         var str = "";
         
         if(obj != null){                                
-            str += "<tr>";
+/*             str += "<tr>";
             str += "<th>제목</th>";
             str= + "<td>"+ obj.gllyNm +"</td>";
             str= + "</tr>";        
@@ -83,58 +78,75 @@
             str += "<tr>";
             str += "<th>내용</th>";
             str += "<td colspan='3'>"+ obj.gllyCts +"</td>";
+            str += "</tr>"; */
+            str += "<tr>";
+            str += "<th>이미지</th>";
+            str += "<td>"+ "<img src='/glly/"+obj.firstFilePath+"' width=\"600\"/>" +"</td>";
             str += "</tr>";
-            
+            $("#glly_nm").val(obj.gllyNm);
+            $("#glly_cts").val(obj.gllyCts);
+            $("#showMainYn").val(obj.showMainYn);
         } else {
             
             alert("등록된 글이 존재하지 않습니다.");
             return;
         }        
         
-        $("#tbody").append(str);
+         $("#tbody").append(str);
     }
     
-    /** 게시판 - 삭제  */
-    function deleteGlaa(){
- 
-        var glaaSeq = $("#glaa_seq").val();
-        
-        var yn = confirm("게시글을 삭제하시겠습니까?");        
-        if(yn){
-            
-            $.ajax({    
-                
-                url        : "/glaa/Glaa1000_deleteGlaa",
-                data    : $("#boardForm").serialize(),
-                dataType: "JSON",
-                cache   : false,
-                async   : true,
-                type    : "POST",    
-                success : function(obj) {
-                    deleteGlaaCallback(obj);                
-                },           
-                error     : function(xhr, status, error) {}
-                
-             });
-        }        
+    // 갤러리 수정
+    function updateGlaaDetail(){
+    	var obj = new Object();
+    	/* var gllyNm = $("#glly_nm").val();
+    	var gllyCts = $("#glly_cts").val();
+    	var showMainYn = $("#showMainYn").val(); */
+    	obj.gllyNm = $("#glly_nm").val();
+    	obj.gllyCts = $("#glly_cts").val();
+    	obj.showMainYn = $("#showMainYn").val();
+    	
+    	if(obj.gllyNm == ""){
+    		alert("제목을 입력해주세요.");
+    		$("#glly_nm").focus();
+    		return;
+    	}
+    	if(obj.gllyCts == ""){
+    		alert("내용을 입력해주세요.");
+    		$("#glly_cts").focus();
+    		return;
+    	}
+    	//var jsonData = JSON.stringify(obj);
+    	var yn = confirm("게시물을 수정하시겠습니까?");
+    	if(yn){
+    		$.ajax({
+    			url			: "/glaa/Glaa1000_updateGlaa",
+    			data		: $("#glaaVO").serialize(),//jsonData//
+    			dataType	: "JSON",
+    			cache		: false,
+    			async 		: true,
+    			type		: "POST",
+    			success		: function(obj){
+    				updateGlaaCallback(obj);
+    			},
+    			error		: function(xhr, status, error){}
+    		});
+    	}
     }
-    
-    /** 게시판 - 삭제 콜백 함수 */
-    function deleteGlaaCallback(obj){
-    
-        if(obj != null){        
-            
-            var result = obj.result;
-            
-            if(result == "SUCCESS"){                
-                alert("게시글 삭제를 성공하였습니다.");                
-                goGlaaList();                
-            } else {                
-                alert("게시글 삭제를 실패하였습니다.");    
-                return;
-            }
-        }
-    }</script>
+    // 수정 콜백함수
+    function updateGlaaCallback(boj){
+    	if(obj != null){
+    		var result = obj.result;
+    		
+    		if(result == "SUCCESS"){
+    			alert("게시글 수정을 성공하였습니다.");
+    			goGlaaList();
+    		}else{
+    			alert("게시글 수정을 실패하였습니다.");
+    			return;
+    		}
+    	}
+    }
+</script>
 </head>
 <body>
 
@@ -143,7 +155,7 @@
     <div id="container">
         <div class="inner">    
             <h2>게시글 상세</h2>
-            <form id="boardForm" name="boardForm">        
+            <form id="glaaVO" name="glaaVO">        
                 <table width="100%" class="table01">
                     <colgroup>
                         <col width="15%">
@@ -151,17 +163,32 @@
                         <col width="15%">
                         <col width="*">
                     </colgroup>
-                    <tbody id="tbody">
-                       
-                    </tbody>
-                </table>        
-                <input type="hidden" id="glly_no"        name="glly_no"    value="${gllyNo}"/> <!-- 게시글 번호 -->
+						<tbody id="tbody">
+							<tr>
+								<th>메인화면 표시 여부<span class="t_red">*</span></th>
+								<td><select id="showMainYn" name="showMainYn">
+										<option value="Y">표시</option>
+										<option value="N" selected>미표시</option>
+								</select></td>
+							</tr>
+							<tr>
+								<th>제목<span class="t_red">*</span></th>
+								<td><input id="glly_nm" name="gllyNm" value=""
+									class="tbox01" /></td>
+							</tr>
+							<tr>
+								<th>내용<span class="t_red">*</span></th>
+								<td colspan="3"><textarea id="glly_cts" name="gllyCts"
+										cols="50" rows="5" class="textarea01"></textarea></td>
+							</tr>
+						</tbody>
+					</table>        
+                <input type="hidden" id="glly_no"        name="gllyNo"    value="${gllyNo}"/> <!-- 게시글 번호 -->
                 <input type="hidden" id="search_type"    name="search_type"     value="S"/> <!-- 조회 타입 - 상세(S)/수정(U) -->
             </form>
             <div class="btn_right mt15">
                 <button type="button" class="btn black mr5" onclick="javascript:goGlaaList();">목록으로</button>
-                <button type="button" class="btn black mr5" onclick="javascript:goGlaaUpdate();">수정하기</button>
-                <button type="button" class="btn black" onclick="javascript:deleteBoard();">삭제하기</button>
+                <button type="button" class="btn black" onclick="javascript:updateGlaaDetail();">수정하기</button>
             </div>
         </div>
     </div>

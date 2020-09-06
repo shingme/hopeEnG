@@ -31,7 +31,7 @@
               ,FIRST_FILE_PATH
 		FROM GLTB
 		WHERE 1=1
-		<if test="bordNm!=null and !bordNm.equals('')">
+		<if test="gllyNm!=null and !gllyNm.equals('')">
 		AND GL_NM LIKE CONCAT('%',#{gllyNm},'%')
 	    </if>
 	    <!-- AND GL_NO=#{gllyNo} -->
@@ -60,21 +60,6 @@
     	INSERT INTO FILETB(GL_NO, FILE_NO,FILE_NM_KEY, FILE_PATH, FILE_SIZE, REGI_DATE)
     	VALUES(#{gllyNo},#{fileNo},#{fileNameKey},#{filePath},#{fileSize},SYSDATE())
     </insert>
-
-<!-- 	<select id="GlaaMapper.Glaa1000_select" resultType="org.hope.web.domain.GlaaVO" parameterType="java.lang.String">
-		SELECT GL_NO AS gllyNo
-			  ,GL_NM AS gllyNm
-              ,GL_CTS AS gllyCts
-              ,SHOWMAIN_YN as showMainYn
-              ,DATE_FORMAT(REGI_DATE, '%Y-%m-%d') AS regiDate
-              ,DATE_FORMAT(MODY_DATE, '%Y-%m-%d') AS modyDate
-        	
-		FROM GLTB
-		WHERE 1=1
-		<if test="bordNm!=null and !bordNm.equals('')">
-		AND GL_NM LIKE CONCAT('%',#{gllyNm},'%')
-	    </if>
-	</select> -->
 	
 	<select id="GlaaMapper.Glaa1000_selectDetail" resultType="org.hope.web.domain.GlaaVO" parameterType="java.lang.String">
 		SELECT GL_NO AS gllyNo
@@ -88,7 +73,27 @@
 	    WHERE GL_NO = #{gllyNo}
 	</select>
 	
+	
+	<select id="GlaaMapper.Glaa1000_totalCnt" parameterType="java.util.HashMap" resultType="java.lang.Integer">
+		SELECT COUNT(*) AS cnt
+		FROM GLTB
+		WHERE 1=1
+			<if test="gllyNm!=null and !gllyNm.equals('')">
+			AND GL_NM LIKE CONCAT('%',#{gllyNo},'%')
+			</if>
+	
+	</select>
+	
 
+    
+    
+    <select id="GlaaMapper.Glaa1000_update" parameterType="org.hope.web.domain.GlaaVO">
+    	UPDATE GLTB
+    		SET GL_NM = #{gllyNm}
+    		,	GL_CTS = #{gllyCts}
+    		, 	MODY_DATE = SYSDATE()
+    		,	SHOWMAIN_YN = #{showMainYn}
+    		WHERE GL_NO = #{gllyNo}
+    </select>
 
-	 
 </mapper>
