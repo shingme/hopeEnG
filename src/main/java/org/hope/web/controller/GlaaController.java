@@ -113,6 +113,21 @@ public class GlaaController {
 			return "FALSE";
 		}
 	}
+	
+	// 갤러리 삭제
+	@RequestMapping("/Glaa1000_delete.do")
+	@ResponseBody
+	public String glaaDelete(String gllyNo) throws Exception  {
+			
+		try {
+			System.out.println("Gllyno :"+gllyNo);
+			glaaService.deleteGlaa(gllyNo);
+			return "SUCCESS";
+		} catch (Exception e) {
+			return "FALSE";
+		}
+	}
+	
 	// 프로젝트 루트 찾기
 	@RequestMapping(value="/Glaa1000_getRootPath")
 	public String getRootPath(HttpServletRequest request) {
