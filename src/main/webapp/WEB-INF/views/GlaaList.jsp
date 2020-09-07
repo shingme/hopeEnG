@@ -49,32 +49,50 @@
 		$("#totalCnt").empty();
 		$("#glaaTable").empty();
 		
-		$("#totalCnt").append("총"+result.paging.total+"게시글");
+		$("#totalCnt").append("총 "+result.paging.total+" 게시글");
 		
-		var glaaAppend = "<tr><th>번호</th><th>제목</th><th>날짜</th><th>사진</th></tr>";
+		var glaaAppend = "";
 		var stus = "";
 		var click = "";
 		
 		$.each(result.glaaList,function(index,item){
 			
 			
-	   		glaaAppend += "<tr>"
-	   					+"<td>"+ item.gllyNo +"</td>"
-	   					//+"<td>"+ item.gllyNm +"</td>"
-	   					<%-- <%if(name != null){%> --%>
-	   					+"<td><a href='javascript:gllyDetail(\""+item.gllyNo+"\");'>"+item.gllyNm+"</a>"
-	   					<%-- <%}else{%> 
-	   					+"<td>"+ item.gllyNm +"</td>"
-	   					<%}%> --%>
-	   					//+"<td on click='javascript:gllyDetail("+item.gllyNo+");' style='cursor:Pointer'>"+item.gllyNm + "</td>"
-	   					+"<td>"+ item.regiDate +"</td>"
-	   					//+"<td>"+ item.showMainYn +"</td>"
-	   					+"<td>"+ "<img src=\"<spring:url value='/glly/"+item.firstFilePath+"'/>\" width=\"200\" />" +"</td>"
-	   					+ "</tr>"
+			glaaAppend += "<li class='gallyLi'>"
+					//+"<td>"+ item.gllyNm +"</td>"
+					<%if(name != null){%>
+					+"<a href='javascript:gllyDetail(\""+item.gllyNo+"\");'>"
+					<%}else{%>
+					+"<div class='user'>"
+					<%}%>
+					+"<div class='minidimm'>"
+					+ "<img src=\"<spring:url value='/glly/"+item.firstFilePath+"'/>\"/>"
+					+"</div>"
+					+"<p class='txtWrap'>"
+					+"<span class='tit'>"+item.gllyNm+"</span>"
+					+"<span class='pdate'>"+item.regiDate+"</span>"
+					+"<span class='sub'>"+item.gllyCts+"</span>"
+					+"</p>"
+					<%if(name != null){%>
+					+"</a>"
+					+"<a href='javascript:gllyDetail(\""+item.gllyNo+"\");' class='mask' style='display:none;'></a>"
+					<%}else{%>
+					+"</div>"
+					<%}%>
+					+"</li>"
 
 		});
+			
+		$(".gallyList").append(glaaAppend);
 		
-		$("#glaaTable").append(glaaAppend);
+		$('.gallyLi > a').mouseenter(function(){
+			console.log("asasdd");
+			$(this).parent().find('.mask').show();
+		});
+		$('.gallyLi > a').mouseleave(function(){
+			console.log("asasdd");
+			$(this).parent().find('.mask').hide();
+		});
 		
 		//페이징 처리
 		var paging ="";
@@ -141,20 +159,25 @@
 		</select>
 		<input class="form-control-mid" type="text" id="searchText" style="float:left;margin-left:5px;"/>
 		<button id="searchBtn" style="margin-left:10px;">검색</button>
+		<div>
+		<%if(name != null){ %>
+		<button id="write" style="float:right;margin-right:4%;">작성하기</button>
+		<%} %>
+	</div>
 	</div>
 	<div>
-		<table class="table" id="glaaTable" width="500" cellpadding="7" cellspacing="0" border="1">
-		</table>
+		<!-- <table class="table" id="glaaTable" width="500" cellpadding="7" cellspacing="0" border="1">
+		</table> -->
+		<section>
+			<ul class="gallyList">
+			</ul>
+		</section>
 	</div>
 	<div id="paging" class="paging">
 
 	</div>
+	<div class="clear-space"></div>
 	
-	<div>
-		<%if(name != null){ %>
-		<button id="write" style="float:right;">작성하기</button>
-		<%} %>
-	</div>
 </div>
 </body>
 <%@ include file="/WEB-INF/views/comm/footer.jsp" %>
