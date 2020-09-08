@@ -130,6 +130,7 @@ function checkAfterAction(num){
 </script>
 
 <div class="inner">
+<h2 class="" > 관리자 온라인 문의</h2>
 <form name="bordWriteForm" id="bordWriteForm" method="POST">
 <input type="hidden" name="bordNo" id="bordNo" value=0>
 <div id="infoCheck">
@@ -147,7 +148,7 @@ function checkAfterAction(num){
 <div>
 	<label for="name">공개여부</label>
 	<p/>
-	<select id="bordRelease" name="bordRelease">
+	<select id="bordRelease" name="bordRelease" class="form-control-small">
 		<option value="Y">공개</option>
 		<option value="N">비공개</option>
 	</select>
@@ -155,50 +156,50 @@ function checkAfterAction(num){
 <div>
 	<label for="name">이름</label>
 	<p/>
-	<input type="text" id="userNm" name="userNm" value="${braa.userNm}">
+	<input type="text" class="form-control-small" id="userNm" name="userNm" value="${braa.userNm}">
 </div>
 <div id="pwdDiv">
 	<label for="pwd">비밀번호</label>
 	<p/>
-	<input type="password" id="userPw" name="userPw">
+	<input type="password" class="form-control-mid" id="userPw" name="userPw">
 	<span>비밀번호 분실 시 찾을 수 없습니다.</span>
 </div>
 <div id="pwdCheckDiv">
 	<label for="pwdCheck">비밀번호 확인</label>
 	<p/>
-	<input type="password" id="userPwCheck" name="userPwCheck">
+	<input type="password" class="form-control-mid" id="userPwCheck" name="userPwCheck">
 	<span id="pwCheckMsg"></span>
 </div>
 <div id="email">
 	<label for="email">이메일</label>
 	<p/>
-	<input type="text" id="userEmail" name="userEmail" value="${braa.userEmail}">
+	<input type="text" class="form-control-mid" id="userEmail" name="userEmail" value="${braa.userEmail}">
 </div>
 <div id="tel">
 	<label for="tel">연락처</label>
 	<p/>
-	<input type="text" id="userPhone" name="userPhone" value="${braa.userPhone}">
+	<input type="text" class="form-control-mid" id="userPhone" name="userPhone" value="${braa.userPhone}">
 </div>
 <div>
 	<label for="title">제목</label>
 	<p/>
-	<input type="text" id="bordNm" name="bordNm" value="${braa.bordNm}">
+	<input type="text" class="form-control" id="bordNm" name="bordNm" value="${braa.bordNm}">
 </div>
 <div>
-	<label for="content">내용</label>
 	<p/>
-	<textarea id="bordCts" name="bordCts" style="resize: none;" placeholder="2000자 이내로 작성해주세요.">${braa.bordCts}</textarea>
+	<label for="content">내용</label>
+	<textarea id="bordCts" class="form-control" name="bordCts" style="resize: none;" placeholder="2000자 이내로 작성해주세요.">${braa.bordCts}</textarea>
 </div>
 
 	<%
 		String name;
 		name = (String)session.getAttribute("name");
 	%>
-<div>
+<div class="btn-group-toggle" style="height:50px;">
 	<label for="status">처리 상태</label>
-	<input type="radio" id="bordStus" name="bordStus" value="S" ${ braa.bordStus eq 'S' ? "checked" : ""}>대기중
-	<input type="radio" id="bordStus" name="bordStus" value="P" ${ braa.bordStus eq 'P' ? "checked" : ""}>처리중
-	<input type="radio" id="bordStus" name="bordStus" value="C" ${ braa.bordStus eq 'C' ? "checked" : ""}>완료
+	<label for="bordStus_rdy" class="btn_radio_label">대기중</label><input class="btn_radio" type="radio" id="bordStus_rdy" name="bordStus" value="S" ${ braa.bordStus eq 'S' ? "checked" : ""}>
+	<label for="bordStus_ing" class="btn_radio_label">처리중</label><input class="btn_radio" type="radio" id="bordStus_ing" name="bordStus" value="P" ${ braa.bordStus eq 'P' ? "checked" : ""}>
+	<label for="bordStus_end" class="btn_radio_label">완료</label><input class="btn_radio" type="radio" id="bordStus_end" name="bordStus" value="C" ${ braa.bordStus eq 'C' ? "checked" : ""}>
 </div>
 <button type="button" id="braaUpdate" onclick="btnClickAction('update')">수정</button>
 </form>

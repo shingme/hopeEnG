@@ -138,7 +138,7 @@
         <div class="inner">    
             <h2>게시글 상세</h2>
             <form id="glaaVO" name="glaaVO">        
-                <table width="100%" class="table01">
+                <table width="100%" class="table">
                     <colgroup>
                         <col width="15%">
                         <col width="35%">
@@ -148,7 +148,7 @@
 						<tbody id="tbody">
 							<tr>
 								<th>메인화면 표시 여부<span class="t_red">*</span></th>
-								<td><select id="showMainYn" name="showMainYn">
+								<td><select id="showMainYn" name="showMainYn" class="form-control-small">
 										<option value="Y">표시</option>
 										<option value="N" selected>미표시</option>
 								</select></td>
@@ -156,21 +156,21 @@
 							<tr>
 								<th>제목<span class="t_red">*</span></th>
 								<td><input id="glly_nm" name="gllyNm" value=""
-									class="tbox01" /></td>
+									class="form-control" /></td>
 							</tr>
 							<tr>
 								<th>내용<span class="t_red">*</span></th>
 								<td colspan="3"><textarea id="glly_cts" name="gllyCts"
-										cols="50" rows="5" class="textarea01"></textarea></td>
+										cols="200" rows="5" class="form-control"></textarea></td>
 							</tr>
 						</tbody>
 					</table>        
                 <input type="hidden" id="glly_no"        name="gllyNo"    value="${gllyNo}"/> <!-- 게시글 번호 -->
                 <input type="hidden" id="search_type"    name="search_type"     value="S"/> <!-- 조회 타입 - 상세(S)/수정(U) -->
             </form>
-            <div class="btn_right mt15">
-                <button type="button" class="btn black mr5" onclick="javascript:goGlaaList();">목록으로</button>
-                <button type="button" class="btn black" onclick="javascript:updateGlaaDetail();">수정하기</button>
+            <div class="" style="margin-top:20px;">
+                <button type="button" class="" onclick="javascript:goGlaaList();">목록으로</button>
+                <button type="button" class="" onclick="javascript:updateGlaaDetail();">수정하기</button>
             </div>
         </div>
     </div>

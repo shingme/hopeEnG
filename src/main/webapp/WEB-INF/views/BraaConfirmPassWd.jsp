@@ -71,7 +71,7 @@
 		<div>
 			<input class="form-control-small"  type="password" id="pw">
 		</div>
-		<div>
+		<div style="margin-top:10px;">
 			<button type="button" id ="confirmPw">확인</button>
 			<button type="button" id ="confirmClose">닫기</button>
 		</div>

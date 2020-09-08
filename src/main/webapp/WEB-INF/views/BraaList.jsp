@@ -42,8 +42,8 @@
 		$("#braaTable").empty();
 		$("#braaTable").empty();
 		
-		$("#totalCnt").append("총" + result.paging.total + "게시글");
-		var braaAppend = "<tr><th>번호</th><th>제목</th><th>작성자</th><th>날짜</th><th>조회수</th><th>처리상태</th><th>공개여부</th></tr>";
+		$("#totalCnt").append("총 " + result.paging.total + " 게시글");
+		var braaAppend = "<colgroup><col width='10%'><col width='35%'><col width='15%'><col width='*'></colgroup><tr><th>번호</th><th>제목</th><th>작성자</th><th>날짜</th><th>조회수</th><th>처리상태</th><th>공개여부</th></tr>";
 		var stus = "";
 		var click = "";
 		
@@ -155,6 +155,7 @@
 	</div>
 	<div>
 		<table id="braaTable" width="500" cellpadding="7" cellspacing="0" border="1" class="table">
+		
 		</table>
 	</div>
 	<div id="paging" class="paging">
