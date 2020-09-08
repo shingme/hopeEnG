@@ -66,14 +66,12 @@
 					+"<div class='user'>"
 					<%}%>
 					+"<div class='minidimm'>"
-					//+ "<img src=\"<spring:url value='/glly/"+item.firstFilePath.substr(14)+"'/>\"/>"
-					+ "<img src=\"<spring:url value='/glly/c5ceffcd1cf9438e929df7fb2328ce0f.jpg'/>\"/>"
+					+ "<img src=\"<spring:url value='/glly/"+item.firstFilePath+"'/>\"/>"
 					+"</div>"
 					+"<p class='txtWrap'>"
 					+"<span class='tit'>"+item.gllyNm+"</span>"
 					+"<span class='pdate'>"+item.regiDate+"</span>"
 					+"<span class='sub'>"+item.gllyCts+"</span>"
-					//+"<span class='sub'>2020년 1월 14일 서울 건설공제조합에서 2020년 상반기 KICK-OFF 행사를 진행했습니다.2019년 실적 및 이슈를 되짚어 봤으며, …</span>"
 					+"</p>"
 					<%if(name != null){%>
 					+"</a>"
