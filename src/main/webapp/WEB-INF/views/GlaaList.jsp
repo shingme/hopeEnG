@@ -66,8 +66,8 @@
 					+"<div class='user'>"
 					<%}%>
 					+"<div class='minidimm'>"
-					+ "<img src=\"<spring:url value='/glly/"+item.firstFilePath.substr(14)+"'/>\"/>"
-					//+ "<img src=\"<spring:url value='/glly/c5ceffcd1cf9438e929df7fb2328ce0f.jpg'/>\"/>"
+					//+ "<img src=\"<spring:url value='/glly/"+item.firstFilePath.substr(14)+"'/>\"/>"
+					+ "<img src=\"<spring:url value='/glly/c5ceffcd1cf9438e929df7fb2328ce0f.jpg'/>\"/>"
 					+"</div>"
 					+"<p class='txtWrap'>"
 					+"<span class='tit'>"+item.gllyNm+"</span>"

@@ -95,17 +95,17 @@
     }
     
     /** 게시판 - 삭제  */
-    function deleteGlaa(){
+    function goDeleteGlaa(){
  
-        var glaaSeq = $("#glaa_seq").val();
         
+        var gllyNo = $("#glly_no").val();
         var yn = confirm("게시글을 삭제하시겠습니까?");        
         if(yn){
             
             $.ajax({    
                 
-                url        : "/glaa/Glaa1000_deleteGlaa",
-                data    : $("#boardForm").serialize(),
+                url        : "/glaa/Glaa1000_delete.do",
+                data    : {gllyNo : gllyNo},
                 dataType: "JSON",
                 cache   : false,
                 async   : true,
@@ -124,9 +124,9 @@
     
         if(obj != null){        
             
-            var result = obj.result;
             
-            if(result == "SUCCESS"){                
+            
+            if(obj == "SUCCESS"){                
                 alert("게시글 삭제를 성공하였습니다.");                
                 goGlaaList();                
             } else {                

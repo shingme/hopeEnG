@@ -57,17 +57,6 @@ public class GlaaServiceImpl implements GlaaService{
 		return resultMap;
 	}
 
-	/*
-	 * @Override public List<GlaaVO> selectGlaa(Map<String, Object> map) { int cnt =
-	 * glaaDAO.selectTotalCnt(map);
-	 * 
-	 * //페이징 처리 PagingVO paging = new PagingVO(cnt,
-	 * Integer.parseInt((String)map.get("pageNum")),
-	 * Integer.parseInt((String)map.get("cntPerPage")));
-	 * 
-	 * return glaaDAO.select(map); }
-	 */
-
 	@Override
 	public GlaaVO selectDetailGlaa(String gllyNo) {
 
@@ -143,6 +132,12 @@ public class GlaaServiceImpl implements GlaaService{
     
     public List<Map<String, String>> getImagePathGlaa(Map<String, String> map){
     	return glaaDAO.selectImagePath(map);
+    }
+    
+    // 삭제
+    @Override
+    public int deleteGlaa(String gllyNo) {
+    	return glaaDAO.deleteGlaa(gllyNo);
     }
 
 }
