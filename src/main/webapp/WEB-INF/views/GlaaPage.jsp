@@ -161,7 +161,7 @@
             <div class="" style="margin-top:20px;">
                 <button type="button" class="" onclick="javascript:goGlaaList();">목록으로</button>
                 <button type="button" class="" onclick="javascript:goGlaaUpdate();">수정하기</button>
-                <button type="button" class="" onclick="javascript:deleteBoard();">삭제하기</button>
+                <button type="button" class="" onclick="javascript:goDeleteGlaa();">삭제하기</button>
             </div>
         </div>
     </div>
