@@ -116,21 +116,6 @@
                 error     : function(xhr, status, error) {}
                 
             });
-            
-            /* $.ajax({    
-                
-                url        : "/glaa/Glaa1000_delete.do",
-                data    : {gllyNo : gllyNo},
-                dataType: "JSON",
-                cache   : false,
-                async   : true,
-                type    : "POST",    
-                success : function(obj) {
-                    deleteGlaaCallback(obj);                
-                },           
-                error     : function(xhr, status, error) {}
-                
-             }); */
         }        
     }
     
