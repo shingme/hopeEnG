@@ -101,8 +101,23 @@
         var gllyNo = $("#glly_no").val();
         var yn = confirm("게시글을 삭제하시겠습니까?");        
         if(yn){
+        	
+        	$.ajax({
+                url   : "/glaa/Glaa1000_delete.do",
+                data    : {gllyNo : gllyNo},
+                dataType: "text",
+                enctype    : "multipart/form-data",
+                cache   : false,
+                async   : false,
+                type    : "POST",                         
+                success : function(obj) {
+                	deleteGlaaCallback(obj);                
+                },           
+                error     : function(xhr, status, error) {}
+                
+            });
             
-            $.ajax({    
+            /* $.ajax({    
                 
                 url        : "/glaa/Glaa1000_delete.do",
                 data    : {gllyNo : gllyNo},
@@ -115,26 +130,29 @@
                 },           
                 error     : function(xhr, status, error) {}
                 
-             });
+             }); */
         }        
     }
     
     /** 게시판 - 삭제 콜백 함수 */
     function deleteGlaaCallback(obj){
-    
+    	alert("234");
         if(obj != null){        
             
             
             
             if(obj == "SUCCESS"){                
                 alert("게시글 삭제를 성공하였습니다.");                
-                goGlaaList();                
+                //goGlaaList();              
+                alert("1");
+                window.location.href = "glaa.do";
             } else {                
                 alert("게시글 삭제를 실패하였습니다.");    
                 return;
             }
         }
-    }</script>
+    }
+</script>
 </head>
 <body>
 

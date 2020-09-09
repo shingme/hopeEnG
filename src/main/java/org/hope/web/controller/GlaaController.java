@@ -120,7 +120,6 @@ public class GlaaController {
 	public String glaaDelete(String gllyNo) throws Exception  {
 			
 		try {
-			System.out.println("Gllyno :"+gllyNo);
 			glaaService.deleteGlaa(gllyNo);
 			return "SUCCESS";
 		} catch (Exception e) {
