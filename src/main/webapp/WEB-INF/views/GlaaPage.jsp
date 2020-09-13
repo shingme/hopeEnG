@@ -84,6 +84,14 @@
             str += "<th>내용</th>";
             str += "<td colspan='3'>"+ obj.gllyCts +"</td>";
             str += "</tr>";
+            str += "<tr>";
+            str += "<th>메인문구</th>";
+            str += "<td colspan='3'>"+ obj.comment +"</td>";
+            str += "</tr>";
+            str += "<tr>";
+            str += "<th>추가문구</th>";
+            str += "<td colspan='3'>"+ obj.subComment +"</td>";
+            str += "</tr>";
             
         } else {
             

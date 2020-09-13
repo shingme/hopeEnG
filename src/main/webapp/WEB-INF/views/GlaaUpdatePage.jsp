@@ -68,8 +68,10 @@
             str += "<td>"+ "<img src='/glly/"+obj.firstFilePath+"' width=\"600\"/>" +"</td>";
             str += "</tr>";
             $("#glly_nm").val(obj.gllyNm);
-            $("#glly_cts").val(obj.gllyCts);
-            $("#showMainYn").val(obj.showMainYn);
+            $("#gllyCts").val(obj.gllyCts);
+            $("#imgPstn").val(obj.imgPstn);
+            $("#comment").val(obj.comment);
+            $("#subComment").val(obj.subComment);
         } else {
             
             alert("등록된 글이 존재하지 않습니다.");
@@ -83,8 +85,8 @@
     function updateGlaaDetail(){
     	var obj = new Object();
     	obj.gllyNm = $("#glly_nm").val();
-    	obj.gllyCts = $("#glly_cts").val();
-    	obj.showMainYn = $("#showMainYn").val();
+    	obj.gllyCts = $("#gllyCts").val();
+    	obj.imgPstn = $("#imgPstn").val();
     	
     	if(obj.gllyNm == ""){
     		alert("제목을 입력해주세요.");
@@ -93,7 +95,7 @@
     	}
     	if(obj.gllyCts == ""){
     		alert("내용을 입력해주세요.");
-    		$("#glly_cts").focus();
+    		$("#gllyCts").focus();
     		return;
     	}
     	//var jsonData = JSON.stringify(obj);
@@ -148,8 +150,9 @@
 						<tbody id="tbody">
 							<tr>
 								<th>메인화면 표시 여부<span class="t_red">*</span></th>
-								<td><select id="showMainYn" name="showMainYn" class="form-control-small">
-										<option value="Y">표시</option>
+								<td><select id="imgPstn" name="imgPstn" class="form-control-small">
+										<option value="T">상단 표시</option>
+										<option value="B">하단 표시</option>
 										<option value="N" selected>미표시</option>
 								</select></td>
 							</tr>
@@ -158,11 +161,19 @@
 								<td><input id="glly_nm" name="gllyNm" value=""
 									class="form-control" /></td>
 							</tr>
-							<tr>
-								<th>내용<span class="t_red">*</span></th>
-								<td colspan="3"><textarea id="glly_cts" name="gllyCts"
-										cols="200" rows="5" class="form-control"></textarea></td>
-							</tr>
+
+                        <tr>
+                            <th>내용<span class="t_red">*</span></th>
+                            <td><textarea class="form-control" id="gllyCts" name="gllyCts" cols="30" rows="10" class="textarea01"></textarea></td>
+                        </tr>
+                        <tr>
+                            <th>메인 문구<span class="t_red">*</span></th>
+                            <td><textarea class="form-control" id="comment" name="comment" cols="30" rows="10" class="textarea01"></textarea></td>
+                        </tr>
+                        <tr>
+                            <th>추가 문구<span class="t_red">*</span></th>
+                            <td><textarea class="form-control" id="subComment" name="subComment" cols="30" rows="10" class="textarea01"></textarea></td>
+                        </tr>
 						</tbody>
 					</table>        
                 <input type="hidden" id="glly_no"        name="gllyNo"    value="${gllyNo}"/> <!-- 게시글 번호 -->
