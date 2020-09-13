@@ -110,8 +110,9 @@ function insertGlaaCallback(obj){
                    		<tr>
                             <th>메인화면 표시 여부<span class="t_red">*</span></th>
                             <td>
-                            <select id="showMainYn" class="form-control-small" name="showMainYn">
-							<option value="Y">표시</option>
+                            <select id="imgPstn" class="form-control-small" name="imgPstn">
+							<option value="T">상단 표시</option>
+							<option value="B">하단 표시</option>
 							<option value="N" selected>미표시</option>
 							</select>
 							</td>
@@ -123,6 +124,14 @@ function insertGlaaCallback(obj){
                         <tr>
                             <th>내용<span class="t_red">*</span></th>
                             <td><textarea class="form-control" id="gllyCts" name="gllyCts" cols="30" rows="10" class="textarea01"></textarea></td>
+                        </tr>
+                        <tr>
+                            <th>메인 문구<span class="t_red">*</span></th>
+                            <td><textarea class="form-control" id="comment" name="comment" cols="30" rows="10" class="textarea01"></textarea></td>
+                        </tr>
+                        <tr>
+                            <th>추가 문구<span class="t_red">*</span></th>
+                            <td><textarea class="form-control" id="subComment" name="subComment" cols="30" rows="10" class="textarea01"></textarea></td>
                         </tr>
                         <tr>
                             <th scope="row">첨부파일</th>

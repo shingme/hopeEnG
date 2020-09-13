@@ -9,7 +9,10 @@
 		<result property="gllyNm" column="GL_NM"></result>
 		<result property="gllyCts" column="GL_CTS"></result>
 		<result property="regiDate" column="REGI_DATE"></result>
-		<result property="showMainYn" column="SHOWMAIN_YN"></result>
+		<!-- <result property="showMainYn" column="SHOWMAIN_YN"></result> -->
+		<result property="imgPstn" column="IMG_PSTN"></result>
+		<result property="comment" column="COMMENT"></result>
+		<result property="subComment" column="SUB_COMMENT"></result>
 		<result property="firstFilePath" column="FIRST_FILE_PATH"></result>
 		<!-- <collection property="glaaFileVO" column="GL_NO" resultMap="glaaFileListResult" ></collection> -->
 		<collection property="glaaFileVO" column="GL_NO" javaType="java.util.ArrayList" ofType="org.hope.web.domain.GlaaFileVO" select="GlaaMapper.Glaa1000_selectFileList"/>
@@ -27,7 +30,9 @@
 		(SELECT GL_NO
 			  ,GL_NM
               ,GL_CTS
-              ,SHOWMAIN_YN
+              ,IMG_PSTN
+              ,COMMENT
+              ,SUB_COMMENT
               ,DATE_FORMAT(REGI_DATE, '%Y-%m-%d') as REGI_DATE
               ,DATE_FORMAT(MODY_DATE, '%Y-%m-%d') as MODY_DATE		
               ,FIRST_FILE_PATH
@@ -52,8 +57,8 @@
 	
     <insert id="Glaa1000_insert" parameterType="org.hope.web.domain.GlaaVO">
   
-		INSERT INTO GLTB(GL_NM, GL_CTS, REGI_DATE, MODY_DATE, SHOWMAIN_YN, FIRST_FILE_PATH)
-		VALUES(#{gllyNm},#{gllyCts}, SYSDATE(), SYSDATE(), #{showMainYn}, #{firstFilePath})
+		INSERT INTO GLTB(GL_NM, GL_CTS, REGI_DATE, MODY_DATE, IMG_PSTN, COMMENT, SUB_COMMENT, FIRST_FILE_PATH)
+		VALUES(#{gllyNm},#{gllyCts}, SYSDATE(), SYSDATE(), #{imgPstn}, #{comment}, #{subComment},#{firstFilePath})
 	
 		<selectKey resultType="Integer" keyProperty="gllyNo" order="AFTER">
     		SELECT LAST_INSERT_ID() as gllyNo
@@ -70,7 +75,9 @@
 			  ,GL_NM AS gllyNm
               ,GL_CTS AS gllyCts
               ,FIRST_FILE_PATH as firstFilePath
-              ,SHOWMAIN_YN as showMainYn
+              ,IMG_PSTN as imgPstn
+              ,COMMENT as comment
+              ,SUB_COMMENT as subComment
               ,DATE_FORMAT(REGI_DATE, '%Y-%m-%d') AS regiDate
               ,DATE_FORMAT(MODY_DATE, '%Y-%m-%d') AS modyDate
 		 FROM GLTB
@@ -97,7 +104,9 @@
     		SET GL_NM = #{gllyNm}
     		,	GL_CTS = #{gllyCts}
     		, 	MODY_DATE = SYSDATE()
-    		,	SHOWMAIN_YN = #{showMainYn}
+              ,IMG_PSTN =#{imgPstn}
+              ,COMMENT =#{comment}
+              ,SUB_COMMENT=#{subComment}
     		WHERE GL_NO = #{gllyNo}
     </update>
 
