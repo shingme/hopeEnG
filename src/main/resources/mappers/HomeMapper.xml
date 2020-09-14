@@ -2,19 +2,33 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="HomeMapper">
-	
 	<resultMap id="HomeSelectListResult" type="org.hope.web.domain.HomeVO">
 		<id property="gllyNo" column="GL_NO"></id>
 		<result property="gllyNo" column="GL_NO"></result>
+		<result property="comment" column="COMMENT"></result>
+		<result property="subComment" column="SUB_COMMENT"></result>
 		<result property="firstFilePath" column="FIRST_FILE_PATH"></result>
 		<!-- <collection property="HomeFileVO" column="GL_NO" resultMap="HomeFileListResult" ></collection> -->
 	</resultMap>
-	<select id="HomeMapper.Home1000_select" resultMap="HomeSelectListResult">
+	<select id="HomeMapper.Home1000_selectTop" resultMap="HomeSelectListResult">
 		SELECT GL_NO
+			  ,COMMENT 
+			  ,SUB_COMMENT
               ,FIRST_FILE_PATH
 		 FROM GLTB
 		WHERE 1=1
-		  AND SHOWMAIN_YN ='Y'
+		  AND IMG_PSTN ='T'
+	 ORDER BY GL_NO		
+	    <!-- AND GL_NO=#{gllyNo} -->
+	</select>
+	<select id="HomeMapper.Home1000_selectBottm" resultMap="HomeSelectListResult">
+		SELECT GL_NO
+			  ,COMMENT
+			  ,SUB_COMMENT
+              ,FIRST_FILE_PATH
+		 FROM GLTB
+		WHERE 1=1
+		  AND IMG_PSTN ='B'
 	 ORDER BY GL_NO		
 	    <!-- AND GL_NO=#{gllyNo} -->
 	</select>

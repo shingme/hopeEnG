@@ -56,13 +56,15 @@ public class HomeController {
 		  
 		  Map<String, List<HomeVO>> map = new HashMap<String, List<HomeVO>>();
 		  
-		  List<HomeVO> HomeList = homeService.selectHome(paramMap);
+		  List<HomeVO> HomeTopList = homeService.selectHomeTop(paramMap);
+		  List<HomeVO> HomeBottmList = homeService.selectHomeBottm(paramMap);
 		  /*
 		   * System.out.println("첫번째파일경로");
 		   * System.out.println(glaaList.get(0).getFirstFilePath());
 		   */
 		
-		  map.put("HomeList",HomeList); 
+		  map.put("HomeTopList",HomeTopList); 
+		  map.put("HomeBottmList",HomeBottmList);
 		  
 		  return map; 
 	  }
