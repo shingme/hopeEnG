@@ -86,11 +86,9 @@
 		$(".gallyList").append(glaaAppend);
 		
 		$('.gallyLi > a').mouseenter(function(){
-			console.log("asasdd");
 			$(this).parent().find('.mask').show();
 		});
 		$('.gallyLi > a').mouseleave(function(){
-			console.log("asasdd");
 			$(this).parent().find('.mask').hide();
 		});
 		

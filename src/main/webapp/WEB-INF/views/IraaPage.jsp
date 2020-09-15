@@ -57,28 +57,29 @@
 		<div style="font-size:40px;padding:2%;text-align:left;">
 			CEO 인사말
 		</div>
-		<div style="float:left;width:60%;padding:2%;">
-		 <span class="infoSpan">주식회사 희망ENG</span>는 <br>자동제어 및 전기공사를 주업무로 하고 있는기업으로<br>
-		 2018년 10월 회사창립 이후로 끊임없이 고객만족을 목표로 각 분야별로 최선을
-		다해 달려왔습니다.<br><br>
-		<span class="infoSpan">최고의 품질</span>, <span class="infoSpan">최고의 서비스</span> 경영이념으로
-		최상의 서비스 공급을 위해 최선을 다하고 있습니다.<br>
-		끊임없이 쏟아져 나오는 신기술을 자체 개발 및 교육을 통하여 진보된
-		기술력으로 고객을 만족시키기 위해 노력하고 있습니다.<br>
-		<br>
-		이에 기술력과 품질 만큼은 어느 타사보다 높은 자부심을 가지고
-		있습니다.
-		 하지만, 현재에 만족하지 않고 더 큰 고객만족을 위해 ㈜희망ENG는 
-		계속해서 신기술 개발에 노력할 것임을 약속 드립니다.
-		<br>
-		 앞으로 더욱더 발전할 ㈜희망ENG를 지켜봐 주시고 많은 애정과 관심을 부탁 드립니다.
-				
+		<div style="height:auto;">
+			<div class ="ceoComment" style="">
+			 <span class="infoSpan">주식회사 희망ENG</span>는 <br>자동제어 및 전기공사를 주업무로 하고 있는기업으로<br>
+			 2018년 10월 회사창립 이후로 끊임없이 고객만족을 목표로 각 분야별로 최선을
+			다해 달려왔습니다.<br><br>
+			<span class="infoSpan">최고의 품질</span>, <span class="infoSpan">최고의 서비스</span> 경영이념으로
+			최상의 서비스 공급을 위해 최선을 다하고 있습니다.<br>
+			끊임없이 쏟아져 나오는 신기술을 자체 개발 및 교육을 통하여 진보된
+			기술력으로 고객을 만족시키기 위해 노력하고 있습니다.<br>
+			<br>
+			이에 기술력과 품질 만큼은 어느 타사보다 높은 자부심을 가지고
+			있습니다.
+			 하지만, 현재에 만족하지 않고 더 큰 고객만족을 위해 ㈜희망ENG는 
+			계속해서 신기술 개발에 노력할 것임을 약속 드립니다.
+			<br>
+			 앞으로 더욱더 발전할 ㈜희망ENG를 지켜봐 주시고 많은 애정과 관심을 부탁 드립니다.
+					
+			</div>
+			<div class="col-lg-4 mb-4 ceoPicture" style="">
+				<img style="width:100%;" src="/image/img/iraa/picCEO.jpg" alt="CEO사진"/>
+				<span class="imgTxt">CEO 김종진</span>
+			</div>
 		</div>
-		<div class="col-lg-4 col-sm-6 mb-4" style="float:right;margin-bottom:25px;">
-			<img style="width:100%;" src="/image/img/iraa/picCEO.jpg" alt="CEO사진"/>
-			<span class="imgTxt">CEO 김종진</span>
-		</div>
-		
 		<!-- <div>
 			<div style="width: 30%;float: left;text-align: center; border-right:1px solid #7a7676;">
 				<img class="img-fluid d-block mx-auto" src="/image/img/logos/creative-market.jpg" alt="" />

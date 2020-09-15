@@ -179,7 +179,7 @@
                 <input type="hidden" id="glly_no"        name="gllyNo"    value="${gllyNo}"/> <!-- 게시글 번호 -->
                 <input type="hidden" id="search_type"    name="search_type"     value="S"/> <!-- 조회 타입 - 상세(S)/수정(U) -->
             </form>
-            <div class="" style="margin-top:20px;">
+            <div class="" style="margin-top:20px;margin-bottom:20px;">
                 <button type="button" class="" onclick="javascript:goGlaaList();">목록으로</button>
                 <button type="button" class="" onclick="javascript:updateGlaaDetail();">수정하기</button>
             </div>

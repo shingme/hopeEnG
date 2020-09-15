@@ -70,7 +70,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-top:93px;
+  margin-top:102px;
 }
 
 .path {
@@ -100,9 +100,10 @@
 }
 
 .container-err {
-  padding-top: 4em;
+  padding-top: 102px;
   display: block;
-  margin: 0 auto;
+  margin: 45px auto;
+  min-height:780px;
 }
 
 .error-num {
