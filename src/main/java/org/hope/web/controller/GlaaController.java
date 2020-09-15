@@ -72,10 +72,10 @@ public class GlaaController {
 	@RequestMapping("/Glaa1000_select.do")
 	@ResponseBody 
 	public Map<String, Object> glaaSelect(@RequestParam HashMap<String, Object> paramMap) {
-
-	Map<String, Object> map = glaaService.selectGlaa(paramMap);
-	  
-	return map; 
+		System.out.println(paramMap);
+		Map<String, Object> map = glaaService.selectGlaa(paramMap);
+		System.out.println("aaaaaa");
+		return map; 
 	}
 
 	// 갤러리 게시물 작성

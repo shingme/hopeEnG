@@ -18,7 +18,7 @@
 	%>
 <script>
 	var pageNum = 1;
-	var cntPerPage = 5;
+	var cntPerPage = 6;
 	var searchArr = new Object();
 	
 	$(document).ready(function(){ //메인에서 클릭해서 들어오면 서버에서 무조건 5개 가지고 옴
@@ -30,6 +30,9 @@
 		$("#searchBtn").click(function(){
 			var url = "/glaa/Glaa1000_select.do";
 			var searchArr = new Object();
+			
+			searchArr["pageNum"] = pageNum;
+			searchArr["cntPerPage"] = cntPerPage;
 			searchArr[$("#select").val()] = $("#searchText").val();
 
 			ajaxComm(url, searchArr, glaaSelectCallback);			
@@ -47,7 +50,7 @@
 
 	function glaaSelectCallback(result){
 		$("#totalCnt").empty();
-		$("#glaaTable").empty();
+		$("#gallyList").empty();
 		
 		$("#totalCnt").append("총 "+result.paging.total+" 게시글");
 		
@@ -59,12 +62,7 @@
 			
 			
 			glaaAppend += "<li class='gallyLi'>"
-					//+"<td>"+ item.gllyNm +"</td>"
-					<%if(name != null){%>
 					+"<a href='javascript:gllyDetail(\""+item.gllyNo+"\");'>"
-					<%}else{%>
-					+"<div class='user'>"
-					<%}%>
 					+"<div class='minidimm'>"
 					+ "<img src=\"<spring:url value='/glly/"+item.firstFilePath+"'/>\"/>"
 					+"</div>"
@@ -73,12 +71,8 @@
 					+"<span class='pdate'>"+item.regiDate+"</span>"
 					+"<span class='sub'>"+item.gllyCts+"</span>"
 					+"</p>"
-					<%if(name != null){%>
 					+"</a>"
 					+"<a href='javascript:gllyDetail(\""+item.gllyNo+"\");' class='mask' style='display:none;'></a>"
-					<%}else{%>
-					+"</div>"
-					<%}%>
 					+"</li>"
 
 		});
@@ -152,8 +146,8 @@
 <h2 class="" > 갤러리</h2>
 	<div style="margin-bottom:15px;">
 		<select id="select" class="form-control" style="width:100px;float:left;">
-			<option value="bordNm">제목</option>
-			<option value="userNm">이름</option>
+			<option value="glNm">제목</option>
+			<option value="glCts">내용</option>
 		</select>
 		<input class="form-control-mid" type="text" id="searchText" style="float:left;margin-left:5px;"/>
 		<button id="searchBtn" style="margin-left:10px;">검색</button>
@@ -167,7 +161,7 @@
 		<!-- <table class="table" id="glaaTable" width="500" cellpadding="7" cellspacing="0" border="1">
 		</table> -->
 		<section>
-			<ul class="gallyList">
+			<ul id = "gallyList" class="gallyList">
 			</ul>
 		</section>
 	</div>

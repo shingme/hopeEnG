@@ -104,7 +104,7 @@
     		$.ajax({
     			url			: "/glaa/Glaa1000_updateGlaa",
     			data		: $("#glaaVO").serialize(),//jsonData//
-    			dataType	: "JSON",
+    			dataType	: "text",
     			cache		: false,
     			async 		: true,
     			type		: "POST",
@@ -167,11 +167,11 @@
                             <td><textarea class="form-control" id="gllyCts" name="gllyCts" cols="30" rows="10" class="textarea01"></textarea></td>
                         </tr>
                         <tr>
-                            <th>메인 문구<span class="t_red">*</span></th>
+                            <th>메인 문구<span class="t_red"></span></th>
                             <td><textarea class="form-control" id="comment" name="comment" cols="30" rows="10" class="textarea01"></textarea></td>
                         </tr>
                         <tr>
-                            <th>추가 문구<span class="t_red">*</span></th>
+                            <th>추가 문구<span class="t_red"></span></th>
                             <td><textarea class="form-control" id="subComment" name="subComment" cols="30" rows="10" class="textarea01"></textarea></td>
                         </tr>
 						</tbody>

@@ -24,6 +24,7 @@
 		<result property="fileNo" column="FILE_NO"></result>
 		<result property="filePath" column="FILE_PATH"></result>
 	</resultMap>
+	
 	<select id="GlaaMapper.Glaa1000_select" resultMap="glaaSelectListResult">
 		select *
 		from
@@ -38,12 +39,16 @@
               ,FIRST_FILE_PATH
 		FROM GLTB
 		WHERE 1=1
-		<if test="gllyNm!=null and !gllyNm.equals('')">
-		AND GL_NM LIKE CONCAT('%',#{gllyNm},'%')
+		<if test="glNm!=null and !glNm.equals('')">
+		AND GL_NM LIKE CONCAT('%',#{glNm},'%')
 	    </if>
-	    ORDER BY REGI_DATE DESC
+	    <if test="glCts!=null and !glCts.equals('')">
+		AND GL_CTS LIKE CONCAT('%',#{glCts},'%')
+	    </if>
+	    ORDER BY MODY_DATE DESC
 	    ) T1
-	    LIMIT #{start},5
+	    ORDER BY MODY_DATE DESC
+	    LIMIT #{start},${cntPerPage}
 	</select>
 	
 	<select id="GlaaMapper.Glaa1000_selectFileList" resultMap="glaaFileListResult" >

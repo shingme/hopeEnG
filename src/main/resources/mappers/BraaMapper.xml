@@ -18,6 +18,9 @@
 		   <if test="userNm!=null and !userNm.equals('')">
 		   AND USER_NM LIKE CONCAT('%',#{userNm},'%')
 		   </if>
+		   <if test="bordNo!=null and !bordNo.equals('')">
+		   AND BORD_NO = #{bordNo}
+		   </if>
 		   AND BORD_STUS != 'D'
     </select>
 
@@ -69,12 +72,12 @@
 			<if test="userNm!=null and !userNm.equals('')">
 		    	AND USER_NM LIKE CONCAT('%',#{userNm},'%')
 		    </if>
-		    <!-- <if test="braaStus!=null and !braaStus.equals('')">
-		    AND BORD_STUS = #{braaStus}
-		    </if> -->
+		    <if test="bordNo!=null and !bordNo.equals('')">
+		   		AND BORD_NO = #{bordNo}
+		    </if>
 		    AND BORD_STUS != 'D'
 		 ORDER BY REGI_DATE DESC
-		 LIMIT #{start}, 5
+		 LIMIT #{start}, ${cntPerPage}
 	</select>
 	
 	<select id="BraaMapper.Braa1000_selectDetail" resultType="org.hope.web.domain.BraaVO" parameterType="java.lang.String">
@@ -99,14 +102,17 @@
 	</select>
 	
 	<update id="BraaMapper.Braa1000_updateIncreViews" parameterType="java.lang.String">
-		update BORDTB
-		   set BORD_CNT = (select BORD_CNT+1
-		   					 from BORDTB
-		   					where BORD_NO = #{bordNum})
-		 where BORD_NO = #{bordNum}
+		UPDATE BORDTB
+		   SET BORD_CNT = (SELECT BORD_CNT+1
+		   					 FROM BORDTB
+		   					WHERE BORD_NO = #{bordNum})
+		 WHERE BORD_NO = #{bordNum}
 	</update>
 	
 	<select id="BraaMapper.Braa1000_temp" resultType="org.hope.web.domain.BraaVO" parameterType="org.hope.web.domain.BraaVO">
-	    select bord_no as bordNum, user_pw as userPw from BORDTB where bord_release = 'N'
+	    SELECT BORD_NO as bordNum
+	          ,USER_PW as userPw 
+	      FROM BORDTB 
+	     WHERE BORD_RELEASE = 'N'
 	</select>
 </mapper>

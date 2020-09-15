@@ -148,7 +148,10 @@
 </script>
 </head>
 <body>
-
+<%
+	String name;
+	name = (String)session.getAttribute("name");
+%>
     
 <div id="wrap">
     <div id="container">
@@ -171,8 +174,10 @@
             </form>
             <div class="" style="margin-top:20px;margin-bottom:20px;">
                 <button type="button" class="" onclick="javascript:goGlaaList();">목록으로</button>
+                <%if(name != null){ %>
                 <button type="button" class="" onclick="javascript:goGlaaUpdate();">수정하기</button>
                 <button type="button" class="" onclick="javascript:goDeleteGlaa();">삭제하기</button>
+                <%} %>
             </div>
         </div>
     </div>
