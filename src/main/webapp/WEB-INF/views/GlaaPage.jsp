@@ -129,15 +129,10 @@
     
     /** 게시판 - 삭제 콜백 함수 */
     function deleteGlaaCallback(obj){
-    	alert("234");
         if(obj != null){        
-            
-            
             
             if(obj == "SUCCESS"){                
                 alert("게시글 삭제를 성공하였습니다.");                
-                //goGlaaList();              
-                alert("1");
                 window.location.href = "glaa.do";
             } else {                
                 alert("게시글 삭제를 실패하였습니다.");    

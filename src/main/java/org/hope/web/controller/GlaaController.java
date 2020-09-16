@@ -44,7 +44,7 @@ public class GlaaController {
 	} 
 	
 	//갤러리 작성 페이지 이동
-	@RequestMapping(value="/uploadForm", method=RequestMethod.GET) 
+	@RequestMapping(value="/uploadForm.do", method=RequestMethod.GET) 
 	public String showUploadForm() { 
 		return "GlaaUploadForm"; 
 	}
@@ -72,9 +72,7 @@ public class GlaaController {
 	@RequestMapping("/Glaa1000_select.do")
 	@ResponseBody 
 	public Map<String, Object> glaaSelect(@RequestParam HashMap<String, Object> paramMap) {
-		System.out.println(paramMap);
 		Map<String, Object> map = glaaService.selectGlaa(paramMap);
-		System.out.println("aaaaaa");
 		return map; 
 	}
 
