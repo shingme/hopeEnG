@@ -507,6 +507,13 @@ mark,
   height: auto;
 }
 
+.img-main-gallery{
+  max-width: 100%;
+  width:100%;
+  height: 268px;
+}
+
+
 .img-thumbnail {
   padding: 0.25rem;
   background-color: #fff;
@@ -586,8 +593,8 @@ pre code {
   padding-left: 0.75rem;
   margin-right: auto;
   margin-left: auto;
-  min-height:740px;
-  margin-top:93px;
+  min-height:780px;
+  margin-top:102px;
 }
 
 form{
@@ -631,6 +638,12 @@ form .btn_radio{
   }
   .inner {
     max-width: 720px;
+  }
+  .ceoComment{
+	width:100%;
+  }
+  .ceoPicture{
+	float: none;
   }
 }
 @media (min-width: 992px) {
@@ -984,8 +997,8 @@ form .btn_radio{
   }
 
   .col-sm-6 {
-    flex: 0 0 50%;
-    max-width: 50%;
+    /*flex: 0 0 50%;*/
+    /*max-width: 50%;*/
   }
 
   .col-sm-7 {
@@ -10159,6 +10172,45 @@ p {
   margin-bottom: 4rem;
 }
 
+.footerLeft{
+	max-width:25%;
+}
+
+.footerMid{
+	padding-left: 60px;
+	min-width: 45%;
+	max-width: 45%;
+}
+
+@media (max-width: 768px) {
+	
+	.masthead-heading{
+		font-size:2.25rem !important;
+	}
+	
+	.text-muted{
+		font-size:1.35em;
+	}
+	.footerMid{
+		padding-left: 0px;
+		min-width: 100%;
+		max-width: 100%;
+		width:100%:
+	}
+	
+	.footerLeft{
+		max-width:100%;
+		width:100%;
+	}
+	
+	.footerLogin{
+		width:100%;
+	}
+	
+	
+	
+}
+
 @media (min-width: 768px) {
   section {
     /* padding: 9rem 0; */
@@ -10278,7 +10330,7 @@ header.masthead {
   padding-bottom: 6rem; */
   text-align: center;
   color: #fff;
-  margin-top:93px;
+  margin-top:102px;
   /* background-image: url("../image/img/header-bg.jpg");
   background-repeat: no-repeat;
   background-attachment: scroll;
@@ -10317,7 +10369,7 @@ header.masthead .masthead-heading {
     margin-bottom: 2rem;
   }
   header.masthead .masthead-heading {
-    font-size: 4.5rem;
+    font-size: 3.5rem;
     font-weight: 700;
     line-height: 4.5rem;
     margin-bottom: 4rem;
@@ -10361,10 +10413,17 @@ header.masthead .masthead-heading {
   font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   font-weight: 700;
   margin-bottom: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 #portfolio .portfolio-item .portfolio-caption .portfolio-caption-subheading {
   font-style: italic;
   font-family: "Droid Serif", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:normal;
+  max-height:68px;
 }
 
 .portfolio-modal .modal-dialog {
@@ -10745,6 +10804,7 @@ section#contact form#contactForm :-ms-input-placeholder {
 	font-size: 20px;
 	margin: 0 auto;
 	display: block;
+	margin-bottom: 20px;
 }
 
 .infoTxt{
@@ -10762,7 +10822,19 @@ section#contact form#contactForm :-ms-input-placeholder {
 	width: 100%;
 }
 
-@media (max-width: 800px) {
+/*CEO 소개*/
+.ceoComment{
+	float: left;
+	width: 60%;
+	padding: 2%;
+}
+
+.ceoPicture{
+	float: right;
+	margin-bottom: 25px;
+}
+
+@media (max-width: 991px) {
 	.infoTxt{
 		width:100%;
 	}
@@ -10770,6 +10842,13 @@ section#contact form#contactForm :-ms-input-placeholder {
 	.infoChart {
 		width:100%;
 		display:contents;
+	}
+	
+	.ceoComment{
+		width:100%;
+	}
+	.ceoPicture{
+		float: none;
 	}
 }
 
@@ -10787,7 +10866,7 @@ section#contact form#contactForm :-ms-input-placeholder {
 .gallyList li.gallyLi{
 	position: relative;
     width: 500px;
-    height: 438px;
+    height: 100%;
 }
 .gallyList li .user{
 	display: block;
@@ -10815,6 +10894,7 @@ section#contact form#contactForm :-ms-input-placeholder {
 	display: block;
 	vertical-align: top;
 	width:100%;
+	height:330px;
 }
 
 .gallyList li.gallyLi .txtWrap {
@@ -10826,6 +10906,9 @@ section#contact form#contactForm :-ms-input-placeholder {
     font-family: 'nbgbd';
     font-size: 21px;
     line-height: 26px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 .gallyList > li .txtWrap .pdate {
     display: block;
@@ -10837,6 +10920,5 @@ section#contact form#contactForm :-ms-input-placeholder {
 .gallyList > li .txtWrap .sub {
     display: block;
     overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
+    height:107px;
 }

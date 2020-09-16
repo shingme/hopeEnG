@@ -11,7 +11,7 @@
 <script src="${pageContext.request.contextPath}/js/jquery-3.5.1.min.js" type="text/javascript"></script>
 <script>
 	var pageNum = 1;
-	var cntPerPage = 5;
+	var cntPerPage = 10;
 	var searchArr = new Object();
 	
 	$(document).ready(function(){
@@ -25,7 +25,7 @@
 			
 			searchArr = new Object();
 			searchArr[$("#select").val()] = $("#searchText").val();
-			searchArr["pageNum"] = 1;
+			searchArr["pageNum"] = pageNum;
 			searchArr["cntPerPage"] = cntPerPage;
 			
 			ajaxComm(url, searchArr, braaSelectCallback);			
@@ -148,6 +148,7 @@
 		<select id="select"  class="form-control" style="width:100px;float:left;">
 			<option value="bordNm">제목</option>
 			<option value="userNm">이름</option>
+			<option value="bordNo">번호</option>
 		</select>
 		<input  class="form-control-mid" type="text" id="searchText" style="float:left;margin-left:5px;"/>
 		<button id="searchBtn" style="margin-left:10px;">검색</button>

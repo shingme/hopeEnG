@@ -65,53 +65,112 @@
      <script src="${pageContext.request.contextPath}/js/slick.js" type="text/javascript" charset="utf-8"></script>
      <script type="text/javascript">
      	$(function(){
-	   	  $(".lazy").slick({
-	   		lazyLoad: 'ondemand', // ondemand progressive anticipated
-	        infinite: true,
-	        arrows : true,
-	        slidesToShow : 1,
-	        fade: true,
-	        slidesToScroll: 1,
-	        speed: 1500,
-	        dots: true,
-	        prevArrow : "<button type='button' class='slick-prev'>Previous</button>",		// 이전 화살표 모양 설정
-			nextArrow : "<button type='button' class='slick-next'>Next</button>"		// 다음 화살표 모양 설정
-	       });
-	   	  
 			
-			ajaxComm("/Home1000_select.do","",homeSelectCallback);
+			ajaxComm("/Home1000_select.do","",homeSelectCallback,errorCallbackfn);
 			
      	});
+     	
+     	function errorCallbackfn(){
+     			var appendDiv = ""
+    			
+    			appendDiv = "<div class='container' style=\'background:url("+"../image/img/main/main_bg1.jpg"+") no-repeat center; height:640px;  background-size:100%; max-width:none;background-size: cover;\'>";
+				appendDiv += "<div class='masthead-subheading'>For Number One!</div>";
+				appendDiv += "<div class='masthead-heading text-uppercase'>최고의 품질과 서비스<br><br> 끊임없는 신기술 역량함양으로 고객만족 실현</div>";
+				appendDiv += "<a class='btn btn-primary btn-xl text-uppercase js-scroll-trigger' href='/braa/braa.do'>문의하기</a>";
+				appendDiv += "</div>";
+				
+				//임시 Top 설정
+				$(".slider").append(appendDiv);
+				$(".slider").append(appendDiv);	
+				
+				//임시이미지
+    			$("#gally01").append("<img class='img-main-gallery' src='/image/img/portfolio/02-thumbnail.jpg' alt='' />");
+    			$("#gally02").append("<img class='img-main-gallery' src='/image/img/portfolio/03-thumbnail.jpg' alt='' />");
+				
+    			makeSlick();
+     	}
+     	
+     	function makeSlick(){
+     		$(".lazy").slick({
+		   		lazyLoad: 'ondemand', // ondemand progressive anticipated
+		        infinite: true,
+		        arrows : true,
+		        slidesToShow : 1,
+		        fade: true,
+		        slidesToScroll: 1,
+		        speed: 1500,
+		        dots: true,
+		        prevArrow : "<button type='button' class='slick-prev'>Previous</button>",		// 이전 화살표 모양 설정
+				nextArrow : "<button type='button' class='slick-next'>Next</button>"		// 다음 화살표 모양 설정
+		       });
+     	}
+     	
      	
      	function homeSelectCallback(result){
     		var stus = "";
     		var click = "";
-    		console.log(result.HomeList);
-    		console.log(result.HomeList.length);
-    		if(result.HomeList.length >0){
-	    		for(var i=0; i<result.HomeList.length;i++){
+    		//이미지 Top
+    		if(result.HomeTopList.length >0){
+    			
+    			for(var i in result.HomeTopList){
+    				var appendDiv = ""
+    				
+    				appendDiv = "<div class='container' style='background:url("+"/glly/"+result.HomeTopList[i].firstFilePath+") no-repeat center; height:640px;  background-size:100%; max-width:none;background-size: cover;'>";
+    				appendDiv += "<div class='masthead-subheading'>"+result.HomeTopList[i].comment+"</div>";
+    				appendDiv += "<div class='masthead-heading text-uppercase'>"+result.HomeTopList[i].subComment+"</div>";
+    				appendDiv += "<a class='btn btn-primary btn-xl text-uppercase js-scroll-trigger' href='/braa/braa.do'>문의하기</a>";
+    				appendDiv += "</div>";
+    				
+    				$(".slider").append(appendDiv);
+    			}
+    			
+    			makeSlick();
+    		}
+    		else{
+    			var appendDiv = ""
+    			
+    			appendDiv = "<div class='container' style='background:url("+"../image/img/main/main_bg1.jpg"+") no-repeat center; height:640px;  background-size:100%; max-width:none;background-size: cover;'>";
+				appendDiv += "<div class='masthead-subheading'>For Number One!</div>";
+				appendDiv += "<div class='masthead-heading text-uppercase'>최고의 품질과 서비스<br><br> 끊임없는 신기술 역량함양으로 고객만족 실현</div>";
+				appendDiv += "<a class='btn btn-primary btn-xl text-uppercase js-scroll-trigger' href='/braa/braa.do'>문의하기</a>";
+				appendDiv += "</div>";
+				
+				$(".slider").append(appendDiv);
+				$(".slider").append(appendDiv);
+				
+				makeSlick();
+    		}
+    		//이미지 bottom
+    		if(result.HomeBottmList.length >0){
+	    		for(var i=0; i<result.HomeBottmList.length;i++){
 	    			if(i>2) break;
-	    			$("#gally0"+(i+1)).append("<img class='img-fluid' src=\'/glly/"+result.HomeList[i].firstFilePath.substr(14)+"'/>");
+	    			$("#gally0"+(i+1)).append("<img class='img-main-gallery' src=\'/glly/"+result.HomeBottmList[i].firstFilePath+"'/>");
+	    			$("#gally0"+(i+1)).siblings().children().eq(0).text(result.HomeBottmList[i].comment);
+    				$("#gally0"+(i+1)).siblings().children().eq(1).text(result.HomeBottmList[i].subComment);
 	    		}
 	    		
 	    		for(var i=1;i<=2;i++){
-	    			console.log($("#gally0"+i+">img").length);
 	    			if($("#gally0"+i+">img").length == "0"){
-	    				console.log(i);
-	    				$("#gally0"+i).append("<img class='img-fluid' src='/image/img/portfolio/02-thumbnail.jpg' alt='' />");
+	    				$("#gally0"+i).append("<img class='img-main-gallery' src='/image/img/portfolio/02-thumbnail.jpg' alt='' />");
 	    			}
 	 
 	    		}
     		}
     		else{
-    			$("#gally01").append("<img class='img-fluid' src='/image/img/portfolio/02-thumbnail.jpg' alt='' />");
-    			$("#gally02").append("<img class='img-fluid' src='/image/img/portfolio/03-thumbnail.jpg' alt='' />");
+    			$("#gally01").append("<img class='img-main-gallery' src='/image/img/portfolio/02-thumbnail.jpg' alt='' />");
+    			$("#gally02").append("<img class='img-main-gallery' src='/image/img/portfolio/03-thumbnail.jpg' alt='' />");
     		}
+    		
+    		
+    		
+    		
+    		
+    		
     		
     		return;
     	}
      	
-     	function ajaxComm(url, data, callback){
+     	function ajaxComm(url, data, callback,errorCallback){
     		$.ajax({
     			url:url,
     			type:"get",
@@ -119,9 +178,7 @@
     			dataType:"json",
     			contentType:"application/json; charset=UTF-8",
     			success:callback,
-    			error:function(xhr, status, error){
-    				console.log(xhr+"\n"+status+"\n"+error);
-    			}
+    			error:errorCallback
     		});
     	}
     	$(document).ajaxStart(function(){
@@ -158,63 +215,14 @@
         <!-- Masthead-->
         <header class="masthead">
         <section class="lazy slider" data-sizes="50vw">
-        	<!-- <div>
-		      <img data-lazy="http://placehold.it/350x300?text=1-350w" data-srcset="http://placehold.it/650x300?text=1-650w 650w, http://placehold.it/960x300?text=1-960w 960w" data-sizes="100vw">
-		    </div>
-		    <div>
-		      <img data-lazy="http://placehold.it/350x300?text=2-350w" data-srcset="http://placehold.it/650x300?text=2-650w 650w, http://placehold.it/960x300?text=2-960w 960w" data-sizes="100vw">
-		    </div>
-		    <div>
-		      <img data-lazy="http://placehold.it/350x300?text=3-350w"  data-srcset="http://placehold.it/650x300?text=3-650w 650w, http://placehold.it/960x300?text=3-960w 960w" data-sizes="100vw">
-		    </div>
-		    <div>
-		      <img data-lazy="http://placehold.it/350x300?text=4-350w"  data-srcset="http://placehold.it/650x300?text=4-650w 650w, http://placehold.it/960x300?text=4-960w 960w" data-sizes="100vw">
-		    </div>
-		    <div>
-		      <img data-lazy="http://placehold.it/350x300?text=5-350w"  data-srcset="http://placehold.it/650x300?text=5-650w 650w, http://placehold.it/960x300?text=5-960w 960w" data-sizes="100vw">
-		    </div>
-		    <div>
-		      this slide should inherit the sizes attr from the parent slider
-		      <img data-lazy="http://placehold.it/350x300?text=6-350w"  data-srcset="http://placehold.it/650x300?text=6-650w 650w, http://placehold.it/960x300?text=6-960w 960w">
-		    </div> -->
-        
-            <div class="container" style="background:url('../image/img/main/main_bg1.jpg') no-repeat center; height:640px;  background-size:100%; max-width:none;background-size: cover;">
-                <div class="masthead-subheading">For Number One!</div>
-                <div class="masthead-heading text-uppercase">최고의 품질과 서비스<br><br> 끊임없는 신기술 역량함양으로 고객만족 실현</div>
-                <a class="btn btn-primary btn-xl text-uppercase js-scroll-trigger" href="/braa/braa.do">문의하기</a>
-            </div>
-            <div class="container" style="background:url('../image/img/main/main_bg2.jpg') no-repeat center; height:640px; background-size:100%; max-width:none;background-size: cover;">
-                <div class="masthead-subheading">회사소개 문구2</div>
-                <div class="masthead-heading text-uppercase">상세 소개2</div>
-                <a class="btn btn-primary btn-xl text-uppercase js-scroll-trigger" href="/braa/braa.do">문의하기</a>
-            </div>
-            <div class="container" style="background:url('../image/img/main/main_bg3.jpg') no-repeat center; height:640px; background-size:100%; max-width:none;background-size: cover;">
-                <div class="masthead-subheading">회사소개 문구3</div>
-                <div class="masthead-heading text-uppercase">상세 소개3</div>
-                <a class="btn btn-primary btn-xl text-uppercase js-scroll-trigger" href="/braa/braa.do">문의하기</a>
-            </div>
-            <div class="container" style="background:url('../image/img/main/main_bg1.jpg') no-repeat center; height:640px; background-size:100%; max-width:none;background-size: cover;">
-                <div class="masthead-subheading">회사소개 문구4</div>
-                <div class="masthead-heading text-uppercase">상세 소개4</div>
-                <a class="btn btn-primary btn-xl text-uppercase js-scroll-trigger" href="/braa/braa.do">문의하기</a>
-            </div>
-            <div class="container" style="background:url('../image/img/main/main_bg2.jpg') no-repeat center; height:640px; background-size:100%; max-width:none;background-size: cover;">
-                <div class="masthead-subheading">회사소개 문구5</div>
-                <div class="masthead-heading text-uppercase">상세 소개5</div>
-                <a class="btn btn-primary btn-xl text-uppercase js-scroll-trigger" href="/braa/braa.do">문의하기</a>
-            </div>
-            <div class="container" style="background:url('../image/img/main/main_bg3.jpg') no-repeat center; height:640px; background-size:100%; max-width:none;background-size: cover;">
-                <div class="masthead-subheading">회사소개 문구6</div>
-                <div class="masthead-heading text-uppercase">상세 소개6</div>
-                <a class="btn btn-primary btn-xl text-uppercase js-scroll-trigger" href="/braa/braa.do">문의하기</a>
-            </div>
+        	
             </section>
         </header>
         <!-- Services-->
         <section class="page-section" id="services">
             <div class="container">
                 <div class="text-center">
-                    <h2 class="section-heading text-uppercase">(주)희망이엔지 소개</h2>
+                    <h2 class="section-heading text-uppercase" data-speed="10">(주)희망이엔지 소개</h2>
                     <h3 class="section-subheading text-muted">자동제어 및 전기공사를 이끄는 기업 ㈜희망ENG는 일류기업으로 성장하기 위해 최고의 품질과 서비스를 제공하기 위해 최선을 다하고 있으며,<br>끊임없는 노력으로 신기술 역량함양으로  고객의 만족을 실현하기 위해 노력하고 있습니다.
                     </h3>
                 </div>
@@ -305,81 +313,21 @@
             </div>
         </section>
         <!-- About-->
-        <section class="page-section" id="about">
-            <div class="container">
-                <div class="text-center">
-                    <h2 class="section-heading text-uppercase">작업단계</h2>
-                    <h3 class="section-subheading text-muted">안전하고 체계적인 단계를 밟습니다.</h3>
-                </div>
-                <ul class="timeline">
-                    <li>
-                        <div class="timeline-image"><img class="rounded-circle img-fluid" src="/image/img/about/1.jpg" alt="" /></div>
-                        <div class="timeline-panel">
-                            <div class="timeline-heading">
-                                <h4>분석</h4>
-                                <h4 class="subheading">요구사항분석</h4>
-                            </div>
-                            <div class="timeline-body"><p class="text-muted">요구사항을 분석 합니다.</p></div>
-                        </div>
-                    </li>
-                    <li class="timeline-inverted">
-                        <div class="timeline-image"><img class="rounded-circle img-fluid" src="/image/img/about/2.jpg" alt="" /></div>
-                        <div class="timeline-panel">
-                            <div class="timeline-heading">
-                                <h4>설계</h4>
-                                <h4 class="subheading">잘 설계합니다</h4>
-                            </div>
-                            <div class="timeline-body"><p class="text-muted">설계 합니다</p></div>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="timeline-image"><img class="rounded-circle img-fluid" src="/image/img/about/3.jpg" alt="" /></div>
-                        <div class="timeline-panel">
-                            <div class="timeline-heading">
-                                <h4>체크</h4>
-                                <h4 class="subheading">체크합니다</h4>
-                            </div>
-                            <div class="timeline-body"><p class="text-muted">잘 체크합니다</p></div>
-                        </div>
-                    </li>
-                    <li class="timeline-inverted">
-                        <div class="timeline-image"><img class="rounded-circle img-fluid" src="/image/img/about/4.jpg" alt="" /></div>
-                        <div class="timeline-panel">
-                            <div class="timeline-heading">
-                                <h4>구축</h4>
-                                <h4 class="subheading">시스템 구축을 합니다.</h4>
-                            </div>
-                            <div class="timeline-body"><p class="text-muted">시스템 구축</p></div>
-                        </div>
-                    </li>
-                    <li class="timeline-inverted">
-                        <div class="timeline-image">
-                            <h4>
-                               	시스템  완료
-                                <br />
-                           		    설비
-                                <br />
-              					   완료
-                            </h4>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-        </section>
+        
         <!-- Clients-->
         <div class="py-5">
             <div class="container slick_icon" id="">
                 <div class="row">
-                    <div class="col-md-3 col-sm-6 my-3">
+                    <div class="col-md-3 col-sm-5 my-3">
                         <a href="#!"><img class="img-fluid d-block mx-auto" src="/image/img/main/DSME.png" alt="" /></a>
                     </div>
-                    <div class="col-md-3 col-sm-6 my-3">
+                    <div class="col-md-3 col-sm-5 my-3">
                         <a href="#!"><img class="img-fluid d-block mx-auto" src="/image/img/main/metanetDT.png" alt="" /></a>
                     </div>
-                    <div class="col-md-3 col-sm-6 my-3">
+                    <div class="col-md-3 col-sm-5 my-3">
                         <a href="#!"><img class="img-fluid d-block mx-auto" src="/image/img/main/STM.png" alt="" /></a>
                     </div>
-                    <div class="col-md-3 col-sm-6 my-3">
+                    <div class="col-md-3 col-sm-5 my-3">
                         <a href="#!"><img class="img-fluid d-block mx-auto" src="/image/img/main/KICS.png" alt="" /></a>
                     </div>
                 </div>
@@ -406,7 +354,7 @@
         
         <!-- Bootstrap core JS-->
         <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> -->
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js"></script>
+        <!-- <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js"></script> -->
         <!-- Third party plugin JS-->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
         <!-- Contact form JS-->

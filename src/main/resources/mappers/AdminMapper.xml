@@ -3,7 +3,7 @@
 
 <mapper namespace="AdminMapper">
 
-	<select id="loginCheck" parameterType="org.hope.web.admin.LoginDTO" resultType="org.hope.web.admin.AdminVO">
+	<select id="loginCheck" parameterType="org.hope.web.admin.AdminVO" resultType="org.hope.web.admin.AdminVO">
 		SELECT ADMIN_ID as adminId
 		     , ADMIN_PW as adminPw
 			 , ADMIN_NM as adminNm

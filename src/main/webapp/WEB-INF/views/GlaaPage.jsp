@@ -129,15 +129,10 @@
     
     /** 게시판 - 삭제 콜백 함수 */
     function deleteGlaaCallback(obj){
-    	alert("234");
         if(obj != null){        
-            
-            
             
             if(obj == "SUCCESS"){                
                 alert("게시글 삭제를 성공하였습니다.");                
-                //goGlaaList();              
-                alert("1");
                 window.location.href = "glaa.do";
             } else {                
                 alert("게시글 삭제를 실패하였습니다.");    
@@ -148,7 +143,10 @@
 </script>
 </head>
 <body>
-
+<%
+	String name;
+	name = (String)session.getAttribute("name");
+%>
     
 <div id="wrap">
     <div id="container">
@@ -169,10 +167,12 @@
                 <input type="hidden" id="glly_no"        name="glly_no"    value="${gllyNo}"/> <!-- 게시글 번호 -->
                 <input type="hidden" id="search_type"    name="search_type"     value="S"/> <!-- 조회 타입 - 상세(S)/수정(U) -->
             </form>
-            <div class="" style="margin-top:20px;">
+            <div class="" style="margin-top:20px;margin-bottom:20px;">
                 <button type="button" class="" onclick="javascript:goGlaaList();">목록으로</button>
+                <%if(name != null){ %>
                 <button type="button" class="" onclick="javascript:goGlaaUpdate();">수정하기</button>
                 <button type="button" class="" onclick="javascript:goDeleteGlaa();">삭제하기</button>
+                <%} %>
             </div>
         </div>
     </div>

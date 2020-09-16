@@ -52,6 +52,13 @@ function insertGlaa(){
     	return;
     }
     
+    var lastDot = fileCheck.lastIndexOf('.');
+    var fileExt = fileCheck.substring(lastDot+1, fileCheck.length).toLowerCase();
+    
+    if(fileExt != "img" && fileExt != "jpg" && fileExt != "jpeg" && fileExt != "png" && fileExt != "gif"){
+    	alert("등록할 수 없는 파일 입니다.");
+    	return;
+    }
    
         
     var yn = confirm("게시글을 등록하시겠습니까?");        
@@ -126,16 +133,16 @@ function insertGlaaCallback(obj){
                             <td><textarea class="form-control" id="gllyCts" name="gllyCts" cols="30" rows="10" class="textarea01"></textarea></td>
                         </tr>
                         <tr>
-                            <th>메인 문구<span class="t_red">*</span></th>
+                            <th>메인 문구<span class="t_red"></span></th>
                             <td><textarea class="form-control" id="comment" name="comment" cols="30" rows="10" class="textarea01"></textarea></td>
                         </tr>
                         <tr>
-                            <th>추가 문구<span class="t_red">*</span></th>
+                            <th>추가 문구<span class="t_red"><span></th>
                             <td><textarea class="form-control" id="subComment" name="subComment" cols="30" rows="10" class="textarea01"></textarea></td>
                         </tr>
                         <tr>
                             <th scope="row">첨부파일</th>
-                            <td><input multiple="multiple" type="file" id="files[0]" name="files[0]" value=""></td>
+                            <td><input multiple="multiple" type="file" accept="image/*" id="files[0]" name="files[0]" value="" >img, gif, png, jpg, jpeg 파일만 가능합니다.</td>
                         </tr>
                        
 					

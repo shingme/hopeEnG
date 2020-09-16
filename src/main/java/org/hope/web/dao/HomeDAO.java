@@ -26,17 +26,25 @@ public class HomeDAO {
 		this.sqlSession = sqlSession;
 	}
 	
-	public List<HomeVO> select(Map<String, String> map) throws DataAccessException{ 
+	public List<HomeVO> selectTop(Map<String, String> map) throws DataAccessException{ 
 		// TODO Auto-generated method stub
 		//System.out.println(map.toString());
-		List<HomeVO> tmp = sqlSession.selectList("HomeMapper.Home1000_select", map);
-		System.out.println("MAP 테스트!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-		System.out.println(tmp.toString()); 
-		System.out.println("Collection test");
+		List<HomeVO> tmp = sqlSession.selectList("HomeMapper.Home1000_selectTop", map);
+		//System.out.println(tmp.get(0).getHomeFileVO().toString());
+		return tmp;
+	}
+	
+	
+	public List<HomeVO> selectBottm(Map<String, String> map) throws DataAccessException{ 
+		// TODO Auto-generated method stub
+		//System.out.println(map.toString());
+		List<HomeVO> tmp = sqlSession.selectList("HomeMapper.Home1000_selectBottm", map);
 		
 		//System.out.println(tmp.get(0).getHomeFileVO().toString());
 		return tmp;
 	}
+	
+	
 	
 	
 

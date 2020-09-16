@@ -21,9 +21,14 @@ public class HomeServiceImpl implements HomeService{
 	
 
 	@Override
-	public List<HomeVO> selectHome(Map<String, String> map) {
+	public List<HomeVO> selectHomeTop(Map<String, String> map) {
 		// TODO Auto-generated method stub
-		return HomeDAO.select(map);
+		return HomeDAO.selectTop(map);
+	}
+	@Override
+	public List<HomeVO> selectHomeBottm(Map<String, String> map) {
+		// TODO Auto-generated method stub
+		return HomeDAO.selectBottm(map);
 	}
 
 
