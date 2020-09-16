@@ -154,8 +154,7 @@
 <h2 class="" > 갤러리</h2>
 	<div style="margin-bottom:15px;">
 		<select id="select" class="form-control" style="width:100px;float:left;">
-			<option value="bordNm">제목</option>
-			<option value="userNm">이름</option>
+			<option value="gllyNm">제목</option>
 		</select>
 		<input class="form-control-mid" type="text" id="searchText" style="float:left;margin-left:5px;"/>
 		<button id="searchBtn" style="margin-left:10px;">검색</button>

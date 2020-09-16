@@ -72,7 +72,6 @@ public class GlaaController {
 	@RequestMapping("/Glaa1000_select.do")
 	@ResponseBody 
 	public Map<String, Object> glaaSelect(@RequestParam HashMap<String, Object> paramMap) {
-
 	Map<String, Object> map = glaaService.selectGlaa(paramMap);
 	  
 	return map; 
