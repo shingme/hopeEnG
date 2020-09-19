@@ -25,7 +25,7 @@
 			
 			searchArr = new Object();
 			searchArr[$("#select").val()] = $("#searchText").val();
-			searchArr["pageNum"] = pageNum;
+			searchArr["pageNum"] = 1;
 			searchArr["cntPerPage"] = cntPerPage;
 			
 			ajaxComm(url, searchArr, braaSelectCallback);			
