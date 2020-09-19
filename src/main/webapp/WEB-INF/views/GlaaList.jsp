@@ -31,7 +31,7 @@
 			var url = "/glaa/Glaa1000_select.do";
 			var searchArr = new Object();
 			
-			searchArr["pageNum"] = pageNum;
+			searchArr["pageNum"] = 1;
 			searchArr["cntPerPage"] = cntPerPage;
 			searchArr[$("#select").val()] = $("#searchText").val();
 

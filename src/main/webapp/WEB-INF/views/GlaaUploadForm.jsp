@@ -105,7 +105,7 @@ function checkFile(el){
 	for(i=0; i < file.length; i++){
 		sum += file[i].size;
 	}
-	alert(sum);
+	//alert(sum);
 	if(sum > 3 * 1024 *1024){
 		alert('3MB 이상 첨부할 수 없습니다.\n\n' + '현재파일 용량 : ' + (Math.round(sum / 1024 / 1024 * 100) / 100) + 'MB');
 	}
