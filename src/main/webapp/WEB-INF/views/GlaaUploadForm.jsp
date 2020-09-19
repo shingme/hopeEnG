@@ -14,7 +14,6 @@
 <body>
 
 <script src="${pageContext.request.contextPath}/js/jquery-3.5.1.min.js" type="text/javascript"></script>
-
 <script>
 $(document).ready(function(){        
     
@@ -29,7 +28,6 @@ function goGlaaList(){
 function insertGlaa(){
 
 	var formData = new FormData($('#gllyForm')[0])
-	
 	
     var gllySubject = $("#gllyNm").val();
     var gllyContent = $("#gllyCts").val();
@@ -64,7 +62,7 @@ function insertGlaa(){
     var yn = confirm("게시글을 등록하시겠습니까?");        
     if(yn){
     	
-        $.ajax({
+         $.ajax({
             url   : "/glaa/Glaa1000_insert.do",
 			data : formData,
 			contentType : false,
@@ -79,7 +77,7 @@ function insertGlaa(){
             error     : function(xhr, status, error) {}
             
         });
-        $("#gllyForm").submit();
+        //$("#gllyForm").submit(); 
 
     }
  
@@ -96,8 +94,24 @@ function insertGlaaCallback(obj){
         } else {                
             alert("게시글 등록을 실패하였습니다.");    
             return;
-        }
+        } 
     }
+}
+function checkFile(el){
+
+	var file = el.files;
+
+	var sum=0;
+	for(i=0; i < file.length; i++){
+		sum += file[i].size;
+	}
+	alert(sum);
+	if(sum > 3 * 1024 *1024){
+		alert('3MB 이상 첨부할 수 없습니다.\n\n' + '현재파일 용량 : ' + (Math.round(sum / 1024 / 1024 * 100) / 100) + 'MB');
+	}
+	else return;
+
+	el.outerHTML = el.outerHTML;
 }
 
 </script>
@@ -142,7 +156,7 @@ function insertGlaaCallback(obj){
                         </tr>
                         <tr>
                             <th scope="row">첨부파일</th>
-                            <td><input multiple="multiple" type="file" accept="image/*" id="files[0]" name="files[0]" value="" >img, gif, png, jpg, jpeg 파일만 가능합니다.</td>
+                            <td><input multiple="multiple" type="file" accept="image/*" id="files[0]" onchange="checkFile(this)" name="files[0]" value="" >img, gif, png, jpg, jpeg 파일만 가능합니다.</td>
                         </tr>
                        
 					

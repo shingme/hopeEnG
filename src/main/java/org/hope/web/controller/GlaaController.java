@@ -5,15 +5,15 @@ import java.io.File;
 import java.io.IOException;
 
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
-import java.util.UUID;
+
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.hope.web.domain.BraaVO;
 import org.hope.web.domain.GlaaVO;
 import org.hope.web.service.GlaaService;
 import org.slf4j.MDC;
@@ -28,6 +28,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
@@ -73,26 +74,27 @@ public class GlaaController {
 	@ResponseBody 
 	public Map<String, Object> glaaSelect(@RequestParam HashMap<String, Object> paramMap) {
 		Map<String, Object> map = glaaService.selectGlaa(paramMap);
+		System.out.println(map.toString());
 		return map; 
 
 	}
 
-	// 갤러리 게시물 작성
 	@RequestMapping(value = "/Glaa1000_insert.do", method = RequestMethod.POST)
 	@ResponseBody 
-	public String glaaInsert(@ModelAttribute GlaaVO glaaVO, Model model, HttpServletRequest request) throws Exception{
+	public String glaaInsert(@ModelAttribute GlaaVO glaaVO, Model model, MultipartHttpServletRequest multi, HttpServletRequest request) throws Exception{
 		
 		try {
 			String root = request.getSession().getServletContext().getRealPath("/");
 			glaaVO.setFirstFilePath(root);
+			glaaVO.setFiles(multi.getFiles("files[0]"));
 			glaaService.insertGlaa(glaaVO);
 			return "SUCCESS";
 		} catch (Exception e) {
+			e.printStackTrace();
 			return "FALSE";
 		}
 		
 	}
-	
 	// 갤러리 수정화면 이동
 	@RequestMapping(value = "/Glaa1000_moveUpdateGlaaPage")
 	public String glaaUpdate(HttpServletRequest request, HttpServletResponse response) throws Exception {
