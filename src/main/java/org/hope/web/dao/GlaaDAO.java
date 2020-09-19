@@ -42,7 +42,7 @@ public class GlaaDAO {
 	public List<GlaaVO> select(Map<String, Object> map) throws DataAccessException{ 
 
 		List<GlaaVO> tmp = sqlSession.selectList("GlaaMapper.Glaa1000_select", map);
-
+		System.out.println("DAO : "+tmp.toString());
 		return tmp;
 	}
 	
@@ -52,8 +52,8 @@ public class GlaaDAO {
 		return tmp;
 	}
 
-	public List<Map<String, String>> selectImagePath(Map<String, String> map){
-		return sqlSession.selectList("GlaaMapper.Glaa1000_selectImagePath",map);
+	public List<GlaaFileVO> selectImagePath(String gllyNo){
+		return sqlSession.selectList("GlaaMapper.Glaa1000_selectFileList", gllyNo);
 	}
 	
 	public int updateGlaa(GlaaVO glaa) throws DataAccessException{

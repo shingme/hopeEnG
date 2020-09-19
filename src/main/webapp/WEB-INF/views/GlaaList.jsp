@@ -21,7 +21,7 @@
 	var cntPerPage = 6;
 	var searchArr = new Object();
 	
-	$(document).ready(function(){ //메인에서 클릭해서 들어오면 서버에서 무조건 5개 가지고 옴
+	$(document).ready(function(){ //메인에서 클릭해서 들어오면 서버에서 무조건 6개 가지고 옴
 		searchArr["pageNum"] = pageNum;
 		searchArr["cntPerPage"] = cntPerPage;
 		

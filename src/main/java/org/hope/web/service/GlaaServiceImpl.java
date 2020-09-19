@@ -30,11 +30,10 @@ public class GlaaServiceImpl implements GlaaService{
 	@Override
 	public void insertGlaa(GlaaVO glaaVO) throws Exception {
 
-		
+	
 		List<GlaaFileVO> glaaFileList = getGlaaFileInfo(glaaVO);
 		glaaVO.setFirstFilePath(glaaFileList.get(0).getFileNameKey());
 		int gllyNo = glaaDAO.insert(glaaVO);
-		System.out.println("갤러리번호 : "+gllyNo);
 		for(GlaaFileVO glaaFileVO : glaaFileList) {
 			glaaFileVO.setGllyNo(gllyNo);
 			glaaDAO.insertGlaaFile(glaaFileVO);
@@ -50,7 +49,6 @@ public class GlaaServiceImpl implements GlaaService{
 		//페이징 처리
 		PagingVO paging = new PagingVO(cnt, Integer.parseInt((String)map.get("pageNum")), Integer.parseInt((String)map.get("cntPerPage")));
 		map.put("start", paging.getStart()-1);
-		
 		//페이징 정보도 함께 전달
 		resultMap.put("paging", paging);
 		resultMap.put("glaaList", glaaDAO.select(map));
@@ -60,7 +58,11 @@ public class GlaaServiceImpl implements GlaaService{
 	@Override
 	public GlaaVO selectDetailGlaa(String gllyNo) {
 
-		return glaaDAO.selectDetail(gllyNo);
+		GlaaVO detailData = glaaDAO.selectDetail(gllyNo);
+		
+		List<GlaaFileVO> fileData = glaaDAO.selectImagePath(gllyNo);
+		detailData.setGlaaFileVO(fileData);
+		return detailData;
 	}
 
 	
@@ -98,8 +100,9 @@ public class GlaaServiceImpl implements GlaaService{
 				file.mkdirs();
 			}
 			int i=1;
+
 			for(MultipartFile multipartFile : files) {
-				
+	
 				fileName = multipartFile.getOriginalFilename();
 				fileExt = fileName.substring(fileName.lastIndexOf("."));
 				fileNameKey = getRandomString() + fileExt;
@@ -128,10 +131,6 @@ public class GlaaServiceImpl implements GlaaService{
     public static String getRandomString() {
  
         return UUID.randomUUID().toString().replaceAll("-", "");
-    }
-    
-    public List<Map<String, String>> getImagePathGlaa(Map<String, String> map){
-    	return glaaDAO.selectImagePath(map);
     }
     
     // 삭제

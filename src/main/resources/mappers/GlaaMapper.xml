@@ -22,7 +22,7 @@
 	<resultMap id="glaaFileListResult" type="org.hope.web.domain.GlaaFileVO">
 		<result property="gllyNo" column="GL_NO"></result>
 		<result property="fileNo" column="FILE_NO"></result>
-		<result property="filePath" column="FILE_PATH"></result>
+		<result property="fileNameKey" column="FILE_NM_KEY"></result>
 	</resultMap>
 	
 	<select id="GlaaMapper.Glaa1000_select" resultMap="glaaSelectListResult">
@@ -35,7 +35,8 @@
               ,COMMENT
               ,SUB_COMMENT
               ,DATE_FORMAT(REGI_DATE, '%Y-%m-%d') as REGI_DATE
-              ,DATE_FORMAT(MODY_DATE, '%Y-%m-%d') as MODY_DATE		
+              ,DATE_FORMAT(MODY_DATE, '%Y-%m-%d') as MODY_DATE
+              ,MODY_DATE as SORT_MODY_DATE		
               ,FIRST_FILE_PATH
 		FROM GLTB
 		WHERE 1=1
@@ -45,9 +46,9 @@
 	    <if test="glCts!=null and !glCts.equals('')">
 		AND GL_CTS LIKE CONCAT('%',#{glCts},'%')
 	    </if>
-	    ORDER BY MODY_DATE DESC
+	    ORDER BY SORT_MODY_DATE DESC
 	    ) T1
-	    ORDER BY MODY_DATE DESC
+	    ORDER BY SORT_MODY_DATE DESC
 	    LIMIT #{start},${cntPerPage}
 	</select>
 	
@@ -55,7 +56,7 @@
 		SELECT 
 			   GL_NO,
 			   FILE_NO,
-			   FILE_PATH
+			   FILE_NM_KEY
 		FROM FILETB
 		WHERE GL_NO=#{gllyNo}
 	</select>
