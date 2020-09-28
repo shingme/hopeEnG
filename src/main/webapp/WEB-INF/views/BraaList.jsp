@@ -11,14 +11,14 @@
 <script src="${pageContext.request.contextPath}/js/jquery-3.5.1.min.js" type="text/javascript"></script>
 <script>
 	var pageNum = 1;
-	var cntPerPage = 10;
+	var cntPerPage = 5;
 	var searchArr = new Object();
 	
 	$(document).ready(function(){
 		searchArr["pageNum"] = pageNum;
 		searchArr["cntPerPage"] = cntPerPage;
 		
-		ajaxComm("/braa/Braa1000_select.do", searchArr, braaSelectCallback);
+		ajaxComm("/braa/Braa1000_select.do", "get", searchArr, braaSelectCallback);
 		
 		$("#searchBtn").click(function(){
 			var url = "/braa/Braa1000_select.do";
@@ -28,7 +28,7 @@
 			searchArr["pageNum"] = 1;
 			searchArr["cntPerPage"] = cntPerPage;
 			
-			ajaxComm(url, searchArr, braaSelectCallback);			
+			ajaxComm(url, "get", searchArr, braaSelectCallback);			
 		})
 		
 		$("#write").click(function(){
@@ -66,35 +66,17 @@
 		});
 		
 		$("#braaTable").append(braaAppend);
-		
+
 		//페이징 처리
-		var paging = "";
-		$("#paging").empty();
-		
-		
-		$("#paging").append("<ul>");
-		
-		if(result.paging.startPage > 1){
-			$("#paging > ul").prepend("<li><a class='move prev' href='javascript:movePage("+((result.paging.startPage-1)*result.paging.cntPerPage)+")'>이전</a></li>");
-			$("#paging > ul").prepend("<li><a class='move first' href='javascript:movePage(1)'>처음</a></li>");
-		}
-		for(var i=((result.paging.startPage-1)*result.paging.cntPerPage)+1; i<=result.paging.endPage; i++){
-			paging += "<li><a href='javascript:movePage("+i+")'>"+i+"</a></li>";
-			pageNum = i;
-		}
-		$("#paging ul").append(paging);
-		if(result.paging.endPage < result.paging.lastPage){
-			$("#paging > ul").append("<li><a class='move next' href='javascript:movePage("+(result.paging.endPage+1)+")'>다음</a></li>");
-			$("#paging > ul").append("<li><a class='move end' href='javascript:movePage("+(result.paging.lastPage)+")'>끝</a></li>");
-		}
-		$("#paging").append("</ul>");
+		var paging = result.paging;
+		pagingList("paging", paging.startPage, paging.endPage, paging.cntPerPage, paging.lastPage, "movePage");	
 	}
 	
 	function movePage(num){
 		searchArr["pageNum"] = num;
 		searchArr["cntPerPage"] = cntPerPage;
 		
-		ajaxComm("/braa/Braa1000_select.do",searchArr,braaSelectCallback);
+		ajaxComm("/braa/Braa1000_select.do","get", searchArr,braaSelectCallback);
 	}
 	
 	function bordWrite(bordNum, bordRelease){	
@@ -110,7 +92,7 @@
 		
 		//비밀번호 입력
 		if(bordRelease == "N"){ //비공개
-			window.open("Braa1000_confirmPasswdWindow.do?bordNum="+bordNum,"","scrollbars=no,status=no,resizable=no,width=300,height=150");		
+			window.open("Braa1000_confirmPasswdWindow.do?bordNum="+bordNum,"","scrollbars=no,status=no,resizable=no,width=300,height=150,left="+ (window.screen.width-300)/2 +",top="+(window.screen.height-150)/2);		
 		}else{
 			checkAfterAction(bordNum);
 		}
@@ -120,21 +102,7 @@
 	function checkAfterAction(num){
 		window.location.href = "Braa1000_detailSelect.do?bordNum="+num;
 	}
-	
-	//공통 js만들면 제거 
-	function ajaxComm(url, data, callback){
-		$.ajax({
-			url:url,
-			type:"get",
-			data:data,
-			dataType:"json",
-			contentType:"application/json; charset=UTF-8",
-			success:callback,
-			error:function(xhr, status, error){
-				console.log(xhr+"\n"+status+"\n"+error);
-			}
-		});
-	}
+
 	$(document).ajaxStart(function(){
 		$('#Progress_Loading').show(); //ajax실행시 로딩바를 보여준다.
 	})

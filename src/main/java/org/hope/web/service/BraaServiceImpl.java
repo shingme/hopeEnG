@@ -103,17 +103,7 @@ public class BraaServiceImpl implements BraaService{
 		return braaDAO.delete(braaVO);
 		
 	}
-
-	//지울예정
-	public void temp() throws Exception{
-		List<BraaVO> list = braaDAO.hexTemp();
-		String str = "";
-		for(BraaVO val : list){
-			str = sha256(val.getUserPw());
-		}
-		
-	}
-
+	
 	@Override
 	public BraaVO encrypBraa(BraaVO braaVO, String updMode, HttpSession session) {
 		// TODO Auto-generated method stub

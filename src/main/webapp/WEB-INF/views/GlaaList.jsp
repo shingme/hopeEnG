@@ -25,7 +25,7 @@
 		searchArr["pageNum"] = pageNum;
 		searchArr["cntPerPage"] = cntPerPage;
 		
-		ajaxComm("/glaa/Glaa1000_select.do",searchArr,glaaSelectCallback);
+		ajaxComm("/glaa/Glaa1000_select.do", "get", searchArr, glaaSelectCallback);
 		
 		$("#searchBtn").click(function(){
 			var url = "/glaa/Glaa1000_select.do";
@@ -35,7 +35,7 @@
 			searchArr["cntPerPage"] = cntPerPage;
 			searchArr[$("#select").val()] = $("#searchText").val();
 
-			ajaxComm(url, searchArr, glaaSelectCallback);			
+			ajaxComm(url, "get", searchArr, glaaSelectCallback);			
 		})
 		$("#write").click(function(){
 			window.location.href = "/glaa/uploadForm.do";
@@ -87,51 +87,21 @@
 		});
 		
 		//페이징 처리
-		var paging ="";
-		$("#paging").empty();
-		
-		$("#paging").append("<ul>");
-		if(result.paging.startPage > 1){
-			$("#paging > ul").prepend("<li><a class='move prev' href='javascript:movePage("+((result.paging.startPage-1)*result.paging.cntPerPage)+")'>이전</a></li>");
-			$("#paging > ul").prepend("<li><a class='move first' href='javascript:movePage(1)'>처음</a></li>");
-		}
-		for(var i=((result.paging.startPage-1)*result.paging.cntPerPage)+1; i<=result.paging.endPage; i++){
-			paging += "<li><a href='javascript:movePage("+i+")'>"+i+"</a></li>";
-			pageNum = i;
-		}
-		$("#paging ul").append(paging);
-		if(result.paging.endPage < result.paging.lastPage){
-			$("#paging > ul").append("<li><a class='move next' href='javascript:movePage("+(result.paging.endPage+1)+")'>다음</a></li>");
-			$("#paging > ul").append("<li><a class='move end' href='javascript:movePage("+(result.paging.lastPage)+")'>끝</a></li>");
-		}
-		$("#paging").append("</ul>");
-		
+		var paging = result.paging;
+		pageNum = pagingList("paging", paging.startPage, paging.endPage, paging.cntPerPage, paging.lastPage);
 	}
+	
 	function movePage(num){
 		searchArr["pageNum"] = num;
 		searchArr["cntPerPage"] = cntPerPage;
 		
-		ajaxComm("/glaa/Glaa1000_select.do",searchArr,glaaSelectCallback);
+		ajaxComm("/glaa/Glaa1000_select.do", "get", searchArr, glaaSelectCallback);
 	}
-
 	
 	function bordWrite(bordNum, bordRelease){		
 		window.location.href = "Glaa1000_detailSelect.do?bordNum="+bordNum;
 	}
 	
-	function ajaxComm(url, data, callback){
-		$.ajax({
-			url:url,
-			type:"get",
-			data:data,
-			dataType:"json",
-			contentType:"application/json; charset=UTF-8",
-			success:callback,
-			error:function(xhr, status, error){
-				console.log(xhr+"\n"+status+"\n"+error);
-			}
-		});
-	}
 	$(document).ajaxStart(function(){
 		$('#Progress_Loading').show(); //ajax실행시 로딩바를 보여준다.
 	})

@@ -108,11 +108,4 @@
 		   					WHERE BORD_NO = #{bordNum})
 		 WHERE BORD_NO = #{bordNum}
 	</update>
-	
-	<select id="BraaMapper.Braa1000_temp" resultType="org.hope.web.domain.BraaVO" parameterType="org.hope.web.domain.BraaVO">
-	    SELECT BORD_NO as bordNum
-	          ,USER_PW as userPw 
-	      FROM BORDTB 
-	     WHERE BORD_RELEASE = 'N'
-	</select>
 </mapper>

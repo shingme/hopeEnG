@@ -207,7 +207,7 @@ function btnClickAction(val){
 			}
 		}else{ // 수정불가 모드  비번 입력해야함
 			//수정모드로 들어가기 위한 비번 입력창
-			window.open("Braa1000_confirmPasswdWindow.do?bordNum="+num,"","scrollbars=no,status=no,resizable=no,width=300,height=180");
+			window.open("Braa1000_confirmPasswdWindow.do?bordNum="+num,"","scrollbars=no,status=no,resizable=no,width=300,height=180,left="+ (window.screen.width-300)/2 +",top="+(window.screen.height-150)/2);
 			return;
 		}
 	}
@@ -219,7 +219,7 @@ function btnClickAction(val){
 
 
 function checkAfterAction(num){
-	ajaxComm("Braa1000_detailSelectUpd.do?bordNum="+num,"",callback, "get");
+	ajaxComm("Braa1000_detailSelectUpd.do?bordNum="+num, "get", "", callback);
 }
 
 function callback(result){
@@ -232,19 +232,7 @@ function callback(result){
 }
 
 //공통 js만들면 제거 
-function ajaxComm(url, data, callback, action){
-	$.ajax({
-		url:url,
-		type:action,
-		data:data,
-		dataType:"json",
-		contentType:"application/json; charset=UTF-8",
-		success:callback,
-		error:function(xhr, status, error){
-			console.log(xhr+"\n"+status+"\n"+error);
-		}
-	});
-}
+
 
 </script>
 <div class="inner">

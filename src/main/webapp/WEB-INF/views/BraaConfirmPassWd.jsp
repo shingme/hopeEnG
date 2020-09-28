@@ -9,8 +9,8 @@
 </head>
 <body>
 <script src="${pageContext.request.contextPath}/js/jquery-3.5.1.min.js" type="text/javascript"></script>
+<script src="${pageContext.request.contextPath}/js/commJs.js" type="text/javascript"></script>
 <script>
-// https로 가기 
 	var num = "${bordNum}";
 		
 	$(document).ready(function(){
@@ -26,9 +26,8 @@
 		});
 
 		$("#confirmPw").click(function(){
-			//비밀번호 암호화 추가해야함
 			var data = {pw : $("#pw").val(), bordNum : num };
-			ajaxComm("/braa/Braa1000_confirmPasswd.do", JSON.stringify(data), callback, "POST");
+			ajaxComm("/braa/Braa1000_confirmPasswd.do", "post", JSON.stringify(data), callback);
 		})
 		
 		$("#confirmClose").click(function(){
@@ -47,22 +46,6 @@
 			$("#confirmMsg span").append(append);
 		}
 	}
-	
-	//공통 js만들면 제거 
-	function ajaxComm(url, data, callback, action){
-		$.ajax({
-			url:url,
-			type:action,
-			data:data,
-			dataType:"json",
-			contentType:"application/json; charset=UTF-8",
-			success:callback,
-			error:function(xhr, status, error){
-				console.log(xhr+"\n"+status+"\n"+error);
-			}
-		});
-	}
-	
 </script>
 	<form style="height:230px;">
 		<div id="guideMsg">
